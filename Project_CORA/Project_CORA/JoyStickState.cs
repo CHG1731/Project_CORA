@@ -13,5 +13,6 @@ namespace Project_CORA
         public static int Yaxis { get; set; }
         public static int Zaxis { get; set; }
         public static bool[] buttons { get; set; }
+        public static int[] pov { get; set; }
     }
 }
