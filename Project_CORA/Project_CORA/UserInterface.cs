@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Project_CORA
 {
-    public partial class Hoofdscherm : Form
+    public partial class UserInterface : Form
     {
-        public Hoofdscherm()
+        public UserInterface()
         {
             InitializeComponent();
         }

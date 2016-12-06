@@ -16,7 +16,7 @@ namespace Project_CORA
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Hoofdscherm());
+            Application.Run(new UserInterface());
         }
     }
 }

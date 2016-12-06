@@ -1,6 +1,6 @@
 ﻿namespace Project_CORA
 {
-    partial class Hoofdscherm
+    partial class UserInterface
     {
         /// <summary>
         /// Required designer variable.
