@@ -16,7 +16,9 @@ namespace Project_CORA
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UserInterface());
+            UserInterface userControls = new UserInterface();
+            Application.Run(userControls);
+            MainProcess mainProcess = new MainProcess(userControls);
         }
     }
 }

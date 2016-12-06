@@ -12,6 +12,9 @@ namespace Project_CORA
 {
     public partial class UserInterface : Form
     {
+        public bool emergencyStopActive = false; //Boolean that tells wheter or not an emergeny stop is in effect.
+        public bool requestedReset = false;      //Tells the main process to reset if value = true.
+
         public UserInterface()
         {
             InitializeComponent();
