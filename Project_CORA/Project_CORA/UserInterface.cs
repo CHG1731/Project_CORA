@@ -12,6 +12,8 @@ namespace Project_CORA
 {
     public partial class UserInterface : Form
     {
+        public bool emergencyStopActive = false;
+        public bool requestedReset = false;
         public bool RobotConnected = false;
         static Dynamixel dynamixel;
         static SerialPort2Dynamixel serialPort;
