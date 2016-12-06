@@ -12,6 +12,10 @@ namespace Project_CORA
 {
     public partial class UserInterface : Form
     {
+        public bool RobotConnected = false;
+        static Dynamixel dynamixel;
+        static SerialPort2Dynamixel serialPort;
+
         public UserInterface()
         {
             InitializeComponent();
@@ -36,6 +40,16 @@ namespace Project_CORA
             if (ports.Length < 1)
             {
                 x.Items.Add("No ports available");
+            }
+        }
+
+        private void toolStripComboBox1_Click(object sender, EventArgs e)
+        {
+            if (serialPort.open(toolStripComboBox1.SelectedItem.ToString()) == false)
+            {
+                dynamixel.sendTossModeCommand(serialPort);
+                serialPort = new SerialPort2Dynamixel();
+                dynamixel = new Dynamixel();
             }
         }
     }
