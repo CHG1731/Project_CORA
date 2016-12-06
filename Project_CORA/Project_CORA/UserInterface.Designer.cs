@@ -44,6 +44,7 @@
             this.connectRobotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusLabel = new System.Windows.Forms.Label();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -162,6 +163,8 @@
             // 
             // connectRobotToolStripMenuItem
             // 
+            this.connectRobotToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox1});
             this.connectRobotToolStripMenuItem.Name = "connectRobotToolStripMenuItem";
             this.connectRobotToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.connectRobotToolStripMenuItem.Text = "Connect Robot";
@@ -182,6 +185,11 @@
             this.statusLabel.Size = new System.Drawing.Size(223, 38);
             this.statusLabel.TabIndex = 4;
             this.statusLabel.Text = "Current status";
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 28);
             // 
             // Hoofdscherm
             // 
@@ -225,6 +233,7 @@
         private System.Windows.Forms.ToolStripMenuItem connectRobotToolStripMenuItem;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
     }
 }
 

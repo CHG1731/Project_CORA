@@ -24,7 +24,19 @@ namespace Project_CORA
 
         private void Hoofdscherm_Load(object sender, EventArgs e)
         {
-
+            fetchCom(toolStripComboBox1);
+        }
+        private void fetchCom(ToolStripComboBox x)
+        {
+            String[] ports = System.IO.Ports.SerialPort.GetPortNames();
+            foreach (String port in ports)
+            {
+                x.Items.Add(port);
+            }
+            if (ports.Length < 1)
+            {
+                x.Items.Add("No ports available");
+            }
         }
     }
 }
