@@ -13,7 +13,6 @@ namespace Project_CORA
     public partial class UserInterface : Form
     {
         public bool RobotConnected = false;
-        public bool JoyStickConnected = false;
         static Dynamixel dynamixel;
         static SerialPort2Dynamixel serialPort;
 
