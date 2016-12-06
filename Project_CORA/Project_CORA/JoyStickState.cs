@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Project_CORA
 {
-    class JoyStickState
+    static class JoyStickState
     {
-        public int Xaxis { get; set; }
+        public static int Xaxis { get; set; }
+        public static int Yaxis { get; set; }
+        public static int Zaxis { get; set; }
+        public static bool[] buttons { get; set; }
     }
 }
