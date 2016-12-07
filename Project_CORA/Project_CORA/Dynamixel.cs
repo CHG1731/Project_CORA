@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-//Diederik niks veranderen aan dit bestand please :)
+
 namespace Project_CORA
 {
     class Dynamixel

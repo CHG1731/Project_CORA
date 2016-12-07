@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//Alsjeblieft zo min mogelijk aan dit bestand schrijven
+
 namespace Project_CORA
 {
     static class Program
