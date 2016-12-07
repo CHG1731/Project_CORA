@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Project_CORA
 {
@@ -21,6 +22,8 @@ namespace Project_CORA
         public UserInterface()
         {
             InitializeComponent();
+            PollJoyStick.RunWorkerAsync();
+            timer1.Start();
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -53,6 +56,17 @@ namespace Project_CORA
                 serialPort = new SerialPort2Dynamixel();
                 dynamixel = new Dynamixel();
             }
+        }
+
+        private void PollJoyStick_DoWork(object sender, DoWorkEventArgs e)
+        {
+            InitializeJoyStick x = new InitializeJoyStick();
+            x.Run();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Asstatus.Value = JoyStickState.Zaxis;
         }
     }
 }
