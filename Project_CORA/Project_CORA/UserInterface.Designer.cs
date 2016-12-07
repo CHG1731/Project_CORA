@@ -47,7 +47,10 @@
             this.statusLabel = new System.Windows.Forms.Label();
             this.PollJoyStick = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.modList = new System.Windows.Forms.ListBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -62,7 +65,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1156, 495);
+            this.tabControl1.Size = new System.Drawing.Size(1156, 823);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -70,17 +73,19 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1148, 466);
+            this.tabPage1.Size = new System.Drawing.Size(1148, 794);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Camera feed";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.richTextBox1);
+            this.tabPage2.Controls.Add(this.modList);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1148, 466);
+            this.tabPage2.Size = new System.Drawing.Size(1148, 794);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Module selection";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -202,12 +207,30 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // modList
+            // 
+            this.modList.FormattingEnabled = true;
+            this.modList.ItemHeight = 16;
+            this.modList.Location = new System.Drawing.Point(6, 6);
+            this.modList.Name = "modList";
+            this.modList.Size = new System.Drawing.Size(242, 468);
+            this.modList.TabIndex = 0;
+            this.modList.SelectedIndexChanged += new System.EventHandler(this.modList_SelectedIndexChanged);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(254, 6);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(888, 782);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CadetBlue;
-            this.ClientSize = new System.Drawing.Size(1410, 538);
+            this.ClientSize = new System.Drawing.Size(1410, 866);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.Asstatus);
@@ -218,6 +241,7 @@
             this.Text = "CORA";
             this.Load += new System.EventHandler(this.Hoofdscherm_Load);
             this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -247,6 +271,8 @@
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.ComponentModel.BackgroundWorker PollJoyStick;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ListBox modList;
     }
 }
 

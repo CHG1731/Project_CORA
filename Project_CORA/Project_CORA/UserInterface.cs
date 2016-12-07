@@ -27,6 +27,7 @@ namespace Project_CORA
             InitializeComponent();
             PollJoyStick.RunWorkerAsync();
             timer1.Start();
+            MainProcess mainProcess = new MainProcess(this);
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -70,6 +71,16 @@ namespace Project_CORA
         private void timer1_Tick(object sender, EventArgs e)
         {
             Asstatus.Value = JoyStickState.Zaxis;
+        }
+
+        private void modList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.modSelected = modList.SelectedIndex;
+        }
+
+        public void addMod(String mod)
+        {
+            modList.Items.Add(mod);
         }
     }
 }

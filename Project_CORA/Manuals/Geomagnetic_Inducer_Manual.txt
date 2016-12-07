@@ -1,0 +1,12 @@
+Geomagnetic Inducer
+
+Description:
+
+Induces something so as to make it geomagnetic.
+
+Control Scheme:
+
+Something something.
+Something else.
+Another something.
+Figure it out.
