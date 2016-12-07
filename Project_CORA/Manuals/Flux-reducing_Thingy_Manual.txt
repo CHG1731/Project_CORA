@@ -1,0 +1,10 @@
+Flux-reducing Thingy.
+
+Desciption:
+
+Reduces Flux, as opposed to the Flux-increasing Thingy.
+(sold seperately.)
+
+Control scheme:
+
+All buttons simultaneously - reduce flux.

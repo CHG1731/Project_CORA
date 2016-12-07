@@ -1,0 +1,12 @@
+Quantum Disruptor.
+
+Discription:
+
+Disrupts Quantum. Usefull for something. No idea what.
+
+Control Scheme:
+
+Button 1 - Disrupt Quantum a little bit.
+Button 2 - Disrupt Quantum some more.
+Button 3 - Disrupt Quantum a lot.
+Button 4 - End the world via Quantum Disruption. (Function untested)
