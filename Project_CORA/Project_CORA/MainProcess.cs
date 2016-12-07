@@ -54,15 +54,7 @@ namespace Project_CORA
                 //switch modules if so
                 if (userControls.modEquiped != this.modEquiped)
                 {
-                    if(this.modEquiped != 0)
-                    {
-                        setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoSwitchPos, frameModInterval * this.modEquiped });
-                        switchMod(true);
-                    }
-                    this.modEquiped = userControls.modEquiped;
-                    setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoSwitchPos, frameModInterval * this.modEquiped });
-                    switchMod(false);
-                    setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoDefault, frameModInterval * this.modEquiped });
+                    changeMod();
                 }
                 //Read joystick and update Servo Positionues
                 calculateServoPositions();
@@ -138,7 +130,21 @@ namespace Project_CORA
          * Based on the Positionue of "eject", module is either coupled
          * or decoupled.
          */ 
-        private void switchMod(bool eject)
+        private void changeMod()
+        {
+            if (this.modEquiped != 0)
+            {
+                setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoSwitchPos, frameModInterval * this.modEquiped });
+                coupleMod(true);
+            }
+            this.modEquiped = userControls.modEquiped;
+            setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoSwitchPos, frameModInterval * this.modEquiped });
+            coupleMod(false);
+            setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoDefault, frameModInterval * this.modEquiped });
+        }
+
+               
+        private void coupleMod(bool eject)
         {
             //TODO Implement function
         }
