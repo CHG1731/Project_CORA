@@ -32,6 +32,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.modList = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.Asstatus = new System.Windows.Forms.TrackBar();
@@ -47,8 +49,7 @@
             this.statusLabel = new System.Windows.Forms.Label();
             this.PollJoyStick = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.modList = new System.Windows.Forms.ListBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.MainProcess = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
@@ -90,12 +91,30 @@
             this.tabPage2.Text = "Module selection";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(254, 6);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(888, 782);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
+            // 
+            // modList
+            // 
+            this.modList.FormattingEnabled = true;
+            this.modList.ItemHeight = 16;
+            this.modList.Location = new System.Drawing.Point(6, 6);
+            this.modList.Name = "modList";
+            this.modList.Size = new System.Drawing.Size(242, 468);
+            this.modList.TabIndex = 0;
+            this.modList.SelectedIndexChanged += new System.EventHandler(this.modList_SelectedIndexChanged);
+            // 
             // tabPage3
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1148, 466);
+            this.tabPage3.Size = new System.Drawing.Size(1148, 794);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Macro management";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -105,7 +124,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1148, 466);
+            this.tabPage4.Size = new System.Drawing.Size(1148, 794);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -207,23 +226,9 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // modList
+            // MainProcess
             // 
-            this.modList.FormattingEnabled = true;
-            this.modList.ItemHeight = 16;
-            this.modList.Location = new System.Drawing.Point(6, 6);
-            this.modList.Name = "modList";
-            this.modList.Size = new System.Drawing.Size(242, 468);
-            this.modList.TabIndex = 0;
-            this.modList.SelectedIndexChanged += new System.EventHandler(this.modList_SelectedIndexChanged);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(254, 6);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(888, 782);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.MainProcess.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // UserInterface
             // 
@@ -273,6 +278,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ListBox modList;
+        private System.ComponentModel.BackgroundWorker MainProcess;
     }
 }
 

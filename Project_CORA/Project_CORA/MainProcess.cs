@@ -32,42 +32,45 @@ namespace Project_CORA
 
         /*
          * Main loop of the program
-         */  
+         */
         private void runMainProcess()
         {
-            //Check if emergency stop is in effect
-            while (userControls.emergencyStopActive)
+            while (true)
             {
-                Thread.Sleep(25);
-            }
-            //check if robot needs to reset
-            if (userControls.requestedReset)
-            {
-                resetRobot();
-                userControls.requestedReset = false;
-            }
-            //Check if the selected module changed.
-            //Update displayed manual if so.
-            if(userControls.modSelected != this.modSelected)
-            {
-                this.modSelected = userControls.modSelected;
-                setManual(this.modSelected);
-            }
-            //Check if a new module is requested
-            //switch modules if so
-            if(userControls.modEquiped != this.modEquiped)
-            {
-                bool eject = true;
-                if(this.modEquiped != 0)
+                //Check if emergency stop is in effect
+                while (userControls.emergencyStopActive)
                 {
+                    Thread.Sleep(25);
+                }
+                //check if robot needs to reset
+                if (userControls.requestedReset)
+                {
+                    resetRobot();
+                    userControls.requestedReset = false;
+                }
+                //Check if the selected module changed.
+                //Update displayed manual if so.
+                if (userControls.modSelected != this.modSelected)
+                {
+                    this.modSelected = userControls.modSelected;
+                    setManual(this.modSelected);
+                }
+                //Check if a new module is requested
+                //switch modules if so
+                if (userControls.modEquiped != this.modEquiped)
+                {
+                    bool eject = true;
+                    if (this.modEquiped != 0)
+                    {
+                        switchMod(this.modEquiped, eject);
+                    }
+                    eject = false;
+                    this.modEquiped = userControls.modEquiped;
                     switchMod(this.modEquiped, eject);
                 }
-                eject = false;
-                this.modEquiped = userControls.modEquiped;
-                switchMod(this.modEquiped, eject);
+                //Read joystick and updat motor values
+                calculateMotorValues();
             }
-            //Read joystick and updat motor values
-            calculateMotorValues();
         }
 
         /*
@@ -77,6 +80,7 @@ namespace Project_CORA
          */ 
         private void registerMods()
         {
+            /*
             String modName;
             int index = 0;
             System.IO.StreamReader modFile = new System.IO.StreamReader("D:\\Documents\\TI\\Project CORA\\Project_CORA\\modList.txt");
@@ -86,6 +90,7 @@ namespace Project_CORA
                 userControls.addMod(modName);
             }
             modFile.Close();
+            */
         }
 
         /*
