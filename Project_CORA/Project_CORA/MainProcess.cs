@@ -27,7 +27,7 @@ namespace Project_CORA
         {
             this.userControls = u;
             registerMods();
-            runMainProcess();
+            while (true) {runMainProcess(); }
         }
 
         /*
@@ -67,7 +67,8 @@ namespace Project_CORA
                 switchMod(this.modEquiped, eject);
             }
             //Read joystick and updat motor values
-            calculateMotorValues();
+            //calculateMotorValues();
+            Thread.Sleep(25);
         }
 
         /*
@@ -95,7 +96,14 @@ namespace Project_CORA
          */ 
         private void setManual(int mod)
         {
-            //TODO Implement function
+            String manual = "", tmp;
+            String path = "D:\\Documents\\TI\\Project CORA\\Project_CORA\\Manuals\\" + modules[mod] + "_Manual.txt";
+            System.IO.StreamReader manFile = new System.IO.StreamReader(path);
+            while ((tmp = manFile.ReadLine()) != null)
+            {
+                manual += tmp;
+            }
+            userControls.setManual(manual);
         }
 
         /*

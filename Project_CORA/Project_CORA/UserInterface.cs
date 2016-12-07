@@ -27,7 +27,6 @@ namespace Project_CORA
             InitializeComponent();
             PollJoyStick.RunWorkerAsync();
             timer1.Start();
-            MainProcess mainProcess = new MainProcess(this);
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -81,6 +80,11 @@ namespace Project_CORA
         public void addMod(String mod)
         {
             modList.Items.Add(mod);
+        }
+
+        public void setManual(string manual)
+        {
+            manualDisplay.Text = manual;
         }
     }
 }
