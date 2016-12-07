@@ -72,7 +72,6 @@ namespace Project_CORA
         {
             JoystickState state = new JoystickState();
             state = stick.GetCurrentState();
-            int x = state.Z;
         }
     }
 }
