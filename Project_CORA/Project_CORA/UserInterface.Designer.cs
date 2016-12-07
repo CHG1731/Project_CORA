@@ -45,6 +45,8 @@
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusLabel = new System.Windows.Forms.Label();
+            this.PollJoyStick = new System.ComponentModel.BackgroundWorker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -192,6 +194,14 @@
             this.statusLabel.TabIndex = 4;
             this.statusLabel.Text = "Current status";
             // 
+            // PollJoyStick
+            // 
+            this.PollJoyStick.DoWork += new System.ComponentModel.DoWorkEventHandler(this.PollJoyStick_DoWork);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -235,6 +245,8 @@
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.ComponentModel.BackgroundWorker PollJoyStick;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
