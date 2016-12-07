@@ -45,11 +45,7 @@
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusLabel = new System.Windows.Forms.Label();
-            this.modList = new System.Windows.Forms.ListBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.selectionButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -64,7 +60,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1156, 833);
+            this.tabControl1.Size = new System.Drawing.Size(1156, 495);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -72,20 +68,17 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1148, 804);
+            this.tabPage1.Size = new System.Drawing.Size(1148, 466);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Camera feed";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.selectionButton);
-            this.tabPage2.Controls.Add(this.richTextBox1);
-            this.tabPage2.Controls.Add(this.modList);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1148, 804);
+            this.tabPage2.Size = new System.Drawing.Size(1148, 466);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Module selection";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -199,39 +192,12 @@
             this.statusLabel.TabIndex = 4;
             this.statusLabel.Text = "Current status";
             // 
-            // modList
-            // 
-            this.modList.FormattingEnabled = true;
-            this.modList.ItemHeight = 16;
-            this.modList.Location = new System.Drawing.Point(7, 7);
-            this.modList.Name = "modList";
-            this.modList.Size = new System.Drawing.Size(225, 484);
-            this.modList.TabIndex = 0;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(239, 7);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(903, 791);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
-            // 
-            // selectionButton
-            // 
-            this.selectionButton.Location = new System.Drawing.Point(6, 497);
-            this.selectionButton.Name = "selectionButton";
-            this.selectionButton.Size = new System.Drawing.Size(226, 43);
-            this.selectionButton.TabIndex = 2;
-            this.selectionButton.Text = "Equip selected";
-            this.selectionButton.UseVisualStyleBackColor = true;
-            this.selectionButton.Click += new System.EventHandler(this.button1_Click);
-            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CadetBlue;
-            this.ClientSize = new System.Drawing.Size(1410, 869);
+            this.ClientSize = new System.Drawing.Size(1410, 538);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.Asstatus);
@@ -242,7 +208,6 @@
             this.Text = "CORA";
             this.Load += new System.EventHandler(this.Hoofdscherm_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -270,9 +235,6 @@
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
-        private System.Windows.Forms.Button selectionButton;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ListBox modList;
     }
 }
 

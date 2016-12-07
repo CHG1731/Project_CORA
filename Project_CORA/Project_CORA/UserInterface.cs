@@ -24,7 +24,6 @@ namespace Project_CORA
         public UserInterface()
         {
             InitializeComponent();
-            MainProcess mainProcess = new MainProcess(this);
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -49,11 +48,6 @@ namespace Project_CORA
             }
         }
 
-        public void addMod(String mod)
-        {
-            modList.Items.Add(mod);
-        }
-
         private void toolStripComboBox1_Click(object sender, EventArgs e)
         {
             if (serialPort.open(toolStripComboBox1.SelectedItem.ToString()) == false)
@@ -62,11 +56,6 @@ namespace Project_CORA
                 serialPort = new SerialPort2Dynamixel();
                 dynamixel = new Dynamixel();
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.modEquiped = modList.SelectedIndex;
         }
     }
 }

@@ -1,9 +1,0 @@
-Retractable Probing Device
-
-Description:
-
-Does naughty things.
-
-Control Scheme:
-
-Button one - Do naughty things.
