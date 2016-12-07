@@ -4,7 +4,7 @@ using System.Text;
 using System.IO.Ports;
 using System.Threading;
 
-//Diederik niks veranderden aan dit bestand pls :)
+
 namespace Project_CORA
 {
     public class SerialPort2Dynamixel
