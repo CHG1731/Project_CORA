@@ -69,7 +69,26 @@ namespace Project_CORA
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Asstatus.Value = JoyStickState.Zaxis;
+            int updateslider = JoyStickState.slider/10;
+            if(Asstatus.Value+updateslider<100 && Asstatus.Value+updateslider>-100)
+            {
+                Asstatus.Value += updateslider;
+            }
+            else
+            {
+                if(Asstatus.Value < 0)
+                {
+                    Asstatus.Value = -100;
+                }
+                else
+                {
+                    Asstatus.Value = 100;
+                }
+            }
+            povLabel.Text = String.Concat("POV: ",JoyStickState.pov.ToString());
+            bool[] button = JoyStickState.buttons;
+            }
+
         }
 
         private void modList_SelectedIndexChanged(object sender, EventArgs e)

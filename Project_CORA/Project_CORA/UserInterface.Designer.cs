@@ -51,6 +51,7 @@
             this.PollJoyStick = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.MainProcess = new System.ComponentModel.BackgroundWorker();
+            this.povLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
@@ -134,7 +135,8 @@
             // 
             this.Asstatus.Enabled = false;
             this.Asstatus.Location = new System.Drawing.Point(1174, 794);
-            this.Asstatus.Minimum = -10;
+            this.Asstatus.Maximum = 100;
+            this.Asstatus.Minimum = -100;
             this.Asstatus.Name = "Asstatus";
             this.Asstatus.Size = new System.Drawing.Size(224, 56);
             this.Asstatus.TabIndex = 1;
@@ -232,17 +234,26 @@
             // 
             this.MainProcess.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // povLabel
+            // 
+            this.povLabel.AutoSize = true;
+            this.povLabel.Location = new System.Drawing.Point(1186, 774);
+            this.povLabel.Name = "povLabel";
+            this.povLabel.Size = new System.Drawing.Size(0, 17);
+            this.povLabel.TabIndex = 5;
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1410, 866);
+            this.Controls.Add(this.povLabel);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.Asstatus);
             this.Controls.Add(this.tabControl1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "UserInterface";
@@ -282,6 +293,7 @@
         private System.Windows.Forms.ListBox modList;
         private System.ComponentModel.BackgroundWorker MainProcess;
         public System.Windows.Forms.TrackBar Asstatus;
+        private System.Windows.Forms.Label povLabel;
     }
 }
 
