@@ -18,6 +18,9 @@ namespace Project_CORA
         static Dynamixel dynamixel;
         static SerialPort2Dynamixel serialPort;
 
+        public int modSelected = 0;
+        public int modEquiped = 0;
+
         public UserInterface()
         {
             InitializeComponent();
