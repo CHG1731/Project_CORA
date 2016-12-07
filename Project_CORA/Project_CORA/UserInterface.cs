@@ -75,6 +75,15 @@ namespace Project_CORA
         private void modList_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.modSelected = modList.SelectedIndex;
+            String manual = "", tmp;
+            String path = "D:\\Documents\\TI\\Project CORA\\Project_CORA\\Manuals\\" + modList.SelectedItem + "_Manual.txt";
+            System.IO.StreamReader manFile = new System.IO.StreamReader(path);
+            while ((tmp = manFile.ReadLine()) != null)
+            {
+                manual += tmp +"\n";
+            }
+            manFile.Close();
+            manualDisplay.Text = manual;
         }
 
         public void addMod(String mod)

@@ -14,12 +14,14 @@ namespace Project_CORA
         private int modSelected = 0;
         private int modEquiped = 0;
 
-        //Declaration of motor values.
-        private int baseMotVal = 850, baseMotMin = 0, baseMotMax = 850;
-        private int midMotVal = 850, midMotMin = 0, midMotMax = 1023;
-        private int endMotVal = 512, endMotMin = 0, endMotMax = 1023;
-        private int rotMotVal = 512, rotMotMin = 0, rotMotMax = 1023;
-        private int moduleMotVal = 512, moduleMotMin = 0, moduleMotMax = 1023;
+        //Declaration of Servoor Positionues.
+        private int baseServoPosition = 850, baseServoMin = 0, baseServoMax = 850, baseServo = 11, baseServoDefault = 850;
+        private int midServoPosition = 850, midServoMin = 0, midServoMax = 1023, midServo = 9, midServoDefault = 850;
+        private int endServoPosition = 512, endServoMin = 0, endServoMax = 1023, endServo = 4, endServoDefault = 512;
+        private int rotServoPosition = 850, rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 850, rotServoSwitchPos = 0;
+        private int frameServoPosition = 0, frameServoMin = 0, frameServoMax = 0 /*TODO Add actual value*/, frameServoDefault = 0; 
+        private int moduleServoPosition = 512, moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
+        private int frameModInterval = 10;
 
         private String[] modules = new String[20];
 
@@ -45,31 +47,28 @@ namespace Project_CORA
                 //check if robot needs to reset
                 if (userControls.requestedReset)
                 {
-                    resetRobot();
+                    setRobotPosition(new int[6]  { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoDefault, frameServoDefault });
                     userControls.requestedReset = false;
-                }
-                //Check if the selected module changed.
-                //Update displayed manual if so.
-                if (userControls.modSelected != this.modSelected)
-                {
-                    this.modSelected = userControls.modSelected;
-                    setManual(this.modSelected);
                 }
                 //Check if a new module is requested
                 //switch modules if so
                 if (userControls.modEquiped != this.modEquiped)
                 {
-                    bool eject = true;
-                    if (this.modEquiped != 0)
+                    if(this.modEquiped != 0)
                     {
-                        switchMod(this.modEquiped, eject);
+                        setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoSwitchPos, frameModInterval * this.modEquiped });
+                        switchMod(true);
                     }
-                    eject = false;
                     this.modEquiped = userControls.modEquiped;
-                    switchMod(this.modEquiped, eject);
+                    setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoSwitchPos, frameModInterval * this.modEquiped });
+                    switchMod(false);
+                    setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoDefault, frameModInterval * this.modEquiped });
                 }
-                //Read joystick and updat motor values
-                calculateMotorValues();
+                //Read joystick and update Servo Positionues
+                calculateServoPositions();
+                //Send Servoor Positionues to servo's
+                sendServoPositions();
+                Thread.Sleep(20);
             }
         }
 
@@ -77,82 +76,103 @@ namespace Project_CORA
          * Function reads the file that specifies which modules are stored
          * in the rack and at what index, and stores the information
          * in the modules array.
-         */ 
+         */
         private void registerMods()
         {
-            /*
             String modName;
             int index = 0;
             System.IO.StreamReader modFile = new System.IO.StreamReader("D:\\Documents\\TI\\Project CORA\\Project_CORA\\modList.txt");
-            while((modName = modFile.ReadLine()) != null)
+            while ((modName = modFile.ReadLine()) != null)
             {
                 modules[index++] = modName;
                 userControls.addMod(modName);
             }
             modFile.Close();
-            */
-        }
-
-        /*
-         * Function searches for the manual corresponding to
-         * the module specified by mod. If the manual is
-         * found it is displayed on the UI.
-         */ 
-        private void setManual(int mod)
-        {
-            /*
-            String manual = "", tmp;
-            String path = "D:\\Documents\\TI\\Project CORA\\Project_CORA\\Manuals\\" + modules[mod] + "_Manual.txt";
-            System.IO.StreamReader manFile = new System.IO.StreamReader(path);
-            while ((tmp = manFile.ReadLine()) != null)
-            {
-                manual += tmp;
-            }
-            userControls.setManual(manual);
-            */
         }
 
         /*
          * Function to reset the robot. If a module is currently
          * equiped it is ejected and stored.
-         * All motor-values are then set to their default positions
+         * All Servoor-Positionues are then set to their default positions
          * and the robot moves to it's starting position.
-         */ 
-        private void resetRobot()
+         */
+        private void setRobotPosition(int[] destinations)
         {
-            //TODO Implement function
+            while (!(baseServoPosition == destinations[0] && midServoPosition == destinations[1] && endServoPosition == destinations[2] && moduleServoPosition == destinations[3]))
+            {
+                baseServoPosition = checkServoPosition(baseServoPosition, destinations[0]);
+                midServoPosition = checkServoPosition(midServoPosition, destinations[1]);
+                endServoPosition = checkServoPosition(endServoPosition, destinations[2]);
+                moduleServoPosition = checkServoPosition(moduleServoPosition, destinations[3]);
+                sendServoPositions();
+                Thread.Sleep(20);
+            }
+            while (rotServoPosition != destinations[4] && frameServoPosition != destinations[5])
+            {
+                rotServoPosition = checkServoPosition(rotServoPosition, destinations[4]);
+                frameServoPosition = checkServoPosition(frameServoPosition, destinations[5]); //Might not work for frameservo.
+                sendServoPositions();
+                Thread.Sleep(20);
+            }
+        }
+
+        private int checkServoPosition(int servoPosition, int servoDestination)
+        {
+            int brakeDis = 10, speedOffset = 5;
+            if (servoPosition > servoDestination)
+            {
+                if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }
+                else { servoPosition--; }
+            }
+            else if (servoPosition < servoDestination)
+            {
+                if (servoDestination - servoPosition > brakeDis) { servoPosition += speedOffset; }
+                else { servoPosition++; }
+            }
+            return servoPosition;
         }
 
         /*
          * Function stores a module on, or gets a module from
          * the specified index of the module rack.
-         * Based on the value of "eject", module is either coupled
+         * Based on the Positionue of "eject", module is either coupled
          * or decoupled.
          */ 
-        private void switchMod(int modIndex, bool eject)
+        private void switchMod(bool eject)
         {
             //TODO Implement function
         }
 
         /*
-         * Function calculates the values of all the joints
+         * Function calculates the Positionues of all the joints
          * based on input from the controller and stores
-         * the values in the globally defined variables.
+         * the Positionues in the globally defined variables.
          */
-        private void calculateMotorValues()
+        private void calculateServoPositions()
         {
-            baseMotVal -= JoyStickState.Xaxis - JoyStickState.Yaxis;
-            midMotVal -= JoyStickState.Xaxis;
-            endMotVal += JoyStickState.Xaxis + JoyStickState.Yaxis;
-            rotMotVal += JoyStickState.Zaxis; //<- This for rotation??
-            if(baseMotVal > baseMotMax) { baseMotVal = baseMotMax; }
-            else if(baseMotVal < baseMotMin) { baseMotVal = baseMotMin; }
-            if(midMotVal > midMotMax) { midMotVal = midMotMax; }
-            else if(midMotVal < midMotMin) { midMotVal = midMotMin; }
-            if(endMotVal > endMotMax) { endMotVal = endMotMax; }
-            else if(endMotVal < endMotMin) { endMotVal = endMotMin; }
-            if(rotMotVal > rotMotMax) { rotMotVal = rotMotMax; }
-            else if(rotMotVal < rotMotMin) { rotMotVal = rotMotMin; }
+            baseServoPosition -= JoyStickState.Xaxis - JoyStickState.Yaxis;
+            midServoPosition -= JoyStickState.Xaxis;
+            endServoPosition += JoyStickState.Xaxis + JoyStickState.Yaxis;
+            rotServoPosition += JoyStickState.Zaxis; //<- This for rotation??
+            if(baseServoPosition > baseServoMax) { baseServoPosition = baseServoMax; }
+            else if(baseServoPosition < baseServoMin) { baseServoPosition = baseServoMin; }
+            if(midServoPosition > midServoMax) { midServoPosition = midServoMax; }
+            else if(midServoPosition < midServoMin) { midServoPosition = midServoMin; }
+            if(endServoPosition > endServoMax) { endServoPosition = endServoMax; }
+            else if(endServoPosition < endServoMin) { endServoPosition = endServoMin; }
+            if(rotServoPosition > rotServoMax) { rotServoPosition = rotServoMax; }
+            else if(rotServoPosition < rotServoMin) { rotServoPosition = rotServoMin; }
+        }
+
+        private void sendServoPositions()
+        {
+            /*
+            Dynamixel.setPosition(portnum, baseServo, baseServoPosition);
+            Dynamixel.setPosition(portnum, midServo, midServoPosition);
+            Dynamixel.setPosition(portnum, endServo, endServoPosition);
+            Dynamixel.setPosition(portnum, rotServo, rotServoPosition);
+            Dynamixel.setPosition(portnum, moduleServo, moduleServoPosition);
+            */
         }
     }
 }

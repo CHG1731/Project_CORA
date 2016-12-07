@@ -32,7 +32,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.manualDisplay = new System.Windows.Forms.RichTextBox();
             this.modList = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -81,7 +81,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.richTextBox1);
+            this.tabPage2.Controls.Add(this.manualDisplay);
             this.tabPage2.Controls.Add(this.modList);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
@@ -91,13 +91,13 @@
             this.tabPage2.Text = "Module selection";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // richTextBox1
+            // manualDisplay
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(254, 6);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(888, 782);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            this.manualDisplay.Location = new System.Drawing.Point(254, 6);
+            this.manualDisplay.Name = "manualDisplay";
+            this.manualDisplay.Size = new System.Drawing.Size(888, 782);
+            this.manualDisplay.TabIndex = 1;
+            this.manualDisplay.Text = "";
             // 
             // modList
             // 
@@ -276,7 +276,7 @@
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.ComponentModel.BackgroundWorker PollJoyStick;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox manualDisplay;
         private System.Windows.Forms.ListBox modList;
         private System.ComponentModel.BackgroundWorker MainProcess;
     }

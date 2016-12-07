@@ -167,7 +167,7 @@ namespace Project_CORA
             int size = getSetPositionCommand(buffer, (byte)id, (short)goal);
             byte[] res = sp2d.query(buffer, size, false);
 
-            //ushort value = 1;
+            //ushort Positionue = 1;
             if (res != null && res.Length > 4 && res[4] == 0)
                 couldSet = true;
 
