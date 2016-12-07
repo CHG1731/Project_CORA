@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserInterface));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -131,7 +132,8 @@
             // 
             // Asstatus
             // 
-            this.Asstatus.Location = new System.Drawing.Point(1174, 466);
+            this.Asstatus.Enabled = false;
+            this.Asstatus.Location = new System.Drawing.Point(1174, 794);
             this.Asstatus.Minimum = -10;
             this.Asstatus.Name = "Asstatus";
             this.Asstatus.Size = new System.Drawing.Size(224, 56);
@@ -212,7 +214,7 @@
             // 
             this.statusLabel.AutoSize = true;
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.Location = new System.Drawing.Point(1174, 32);
+            this.statusLabel.Location = new System.Drawing.Point(1167, 56);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(223, 38);
             this.statusLabel.TabIndex = 4;
@@ -241,6 +243,7 @@
             this.Controls.Add(this.Asstatus);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "UserInterface";
             this.Text = "CORA";
@@ -263,7 +266,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TrackBar Asstatus;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -279,6 +281,7 @@
         private System.Windows.Forms.RichTextBox manualDisplay;
         private System.Windows.Forms.ListBox modList;
         private System.ComponentModel.BackgroundWorker MainProcess;
+        public System.Windows.Forms.TrackBar Asstatus;
     }
 }
 
