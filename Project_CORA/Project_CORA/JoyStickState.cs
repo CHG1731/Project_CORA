@@ -13,8 +13,10 @@ namespace Project_CORA
         public static int Xaxis { get; set; }
         public static int Yaxis { get; set; }
         public static int Zaxis { get; set; }
+        public static int Zrotation { get; set; }
         public static bool[] buttons { get; set; }
-        public static int[] pov { get; set; }
+        public static int pov { get; set; }
+        public static int slider { get; set; }
     }
     public class InitializeJoyStick
     {
@@ -72,6 +74,46 @@ namespace Project_CORA
         {
             JoystickState state = new JoystickState();
             state = stick.GetCurrentState();
+            JoyStickState.buttons = state.GetButtons();
+            int[] sliderval = state.GetSliders();
+            JoyStickState.slider = sliderval[0];
+            JoyStickState.Xaxis = state.X;
+            JoyStickState.Yaxis = state.Y;
+            JoyStickState.Zaxis = state.Z;
+            JoyStickState.Zrotation = state.RotationZ;
+            int[] pov = state.GetPointOfViewControllers();
+            #region Switch
+            switch(pov[0])
+            {
+                case 0:
+                    JoyStickState.pov = 1;
+                    break;
+                case 4500:
+                    JoyStickState.pov = 2;
+                    break;
+                case 9000:
+                    JoyStickState.pov = 3;
+                    break;
+                case 13500:
+                    JoyStickState.pov = 4;
+                    break;
+                case 18000:
+                    JoyStickState.pov = 5;
+                    break;
+                case 22500:
+                    JoyStickState.pov = 6;
+                    break;
+                case 27000:
+                    JoyStickState.pov = 7;
+                    break;
+                case 31500:
+                    JoyStickState.pov = 8;
+                    break;
+                default:
+                    JoyStickState.pov = 0;
+                    break;
+            }
+            #endregion
         }
     }
 }
