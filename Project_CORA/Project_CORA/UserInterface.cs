@@ -87,12 +87,22 @@ namespace Project_CORA
             }
             povLabel.Text = String.Concat("POV: ",JoyStickState.pov.ToString());
             bool[] button = JoyStickState.buttons;
+            string buttons = "";
+            for (int i = 0; i < button.Length - 100; i++)
+            {
+                if(button[i])
+                {
+                    buttons += string.Concat(i.ToString()," ");
+                }
             }
-
+            buttonLabel.Text = "BUTTONS: "+buttons;
+            string axispos = String.Concat("X: ",JoyStickState.Xaxis," Y: ", JoyStickState.Yaxis," Z: ",JoyStickState.Zaxis," Zrot: ",JoyStickState.Zrotation );
+            axisLabel.Text = axispos;
         }
 
         private void modList_SelectedIndexChanged(object sender, EventArgs e)
         {
+        /*
             this.modSelected = modList.SelectedIndex;
             String manual = "", tmp;
             String path = "D:\\Documents\\TI\\Project CORA\\Project_CORA\\Manuals\\" + modList.SelectedItem + "_Manual.txt";
@@ -102,7 +112,8 @@ namespace Project_CORA
                 manual += tmp +"\n";
             }
             manFile.Close();
-            manualDisplay.Text = manual;
+            manualDisplay.Text = manual
+            */
         }
 
         public void addMod(String mod)

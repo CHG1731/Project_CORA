@@ -71,6 +71,7 @@ namespace Project_CORA
          */
         private void registerMods()
         {
+            /*
             String modName;
             int index = 0;
             System.IO.StreamReader modFile = new System.IO.StreamReader("D:\\Documents\\TI\\Project CORA\\Project_CORA\\modList.txt");
@@ -80,6 +81,7 @@ namespace Project_CORA
                 userControls.addMod(modName);
             }
             modFile.Close();
+            */
         }
 
         /*
