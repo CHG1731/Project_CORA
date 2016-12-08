@@ -86,6 +86,29 @@ namespace Project_CORA
             manualDisplay.Text = manual;
         }
 
+        private void updateGUI(int servoValue, int midValue, int endValue)
+        {
+            Graphics graphics = this.robotPositionPanel.CreateGraphics();
+            graphics.Clear(Color.LightGray);
+            Pen blackPen = new Pen(Color.Black, 10);
+            Pen bluePen = new Pen(Color.Blue, 10);
+            Pen redPen = new Pen(Color.Red, 10);
+            blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            float baselength = graphics.DpiX / 2, midlength = graphics.DpiX / 2, endlength = graphics.DpiX / 2;
+            double baseAngle = ((850 - servoValue) * 0.352) * (Math.PI / 180);
+            double midAngle = ((90 + ((850 - midValue) * 0.352)) * (Math.PI / 180)) - baseAngle;
+            double endAngle = ((90 + ((512 - endValue) * 0.352)) * (Math.PI / 180)) + midAngle;
+            double baseX = Math.Sin(baseAngle) * baselength, baseY = Math.Cos(baseAngle) * baselength;
+            double midX = baseX + Math.Sin(midAngle) * midlength, midY = baseY - Math.Cos(midAngle) * midlength;
+            double endX = midX + Math.Sin(endAngle) * endlength, endY = midY + Math.Cos(endAngle) * endlength;
+            graphics.DrawLine(blackPen, 0, graphics.DpiY, (float)baseX, graphics.DpiY - (float)baseY);
+            graphics.DrawLine(redPen, (float)baseX - 5, graphics.DpiY - (float)baseY, (float)midX, graphics.DpiY - (float)midY);
+            graphics.DrawLine(bluePen, (float)midX - 5, graphics.DpiY - (float)midY, (float)endX, graphics.DpiY - (float)endY);
+
+        }
+
         public void addMod(String mod)
         {
             modList.Items.Add(mod);
@@ -94,6 +117,16 @@ namespace Project_CORA
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             MainProcess x = new MainProcess(this);
+        }
+
+        private void testButton_Click(object sender, EventArgs e)
+        {
+            int value = 850, value2 = 850, value3 = 512;
+            while (true)
+            {
+                this.updateGUI(value--, value2, value3--);
+                Thread.Sleep(100);
+            }
         }
     }
 }

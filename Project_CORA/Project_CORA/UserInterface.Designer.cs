@@ -51,6 +51,8 @@
             this.PollJoyStick = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.MainProcess = new System.ComponentModel.BackgroundWorker();
+            this.robotPositionPanel = new System.Windows.Forms.Panel();
+            this.testButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
@@ -232,12 +234,32 @@
             // 
             this.MainProcess.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // robotPositionPanel
+            // 
+            this.robotPositionPanel.BackColor = System.Drawing.Color.SteelBlue;
+            this.robotPositionPanel.Location = new System.Drawing.Point(1174, 97);
+            this.robotPositionPanel.Name = "robotPositionPanel";
+            this.robotPositionPanel.Size = new System.Drawing.Size(224, 176);
+            this.robotPositionPanel.TabIndex = 5;
+            // 
+            // testButton
+            // 
+            this.testButton.Location = new System.Drawing.Point(1245, 349);
+            this.testButton.Name = "testButton";
+            this.testButton.Size = new System.Drawing.Size(75, 23);
+            this.testButton.TabIndex = 6;
+            this.testButton.Text = "test";
+            this.testButton.UseVisualStyleBackColor = true;
+            this.testButton.Click += new System.EventHandler(this.testButton_Click);
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1410, 866);
+            this.Controls.Add(this.testButton);
+            this.Controls.Add(this.robotPositionPanel);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.Asstatus);
@@ -282,6 +304,8 @@
         private System.Windows.Forms.ListBox modList;
         private System.ComponentModel.BackgroundWorker MainProcess;
         public System.Windows.Forms.TrackBar Asstatus;
+        private System.Windows.Forms.Panel robotPositionPanel;
+        private System.Windows.Forms.Button testButton;
     }
 }
 

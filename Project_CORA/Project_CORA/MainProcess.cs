@@ -15,7 +15,7 @@ namespace Project_CORA
         private int modEquiped = 0;
 
         //Declaration of Servoor Positionues.
-        private int baseServoPosition = 850, baseServoMin = 0, baseServoMax = 850, baseServo = 11, baseServoDefault = 850;
+        public int baseServoPosition = 850, baseServoMin = 0, baseServoMax = 850, baseServo = 11, baseServoDefault = 850;
         private int midServoPosition = 850, midServoMin = 0, midServoMax = 1023, midServo = 9, midServoDefault = 850;
         private int endServoPosition = 512, endServoMin = 0, endServoMax = 1023, endServo = 4, endServoDefault = 512;
         private int rotServoPosition = 850, rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 850, rotServoSwitchPos = 0;
@@ -180,5 +180,6 @@ namespace Project_CORA
             Dynamixel.setPosition(portnum, moduleServo, moduleServoPosition);
             */
         }
+
     }
 }
