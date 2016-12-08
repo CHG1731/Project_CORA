@@ -169,10 +169,11 @@ namespace Project_CORA
             Rectangle pointRectangle;
             rotationValueGraphics.DrawEllipse(circlePen, rectangle);
 
-            if(rotValue >=0 && rotValue < 256)
+            if(rotValue >=0 && rotValue < 269)
             {
-                a = 70 - (rotValue * (70 / 256));
-                b = Math.Sqrt(Math.Pow(70, 2) - Math.Pow(a, 2));
+                rotValue = 259;
+                a = 70 - (rotValue * 0.27);
+                b = 70 + Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
                 pointRectangle = new Rectangle((int)a , (int)b, 10, 10);
                 rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
             }
