@@ -83,35 +83,38 @@ namespace Project_CORA
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int updateslider = JoyStickState.slider/10;
-            if(Asstatus.Value+updateslider<100 && Asstatus.Value+updateslider>-100)
+            if (JoyStickState.connected)
             {
-                Asstatus.Value += updateslider;
-            }
-            else
-            {
-                if(Asstatus.Value < 0)
+                int updateslider = JoyStickState.slider / 10;
+                if (Asstatus.Value + updateslider < 100 && Asstatus.Value + updateslider > -100)
                 {
-                    Asstatus.Value = -100;
+                    Asstatus.Value += updateslider;
                 }
                 else
                 {
-                    Asstatus.Value = 100;
+                    if (Asstatus.Value < 0)
+                    {
+                        Asstatus.Value = -100;
+                    }
+                    else
+                    {
+                        Asstatus.Value = 100;
+                    }
                 }
-            }
-            povLabel.Text = String.Concat("POV: ",JoyStickState.pov.ToString());
-            bool[] button = JoyStickState.buttons;
-            string buttons = "";
-            for (int i = 0; i < button.Length - 100; i++)
-            {
-                if(button[i])
+                povLabel.Text = String.Concat("POV: ", JoyStickState.pov.ToString());
+                bool[] button = JoyStickState.buttons;
+                string buttons = "";
+                for (int i = 0; i < button.Length - 100; i++)
                 {
-                    buttons += string.Concat(i.ToString()," ");
+                    if (button[i])
+                    {
+                        buttons += string.Concat(i.ToString(), " ");
+                    }
                 }
+                buttonLabel.Text = "BUTTONS: " + buttons;
+                string axispos = String.Concat("X: ", JoyStickState.Xaxis, " Y: ", JoyStickState.Yaxis, " Z: ", JoyStickState.Zaxis, " Zrot: ", JoyStickState.Zrotation);
+                axisLabel.Text = axispos;
             }
-            buttonLabel.Text = "BUTTONS: "+buttons;
-            string axispos = String.Concat("X: ",JoyStickState.Xaxis," Y: ", JoyStickState.Yaxis," Z: ",JoyStickState.Zaxis," Zrot: ",JoyStickState.Zrotation );
-            axisLabel.Text = axispos;
             updateGUI();
         }
 
