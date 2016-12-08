@@ -51,6 +51,7 @@
             this.PollJoyStick = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.MainProcess = new System.ComponentModel.BackgroundWorker();
+            this.robotPositionPanel = new System.Windows.Forms.Panel();
             this.povLabel = new System.Windows.Forms.Label();
             this.buttonLabel = new System.Windows.Forms.Label();
             this.axisLabel = new System.Windows.Forms.Label();
@@ -236,6 +237,14 @@
             // 
             this.MainProcess.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // robotPositionPanel
+            // 
+            this.robotPositionPanel.BackColor = System.Drawing.Color.SteelBlue;
+            this.robotPositionPanel.Location = new System.Drawing.Point(1174, 97);
+            this.robotPositionPanel.Name = "robotPositionPanel";
+            this.robotPositionPanel.Size = new System.Drawing.Size(224, 176);
+            this.robotPositionPanel.TabIndex = 5;
+            // 
             // povLabel
             // 
             this.povLabel.AutoSize = true;
@@ -266,6 +275,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CadetBlue;
             this.ClientSize = new System.Drawing.Size(1410, 866);
+            this.Controls.Add(this.robotPositionPanel);
             this.Controls.Add(this.axisLabel);
             this.Controls.Add(this.buttonLabel);
             this.Controls.Add(this.povLabel);
@@ -313,6 +323,7 @@
         private System.Windows.Forms.ListBox modList;
         private System.ComponentModel.BackgroundWorker MainProcess;
         public System.Windows.Forms.TrackBar Asstatus;
+        private System.Windows.Forms.Panel robotPositionPanel;
         private System.Windows.Forms.Label povLabel;
         private System.Windows.Forms.Label buttonLabel;
         private System.Windows.Forms.Label axisLabel;

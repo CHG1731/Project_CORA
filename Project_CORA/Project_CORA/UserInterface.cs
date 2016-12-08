@@ -22,9 +22,23 @@ namespace Project_CORA
         public int modSelected = 0;
         public int modEquiped = 0;
 
+        private int updateInterval;
+
+        Graphics positionPanelGraphics;
+        Pen blackPen = new Pen(Color.Black, 10);
+        Pen bluePen = new Pen(Color.Blue, 10);
+        Pen redPen = new Pen(Color.Red, 10);
+
+        //Values used only for testing purpuposes
+        private int value1 = 850, value2 = 850, value3 = 512;
+
         public UserInterface()
         {
+            blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             InitializeComponent();
+            positionPanelGraphics = this.robotPositionPanel.CreateGraphics();
             PollJoyStick.RunWorkerAsync();
             timer1.Start();
             MainProcess.RunWorkerAsync();
@@ -114,6 +128,29 @@ namespace Project_CORA
             manFile.Close();
             manualDisplay.Text = manual
             */
+        }
+
+        public void updateGUI()
+        {
+            updateRobotPositon(ServoPositions.baseServo, ServoPositions.midServo, ServoPositions.endServo);
+        }
+
+        private void updateRobotPositon(int baseValue, int midValue, int endValue)
+        {
+            float baselength = positionPanelGraphics.DpiX / 2, midlength = positionPanelGraphics.DpiX / 2, endlength = positionPanelGraphics.DpiX / 2;
+            double toRadians = Math.PI / 180;
+            double baseAngle = ((850 - baseValue) * 0.352) * toRadians;
+            double midAngle = ((90 + ((850 - midValue) * 0.352)) * toRadians) - baseAngle;
+            double endAngle = ((90 + ((512 - endValue) * 0.352)) * toRadians) + midAngle;
+
+            double baseX = Math.Sin(baseAngle) * baselength, baseY = Math.Cos(baseAngle) * baselength;
+            double midX = baseX + Math.Sin(midAngle) * midlength, midY = baseY - Math.Cos(midAngle) * midlength;
+            double endX = midX + Math.Sin(endAngle) * endlength, endY = midY + Math.Cos(endAngle) * endlength;
+
+            positionPanelGraphics.Clear(Color.LightGray);
+            positionPanelGraphics.DrawLine(blackPen, 0, positionPanelGraphics.DpiY, (float)baseX, positionPanelGraphics.DpiY - (float)baseY);
+            positionPanelGraphics.DrawLine(redPen, (float)baseX, positionPanelGraphics.DpiY - (float)baseY, (float)midX, positionPanelGraphics.DpiY - (float)midY);
+            positionPanelGraphics.DrawLine(bluePen, (float)midX, positionPanelGraphics.DpiY - (float)midY, (float)endX, positionPanelGraphics.DpiY - (float)endY);
         }
 
         public void addMod(String mod)
