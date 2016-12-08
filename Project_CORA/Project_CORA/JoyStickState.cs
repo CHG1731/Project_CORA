@@ -22,7 +22,6 @@ namespace Project_CORA
     {
         public InitializeJoyStick()
         {
-            JoyStickState.connected = true;
             Connect();
         }
         DirectInput Input = new DirectInput();
@@ -59,6 +58,7 @@ namespace Project_CORA
                         {
 
                             stick.GetObjectPropertiesById((int)deviceObject.ObjectType).SetRange(-100, 100);
+                            JoyStickState.connected = true;
                         }
                     }
                     sticks.Add(stick);
