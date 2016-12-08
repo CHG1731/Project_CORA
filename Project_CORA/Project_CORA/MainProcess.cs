@@ -62,7 +62,7 @@ namespace Project_CORA
                     changeMod();
                 }
                 //Read joystick and update Servo Positionues
-                //calculateServoPositions();
+                calculateServoPositions();
                 //Send Servoor Positionues to servo's
                 /*
                 ServoPositions.baseServo -= 30;
@@ -172,10 +172,11 @@ namespace Project_CORA
          */
         private void calculateServoPositions()
         {
-            ServoPositions.baseServo -= JoyStickState.Xaxis - JoyStickState.Yaxis;
-            ServoPositions.midServo -= JoyStickState.Xaxis;
-            ServoPositions.endServo += JoyStickState.Xaxis + JoyStickState.Yaxis;
-            ServoPositions.rotServo += JoyStickState.Zaxis; //<- This for rotation??
+            int speedSetting = 10;
+            ServoPositions.baseServo -= (JoyStickState.Xaxis / speedSetting) - (JoyStickState.Zaxis / speedSetting);
+            ServoPositions.midServo -= (JoyStickState.Xaxis / speedSetting);
+            ServoPositions.endServo += (JoyStickState.Xaxis / speedSetting) + (JoyStickState.Zaxis /speedSetting);
+            ServoPositions.rotServo += (JoyStickState.Zaxis / speedSetting); //<- This for rotation??
             if(ServoPositions.baseServo > baseServoMax) { ServoPositions.baseServo = baseServoMax; }
             else if(ServoPositions.baseServo < baseServoMin) { ServoPositions.baseServo = baseServoMin; }
             if(ServoPositions.midServo > midServoMax) { ServoPositions.midServo = midServoMax; }
