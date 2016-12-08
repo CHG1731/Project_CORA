@@ -22,15 +22,15 @@ namespace Project_CORA
         public int modSelected = 0;
         public int modEquiped = 0;
 
-        private int updateInterval;
+        private int updateInterval = 2;
 
         Graphics positionPanelGraphics;
+        Graphics rotationValueGraphics;
         Pen blackPen = new Pen(Color.Black, 10);
         Pen bluePen = new Pen(Color.Blue, 10);
         Pen redPen = new Pen(Color.Red, 10);
-
-        //Values used only for testing purpuposes
-        private int value1 = 850, value2 = 850, value3 = 512;
+        Pen circlePen = new Pen(Color.Black, 1);
+        SolidBrush redBrush = new SolidBrush(Color.Red);
 
         public UserInterface()
         {
@@ -39,6 +39,7 @@ namespace Project_CORA
             redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             InitializeComponent();
             positionPanelGraphics = this.robotPositionPanel.CreateGraphics();
+            rotationValueGraphics = this.baseRotationPanel.CreateGraphics();
             PollJoyStick.RunWorkerAsync();
             timer1.Start();
             MainProcess.RunWorkerAsync();
@@ -115,7 +116,11 @@ namespace Project_CORA
                 string axispos = String.Concat("X: ", JoyStickState.Xaxis, " Y: ", JoyStickState.Yaxis, " Z: ", JoyStickState.Zaxis, " Zrot: ", JoyStickState.Zrotation);
                 axisLabel.Text = axispos;
             }
-            updateGUI();
+            if (updateInterval++ == 3)
+            {
+                updateGUI();
+                updateInterval = 0;
+            }
         }
 
         private void modList_SelectedIndexChanged(object sender, EventArgs e)
@@ -137,6 +142,7 @@ namespace Project_CORA
         public void updateGUI()
         {
             updateRobotPositon(ServoPositions.baseServo, ServoPositions.midServo, ServoPositions.endServo);
+            updateRotationPosition(ServoPositions.rotServo);
         }
 
         private void updateRobotPositon(int baseValue, int midValue, int endValue)
@@ -155,6 +161,24 @@ namespace Project_CORA
             positionPanelGraphics.DrawLine(blackPen, 0, positionPanelGraphics.DpiY, (float)baseX, positionPanelGraphics.DpiY - (float)baseY);
             positionPanelGraphics.DrawLine(redPen, (float)baseX, positionPanelGraphics.DpiY - (float)baseY, (float)midX, positionPanelGraphics.DpiY - (float)midY);
             positionPanelGraphics.DrawLine(bluePen, (float)midX, positionPanelGraphics.DpiY - (float)midY, (float)endX, positionPanelGraphics.DpiY - (float)endY);
+        }
+
+        private void updateRotationPosition(int rotValue)
+        {
+            int xCor, yCor;
+            double a, b;
+            rotationValueGraphics.Clear(Color.LightGray);
+            Rectangle rectangle = new Rectangle(5, 5, 140, 140);
+            Rectangle pointRectangle;
+            rotationValueGraphics.DrawEllipse(circlePen, rectangle);
+
+            if(rotValue >=0 && rotValue < 256)
+            {
+                a = 70 - (rotValue * (70 / 256));
+                b = Math.Sqrt(Math.Pow(70, 2) - Math.Pow(a, 2));
+                pointRectangle = new Rectangle((int)a , (int)b, 10, 10);
+                rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
+            }
         }
 
         public void addMod(String mod)

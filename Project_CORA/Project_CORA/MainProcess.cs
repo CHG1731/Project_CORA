@@ -30,7 +30,7 @@ namespace Project_CORA
             ServoPositions.baseServo = 850;
             ServoPositions.midServo = 850;
             ServoPositions.endServo = 512;
-            ServoPositions.rotServo = 512;
+            ServoPositions.rotServo = 0;
             ServoPositions.frameServo = 0;
             this.userControls = u;
             registerMods();
@@ -64,12 +64,8 @@ namespace Project_CORA
                 //Read joystick and update Servo Positionues
                 calculateServoPositions();
                 //Send Servoor Positionues to servo's
-                /*
-                ServoPositions.baseServo -= 30;
-                ServoPositions.midServo -= 30;
-                ServoPositions.endServo += 30;
-                */
                 sendServoPositions();
+                ServoPositions.rotServo++;
                 Thread.Sleep(20);
             }
         }

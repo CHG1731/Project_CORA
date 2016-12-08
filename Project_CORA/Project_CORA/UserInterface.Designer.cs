@@ -55,6 +55,7 @@
             this.povLabel = new System.Windows.Forms.Label();
             this.buttonLabel = new System.Windows.Forms.Label();
             this.axisLabel = new System.Windows.Forms.Label();
+            this.baseRotationPanel = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
@@ -275,6 +276,15 @@
             this.axisLabel.Size = new System.Drawing.Size(0, 17);
             this.axisLabel.TabIndex = 7;
             // 
+            // baseRotationPanel
+            // 
+            this.baseRotationPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.baseRotationPanel.BackColor = System.Drawing.Color.SteelBlue;
+            this.baseRotationPanel.Location = new System.Drawing.Point(1190, 279);
+            this.baseRotationPanel.Name = "baseRotationPanel";
+            this.baseRotationPanel.Size = new System.Drawing.Size(200, 182);
+            this.baseRotationPanel.TabIndex = 8;
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -282,6 +292,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(1410, 866);
+            this.Controls.Add(this.baseRotationPanel);
             this.Controls.Add(this.robotPositionPanel);
             this.Controls.Add(this.axisLabel);
             this.Controls.Add(this.buttonLabel);
@@ -334,6 +345,7 @@
         private System.Windows.Forms.Label povLabel;
         private System.Windows.Forms.Label buttonLabel;
         private System.Windows.Forms.Label axisLabel;
+        private System.Windows.Forms.Panel baseRotationPanel;
     }
 }
 
