@@ -64,10 +64,11 @@ namespace Project_CORA
                 //Read joystick and update Servo Positionues
                 //calculateServoPositions();
                 //Send Servoor Positionues to servo's
-
+                /*
                 ServoPositions.baseServo -= 30;
                 ServoPositions.midServo -= 30;
                 ServoPositions.endServo += 30;
+                */
                 sendServoPositions();
                 Thread.Sleep(20);
             }

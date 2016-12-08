@@ -112,6 +112,7 @@ namespace Project_CORA
             buttonLabel.Text = "BUTTONS: "+buttons;
             string axispos = String.Concat("X: ",JoyStickState.Xaxis," Y: ", JoyStickState.Yaxis," Z: ",JoyStickState.Zaxis," Zrot: ",JoyStickState.Zrotation );
             axisLabel.Text = axispos;
+            updateGUI();
         }
 
         private void modList_SelectedIndexChanged(object sender, EventArgs e)
