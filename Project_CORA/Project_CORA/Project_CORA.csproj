@@ -51,6 +51,7 @@
     <Compile Include="JoyStickState.cs" />
     <Compile Include="Dynamixel.cs" />
     <Compile Include="MainProcess.cs" />
+    <Compile Include="ServoPositions.cs" />
     <Compile Include="UserInterface.cs">
       <SubType>Form</SubType>
     </Compile>

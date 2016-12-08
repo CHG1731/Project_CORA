@@ -15,18 +15,23 @@ namespace Project_CORA
         private int modEquiped = 0;
 
         //Declaration of Servoor Positionues.
-        public int baseServoPosition = 850, baseServoMin = 0, baseServoMax = 850, baseServo = 11, baseServoDefault = 850;
-        private int midServoPosition = 850, midServoMin = 0, midServoMax = 1023, midServo = 9, midServoDefault = 850;
-        private int endServoPosition = 512, endServoMin = 0, endServoMax = 1023, endServo = 4, endServoDefault = 512;
-        private int rotServoPosition = 850, rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 850, rotServoSwitchPos = 0;
-        private int frameServoPosition = 0, frameServoMin = 0, frameServoMax = 0 /*TODO Add actual value*/, frameServoDefault = 0; 
-        private int moduleServoPosition = 512, moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
+        public int baseServoMin = 0, baseServoMax = 850, baseServo = 11, baseServoDefault = 850;
+        private int midServoMin = 0, midServoMax = 1023, midServo = 9, midServoDefault = 850;
+        private int endServoMin = 0, endServoMax = 1023, endServo = 4, endServoDefault = 512;
+        private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 850, rotServoSwitchPos = 0;
+        private int frameServoMin = 0, frameServoMax = 0 /*TODO Add actual value*/, frameServoDefault = 0; 
+        private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
         private int frameModInterval = 10;
 
         private String[] modules = new String[20];
 
         public MainProcess(UserInterface u)
         {
+            ServoPositions.baseServo = 850;
+            ServoPositions.midServo = 850;
+            ServoPositions.endServo = 512;
+            ServoPositions.rotServo = 512;
+            ServoPositions.frameServo = 0;
             this.userControls = u;
             registerMods();
             runMainProcess();
@@ -57,8 +62,12 @@ namespace Project_CORA
                     changeMod();
                 }
                 //Read joystick and update Servo Positionues
-                calculateServoPositions();
+                //calculateServoPositions();
                 //Send Servoor Positionues to servo's
+
+                ServoPositions.baseServo -= 30;
+                ServoPositions.midServo -= 30;
+                ServoPositions.endServo += 30;
                 sendServoPositions();
                 Thread.Sleep(20);
             }
@@ -90,19 +99,20 @@ namespace Project_CORA
          */
         private void setRobotPosition(int[] destinations)
         {
-            while (!(baseServoPosition == destinations[0] && midServoPosition == destinations[1] && endServoPosition == destinations[2] && moduleServoPosition == destinations[3]))
+            while (!(ServoPositions.baseServo == destinations[0] && ServoPositions.midServo == destinations[1] 
+                && ServoPositions.endServo == destinations[2] && ServoPositions.moduleServo == destinations[3]))
             {
-                baseServoPosition = checkServoPosition(baseServoPosition, destinations[0]);
-                midServoPosition = checkServoPosition(midServoPosition, destinations[1]);
-                endServoPosition = checkServoPosition(endServoPosition, destinations[2]);
-                moduleServoPosition = checkServoPosition(moduleServoPosition, destinations[3]);
+                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, destinations[0]);
+                ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, destinations[1]);
+                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, destinations[2]);
+                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, destinations[3]);
                 sendServoPositions();
                 Thread.Sleep(20);
             }
-            while (rotServoPosition != destinations[4] && frameServoPosition != destinations[5])
+            while (ServoPositions.rotServo != destinations[4] && ServoPositions.frameServo != destinations[5])
             {
-                rotServoPosition = checkServoPosition(rotServoPosition, destinations[4]);
-                frameServoPosition = checkServoPosition(frameServoPosition, destinations[5]); //Might not work for frameservo.
+                ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
+                ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
                 sendServoPositions();
                 Thread.Sleep(20);
             }
@@ -134,13 +144,16 @@ namespace Project_CORA
         {
             if (this.modEquiped != 0)
             {
-                setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoSwitchPos, frameModInterval * this.modEquiped });
+                setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault,
+                    rotServoSwitchPos, frameModInterval * this.modEquiped });
                 coupleMod(true);
             }
             this.modEquiped = userControls.modEquiped;
-            setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoSwitchPos, frameModInterval * this.modEquiped });
+            setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault,
+                rotServoSwitchPos, frameModInterval * this.modEquiped });
             coupleMod(false);
-            setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault, rotServoDefault, frameModInterval * this.modEquiped });
+            setRobotPosition(new int[6] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault,
+                rotServoDefault, frameModInterval * this.modEquiped });
         }
 
                
@@ -156,28 +169,28 @@ namespace Project_CORA
          */
         private void calculateServoPositions()
         {
-            baseServoPosition -= JoyStickState.Xaxis - JoyStickState.Yaxis;
-            midServoPosition -= JoyStickState.Xaxis;
-            endServoPosition += JoyStickState.Xaxis + JoyStickState.Yaxis;
-            rotServoPosition += JoyStickState.Zaxis; //<- This for rotation??
-            if(baseServoPosition > baseServoMax) { baseServoPosition = baseServoMax; }
-            else if(baseServoPosition < baseServoMin) { baseServoPosition = baseServoMin; }
-            if(midServoPosition > midServoMax) { midServoPosition = midServoMax; }
-            else if(midServoPosition < midServoMin) { midServoPosition = midServoMin; }
-            if(endServoPosition > endServoMax) { endServoPosition = endServoMax; }
-            else if(endServoPosition < endServoMin) { endServoPosition = endServoMin; }
-            if(rotServoPosition > rotServoMax) { rotServoPosition = rotServoMax; }
-            else if(rotServoPosition < rotServoMin) { rotServoPosition = rotServoMin; }
+            ServoPositions.baseServo -= JoyStickState.Xaxis - JoyStickState.Yaxis;
+            ServoPositions.midServo -= JoyStickState.Xaxis;
+            ServoPositions.endServo += JoyStickState.Xaxis + JoyStickState.Yaxis;
+            ServoPositions.rotServo += JoyStickState.Zaxis; //<- This for rotation??
+            if(ServoPositions.baseServo > baseServoMax) { ServoPositions.baseServo = baseServoMax; }
+            else if(ServoPositions.baseServo < baseServoMin) { ServoPositions.baseServo = baseServoMin; }
+            if(ServoPositions.midServo > midServoMax) { ServoPositions.midServo = midServoMax; }
+            else if(ServoPositions.midServo < midServoMin) { ServoPositions.midServo = midServoMin; }
+            if(ServoPositions.endServo > endServoMax) { ServoPositions.endServo = endServoMax; }
+            else if(ServoPositions.endServo < endServoMin) { ServoPositions.endServo = endServoMin; }
+            if(ServoPositions.rotServo > rotServoMax) { ServoPositions.rotServo = rotServoMax; }
+            else if(ServoPositions.rotServo < rotServoMin) { ServoPositions.rotServo = rotServoMin; }
         }
 
         private void sendServoPositions()
         {
             /*
-            Dynamixel.setPosition(portnum, baseServo, baseServoPosition);
-            Dynamixel.setPosition(portnum, midServo, midServoPosition);
-            Dynamixel.setPosition(portnum, endServo, endServoPosition);
-            Dynamixel.setPosition(portnum, rotServo, rotServoPosition);
-            Dynamixel.setPosition(portnum, moduleServo, moduleServoPosition);
+            Dynamixel.setPosition(portnum, baseServo, ServoPositions.baseServo);
+            Dynamixel.setPosition(portnum, midServo, ServoPositions.midServo);
+            Dynamixel.setPosition(portnum, endServo, ServoPositions.endServo);
+            Dynamixel.setPosition(portnum, rotServo, ServoPositions.rotServo);
+            Dynamixel.setPosition(portnum, moduleServo, ServoPositions.moduleServo);
             */
         }
 
