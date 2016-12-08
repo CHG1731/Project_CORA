@@ -13,6 +13,8 @@ namespace Project_CORA
 
         private int modSelected = 0;
         private int modEquiped = 0;
+        Dynamixel dynamixel;
+        SerialPort2Dynamixel serialPort;
 
         //Declaration of Servoor Positionues.
         public int baseServoMin = 0, baseServoMax = 850, baseServo = 11, baseServoDefault = 850;
@@ -20,18 +22,18 @@ namespace Project_CORA
         private int endServoMin = 0, endServoMax = 1023, endServo = 4, endServoDefault = 512;
         private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 850, rotServoSwitchPos = 0;
         private int frameServoMin = 0, frameServoMax = 0 /*TODO Add actual value*/, frameServoDefault = 0; 
-        private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
+        private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 850;
         private int frameModInterval = 10;
 
         private String[] modules = new String[20];
 
         public MainProcess(UserInterface u)
         {
-            ServoPositions.baseServo = 850;
-            ServoPositions.midServo = 850;
-            ServoPositions.endServo = 512;
-            ServoPositions.rotServo = 0;
-            ServoPositions.frameServo = 0;
+            ServoPositions.baseServo = baseServoDefault;
+            ServoPositions.midServo = midServoDefault;
+            ServoPositions.endServo = endServoDefault;
+            ServoPositions.rotServo = rotServoDefault;
+            ServoPositions.moduleServo = moduleServoDefault;
             this.userControls = u;
             registerMods();
             runMainProcess();
@@ -42,6 +44,12 @@ namespace Project_CORA
          */
         private void runMainProcess()
         {
+            serialPort = new SerialPort2Dynamixel();
+            dynamixel = new Dynamixel();
+            if (serialPort.open("COM7") == false)
+            {
+                dynamixel.sendTossModeCommand(serialPort);
+            }
             while (true)
             {
                 //Check if emergency stop is in effect
@@ -64,8 +72,8 @@ namespace Project_CORA
                 //Read joystick and update Servo Positionues
                 calculateServoPositions();
                 //Send Servoor Positionues to servo's
+
                 sendServoPositions();
-                ServoPositions.rotServo++;
                 Thread.Sleep(20);
             }
         }
@@ -169,10 +177,10 @@ namespace Project_CORA
         private void calculateServoPositions()
         {
             int speedSetting = 10;
-            ServoPositions.baseServo -= (JoyStickState.Xaxis / speedSetting) - (JoyStickState.Zaxis / speedSetting);
-            ServoPositions.midServo -= (JoyStickState.Xaxis / speedSetting);
-            ServoPositions.endServo += (JoyStickState.Xaxis / speedSetting) + (JoyStickState.Zaxis /speedSetting);
-            ServoPositions.rotServo += (JoyStickState.Zaxis / speedSetting); //<- This for rotation??
+            ServoPositions.baseServo -= (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis / speedSetting);
+            ServoPositions.midServo -= (JoyStickState.Yaxis / speedSetting);
+            ServoPositions.endServo += (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis /speedSetting);
+            ServoPositions.rotServo += (JoyStickState.Zrotation / speedSetting); //<- This for rotation??
             if(ServoPositions.baseServo > baseServoMax) { ServoPositions.baseServo = baseServoMax; }
             else if(ServoPositions.baseServo < baseServoMin) { ServoPositions.baseServo = baseServoMin; }
             if(ServoPositions.midServo > midServoMax) { ServoPositions.midServo = midServoMax; }
@@ -185,13 +193,11 @@ namespace Project_CORA
 
         private void sendServoPositions()
         {
-            /*
-            Dynamixel.setPosition(portnum, baseServo, ServoPositions.baseServo);
-            Dynamixel.setPosition(portnum, midServo, ServoPositions.midServo);
-            Dynamixel.setPosition(portnum, endServo, ServoPositions.endServo);
-            Dynamixel.setPosition(portnum, rotServo, ServoPositions.rotServo);
-            Dynamixel.setPosition(portnum, moduleServo, ServoPositions.moduleServo);
-            */
+            dynamixel.setPosition(serialPort, baseServo, ServoPositions.baseServo);
+            dynamixel.setPosition(serialPort, midServo, ServoPositions.midServo);
+            dynamixel.setPosition(serialPort, endServo, ServoPositions.endServo);
+            dynamixel.setPosition(serialPort, rotServo, ServoPositions.rotServo);
+            dynamixel.setPosition(serialPort, moduleServo, ServoPositions.moduleServo);
         }
 
     }

@@ -48,7 +48,6 @@ namespace Project_CORA
         {
             Application.Exit();
         }
-
         private void Hoofdscherm_Load(object sender, EventArgs e)
         {
             fetchCom(toolStripComboBox1);
@@ -68,12 +67,7 @@ namespace Project_CORA
 
         private void toolStripComboBox1_Click(object sender, EventArgs e)
         {
-            if (serialPort.open(toolStripComboBox1.SelectedItem.ToString()) == false)
-            {
-                dynamixel.sendTossModeCommand(serialPort);
-                serialPort = new SerialPort2Dynamixel();
-                dynamixel = new Dynamixel();
-            }
+
         }
 
         private void PollJoyStick_DoWork(object sender, DoWorkEventArgs e)
@@ -105,11 +99,14 @@ namespace Project_CORA
                 povLabel.Text = String.Concat("POV: ", JoyStickState.pov.ToString());
                 bool[] button = JoyStickState.buttons;
                 string buttons = "";
-                for (int i = 0; i < button.Length - 100; i++)
+                if (!button.Equals(null))
                 {
-                    if (button[i])
+                    for (int i = 0; i < button.Length - 100; i++)
                     {
-                        buttons += string.Concat(i.ToString(), " ");
+                        if (button[i])
+                        {
+                            buttons += string.Concat(i.ToString(), " ");
+                        }
                     }
                 }
                 buttonLabel.Text = "BUTTONS: " + buttons;
@@ -189,6 +186,11 @@ namespace Project_CORA
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             MainProcess x = new MainProcess(this);
+        }
+
+        private void connectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ServoPositions.COM = toolStripComboBox1.SelectedItem.ToString();
         }
     }
 }

@@ -46,6 +46,7 @@
             this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectRobotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusLabel = new System.Windows.Forms.Label();
             this.PollJoyStick = new System.ComponentModel.BackgroundWorker();
@@ -75,7 +76,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1156, 823);
+            this.tabControl1.Size = new System.Drawing.Size(1089, 395);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -83,7 +84,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1148, 794);
+            this.tabPage1.Size = new System.Drawing.Size(1081, 366);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Camera feed";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -142,7 +143,7 @@
             // 
             this.Asstatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Asstatus.Enabled = false;
-            this.Asstatus.Location = new System.Drawing.Point(1174, 794);
+            this.Asstatus.Location = new System.Drawing.Point(1107, 366);
             this.Asstatus.Maximum = 100;
             this.Asstatus.Minimum = -100;
             this.Asstatus.Name = "Asstatus";
@@ -173,7 +174,7 @@
             this.quitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1410, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1343, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -194,7 +195,8 @@
             // connectionToolStripMenuItem
             // 
             this.connectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectRobotToolStripMenuItem});
+            this.connectRobotToolStripMenuItem,
+            this.connectToolStripMenuItem});
             this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
             this.connectionToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
             this.connectionToolStripMenuItem.Text = "Connections";
@@ -213,6 +215,13 @@
             this.toolStripComboBox1.Size = new System.Drawing.Size(121, 28);
             this.toolStripComboBox1.Click += new System.EventHandler(this.toolStripComboBox1_Click);
             // 
+            // connectToolStripMenuItem
+            // 
+            this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+            this.connectToolStripMenuItem.Text = "Connect";
+            this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
+            // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
@@ -225,7 +234,7 @@
             this.statusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.statusLabel.AutoSize = true;
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.Location = new System.Drawing.Point(1167, 56);
+            this.statusLabel.Location = new System.Drawing.Point(1100, 56);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(223, 38);
             this.statusLabel.TabIndex = 4;
@@ -247,7 +256,7 @@
             // 
             this.robotPositionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.robotPositionPanel.BackColor = System.Drawing.Color.SteelBlue;
-            this.robotPositionPanel.Location = new System.Drawing.Point(1174, 97);
+            this.robotPositionPanel.Location = new System.Drawing.Point(1107, 97);
             this.robotPositionPanel.Name = "robotPositionPanel";
             this.robotPositionPanel.Size = new System.Drawing.Size(224, 176);
             this.robotPositionPanel.TabIndex = 5;
@@ -280,7 +289,7 @@
             // 
             this.baseRotationPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.baseRotationPanel.BackColor = System.Drawing.Color.SteelBlue;
-            this.baseRotationPanel.Location = new System.Drawing.Point(1190, 279);
+            this.baseRotationPanel.Location = new System.Drawing.Point(1123, 279);
             this.baseRotationPanel.Name = "baseRotationPanel";
             this.baseRotationPanel.Size = new System.Drawing.Size(200, 182);
             this.baseRotationPanel.TabIndex = 8;
@@ -291,7 +300,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1410, 866);
+            this.ClientSize = new System.Drawing.Size(1343, 438);
             this.Controls.Add(this.baseRotationPanel);
             this.Controls.Add(this.robotPositionPanel);
             this.Controls.Add(this.axisLabel);
@@ -346,6 +355,7 @@
         private System.Windows.Forms.Label buttonLabel;
         private System.Windows.Forms.Label axisLabel;
         private System.Windows.Forms.Panel baseRotationPanel;
+        private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
     }
 }
 

@@ -78,7 +78,7 @@ namespace Project_CORA
             int[] sliderval = state.GetSliders();
             JoyStickState.slider = sliderval[0];
             JoyStickState.Xaxis = state.X;
-            JoyStickState.Yaxis = state.Y;
+            JoyStickState.Yaxis = state.Y*-1;
             JoyStickState.Zaxis = state.Z;
             JoyStickState.Zrotation = state.RotationZ;
             int[] pov = state.GetPointOfViewControllers();

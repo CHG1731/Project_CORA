@@ -8,6 +8,7 @@ namespace Project_CORA
 {
     static class ServoPositions
     {
+        public static string COM = "COM4";
         public static int baseServo { get; set; }
         public static int midServo { get; set; }
         public static int endServo { get; set; }
