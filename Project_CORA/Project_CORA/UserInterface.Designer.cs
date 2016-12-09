@@ -81,7 +81,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1089, 697);
+            this.tabControl1.Size = new System.Drawing.Size(1089, 889);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -89,7 +89,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1081, 668);
+            this.tabPage1.Size = new System.Drawing.Size(1081, 860);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Camera feed";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -102,7 +102,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1081, 668);
+            this.tabPage2.Size = new System.Drawing.Size(1081, 860);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Module selection";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -119,6 +119,9 @@
             // 
             // manualDisplay
             // 
+            this.manualDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.manualDisplay.Location = new System.Drawing.Point(254, 6);
             this.manualDisplay.Name = "manualDisplay";
             this.manualDisplay.Size = new System.Drawing.Size(888, 782);
@@ -140,7 +143,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1081, 668);
+            this.tabPage3.Size = new System.Drawing.Size(1081, 860);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Macro management";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -150,16 +153,16 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1081, 668);
+            this.tabPage4.Size = new System.Drawing.Size(1081, 860);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // Asstatus
             // 
-            this.Asstatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Asstatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Asstatus.Enabled = false;
-            this.Asstatus.Location = new System.Drawing.Point(1103, 557);
+            this.Asstatus.Location = new System.Drawing.Point(1107, 581);
             this.Asstatus.Maximum = 100;
             this.Asstatus.Minimum = -100;
             this.Asstatus.Name = "Asstatus";
@@ -274,7 +277,7 @@
             this.robotPositionPanel.BackColor = System.Drawing.Color.SteelBlue;
             this.robotPositionPanel.Location = new System.Drawing.Point(1123, 118);
             this.robotPositionPanel.Name = "robotPositionPanel";
-            this.robotPositionPanel.Size = new System.Drawing.Size(200, 176);
+            this.robotPositionPanel.Size = new System.Drawing.Size(200, 235);
             this.robotPositionPanel.TabIndex = 5;
             // 
             // povLabel
@@ -305,14 +308,15 @@
             // 
             this.baseRotationPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.baseRotationPanel.BackColor = System.Drawing.Color.SteelBlue;
-            this.baseRotationPanel.Location = new System.Drawing.Point(1123, 317);
+            this.baseRotationPanel.Location = new System.Drawing.Point(1123, 376);
             this.baseRotationPanel.Name = "baseRotationPanel";
             this.baseRotationPanel.Size = new System.Drawing.Size(200, 182);
             this.baseRotationPanel.TabIndex = 8;
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(1181, 672);
+            this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.resetButton.Location = new System.Drawing.Point(1192, 768);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 9;
@@ -322,6 +326,7 @@
             // 
             // positionPanelLabel
             // 
+            this.positionPanelLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.positionPanelLabel.AutoSize = true;
             this.positionPanelLabel.Location = new System.Drawing.Point(1108, 95);
             this.positionPanelLabel.Name = "positionPanelLabel";
@@ -331,8 +336,9 @@
             // 
             // rotationPanelLabel
             // 
+            this.rotationPanelLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rotationPanelLabel.AutoSize = true;
-            this.rotationPanelLabel.Location = new System.Drawing.Point(1108, 297);
+            this.rotationPanelLabel.Location = new System.Drawing.Point(1108, 356);
             this.rotationPanelLabel.Name = "rotationPanelLabel";
             this.rotationPanelLabel.Size = new System.Drawing.Size(171, 17);
             this.rotationPanelLabel.TabIndex = 11;
@@ -340,8 +346,9 @@
             // 
             // frameLabelPosition
             // 
+            this.frameLabelPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.frameLabelPosition.AutoSize = true;
-            this.frameLabelPosition.Location = new System.Drawing.Point(1108, 528);
+            this.frameLabelPosition.Location = new System.Drawing.Point(1108, 561);
             this.frameLabelPosition.Name = "frameLabelPosition";
             this.frameLabelPosition.Size = new System.Drawing.Size(148, 17);
             this.frameLabelPosition.TabIndex = 12;
@@ -353,7 +360,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1343, 740);
+            this.ClientSize = new System.Drawing.Size(1343, 932);
             this.Controls.Add(this.frameLabelPosition);
             this.Controls.Add(this.rotationPanelLabel);
             this.Controls.Add(this.positionPanelLabel);

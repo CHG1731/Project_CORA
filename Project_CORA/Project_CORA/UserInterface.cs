@@ -22,14 +22,12 @@ namespace Project_CORA
         public int modSelected = 0;
         public int modEquiped = 0;
 
-        private int updateInterval = 2;
-
         Graphics positionPanelGraphics;
         Graphics rotationValueGraphics;
         Pen blackPen = new Pen(Color.Black, 7);
         Pen bluePen = new Pen(Color.Blue, 7);
         Pen redPen = new Pen(Color.Red, 7);
-        Pen circlePen = new Pen(Color.Black, 1);
+        Pen circlePen = new Pen(Color.Black, 2);
         SolidBrush redBrush = new SolidBrush(Color.Red);
 
         public UserInterface()
@@ -68,7 +66,6 @@ namespace Project_CORA
 
         private void toolStripComboBox1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void PollJoyStick_DoWork(object sender, DoWorkEventArgs e)
@@ -84,6 +81,7 @@ namespace Project_CORA
          */ 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //TODO clean up this code.
             if (JoyStickState.connected)
             {
                 int updateslider = JoyStickState.slider / 10;
@@ -167,11 +165,14 @@ namespace Project_CORA
             double baseX = Math.Sin(baseAngle) * baselength + 10, baseY = Math.Cos(baseAngle) * baselength;
             double midX = baseX + Math.Sin(midAngle) * midlength, midY = baseY - Math.Cos(midAngle) * midlength;
             double endX = midX - Math.Sin(endAngle) * endlength, endY = midY - Math.Cos(endAngle) * endlength;
+            float yLength = positionPanelGraphics.DpiY + 40;
 
             positionPanelGraphics.Clear(Color.LightGray);
-            positionPanelGraphics.DrawLine(blackPen, 10, positionPanelGraphics.DpiY, (float)baseX, positionPanelGraphics.DpiY - (float)baseY);
-            positionPanelGraphics.DrawLine(redPen, (float)baseX, positionPanelGraphics.DpiY - (float)baseY, (float)midX, positionPanelGraphics.DpiY - (float)midY);
-            positionPanelGraphics.DrawLine(bluePen, (float)midX, positionPanelGraphics.DpiY - (float)midY, (float)endX, positionPanelGraphics.DpiY - (float)endY);
+            positionPanelGraphics.DrawLine(blackPen, 10, yLength, (float)baseX, yLength - (float)baseY);
+            positionPanelGraphics.DrawLine(redPen, (float)baseX, yLength - (float)baseY, (float)midX, yLength - (float)midY);
+            positionPanelGraphics.DrawLine(bluePen, (float)midX, yLength - (float)midY, (float)endX, yLength - (float)endY);
+            positionPanelGraphics.DrawLine(circlePen, 0, yLength, 30, yLength);
+            positionPanelGraphics.DrawLine(circlePen, 30, yLength, 30, yLength + 60);
         }
 
         /*
