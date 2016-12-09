@@ -164,12 +164,35 @@ namespace Project_CORA
             Rectangle pointRectangle;
             rotationValueGraphics.DrawEllipse(circlePen, rectangle);
 
-            if(rotValue >=0 && rotValue < 269)
+            if(rotValue >=0 && rotValue < 260)
             {
-                rotValue = 259;
+                a = 70 + (rotValue * 0.27);
+                b = 70 + Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
+                pointRectangle = new Rectangle((int)a, (int)b, 10, 10);
+                rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
+            }
+            else if (rotValue >= 260 && rotValue < 513)
+            {
+                rotValue = 512 - rotValue;
+                a = 70 + (rotValue * 0.27);
+                b = 70 - Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
+                pointRectangle = new Rectangle((int)a, (int)b, 10, 10);
+                rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
+            }
+            else if (rotValue >= 513 && rotValue < 768)
+            {
+                rotValue = rotValue - 512;
+                a = 70 - (rotValue * 0.27);
+                b = 70 - Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
+                pointRectangle = new Rectangle((int)a, (int)b, 10, 10);
+                rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
+            }
+            else if (rotValue >= 768 && rotValue < 1024)
+            {
+                rotValue = 1023 - rotValue;
                 a = 70 - (rotValue * 0.27);
                 b = 70 + Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
-                pointRectangle = new Rectangle((int)a , (int)b, 10, 10);
+                pointRectangle = new Rectangle((int)a, (int)b, 10, 10);
                 rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
             }
         }
