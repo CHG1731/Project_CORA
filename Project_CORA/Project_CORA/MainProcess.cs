@@ -16,6 +16,8 @@ namespace Project_CORA
         Dynamixel dynamixel;
         SerialPort2Dynamixel serialPort;
 
+        private bool emergencyStopInEffect = false;
+
         private int baseCoupleVal = 650, endCoupleVal = 712, moduleCoupleVal = 850;
         //Declaration of Servoor Positionues.
         public int baseServoMin = 300, baseServoMax = 850, baseServo = 11, baseServoDefault = 850;
@@ -26,6 +28,8 @@ namespace Project_CORA
         private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
         private int coupleServoMin = 0, coupleServoMax = 1023, coupleServo = 7, coupleServoDefault = 512;
         private int frameModInterval = 10;
+
+        private int emergencyStopButton = 3;
 
         private String[] modules = new String[20];
 
@@ -56,9 +60,14 @@ namespace Project_CORA
             while (true)
             {
                 //Check if emergency stop is in effect
-                while (userControls.emergencyStopActive)
+                //emergencyStopInEffect = JoyStickState.buttons[emergencyStopButton];
+                while (emergencyStopInEffect)
                 {
                     Thread.Sleep(25);
+                    if(userControls.requestedReset || JoyStickState.buttons[emergencyStopButton])
+                    {
+                        emergencyStopInEffect = false;
+                    }
                 }
                 //check if robot needs to reset
                 if (userControls.requestedReset)
