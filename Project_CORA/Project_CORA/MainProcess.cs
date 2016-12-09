@@ -87,7 +87,6 @@ namespace Project_CORA
                 //Send Servoor Positionues to servo's
 
                 sendServoPositions();
-                Thread.Sleep(20);
             }
         }
 
@@ -126,14 +125,12 @@ namespace Project_CORA
                 ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, destinations[3]);
                 //ServoPositions.coupleServo = checkServoPosition(ServoPositions.coupleServo, destinations[6]);
                 sendServoPositions();
-                Thread.Sleep(20);
             }
             while (ServoPositions.rotServo != destinations[4])
             {
                 ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
                 ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
                 sendServoPositions();
-                Thread.Sleep(20);
             }
         }
 
@@ -185,7 +182,6 @@ namespace Project_CORA
                 ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, endCoupleVal);
                 ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, moduleCoupleVal);
                 sendServoPositions();
-                Thread.Sleep(20);
             }
             if (!eject)
             {
@@ -203,7 +199,6 @@ namespace Project_CORA
                 ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, endServoDefault);
                 ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, moduleServoDefault);
                 sendServoPositions();
-                Thread.Sleep(20);
             }
 
         }
