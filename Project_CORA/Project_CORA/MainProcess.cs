@@ -142,16 +142,19 @@ namespace Project_CORA
          */
         private int checkServoPosition(int servoPosition, int servoDestination)
         {
-            int brakeDis = 10, speedOffset = 10;
-            if (servoPosition > servoDestination)
+            if (!userControls.emergencyStopActive)
             {
-                if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }
-                else { servoPosition--; }
-            }
-            else if (servoPosition < servoDestination)
-            {
-                if (servoDestination - servoPosition > brakeDis) { servoPosition += speedOffset; }
-                else { servoPosition++; }
+                int brakeDis = 10, speedOffset = 10;
+                if (servoPosition > servoDestination)
+                {
+                    if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }
+                    else { servoPosition--; }
+                }
+                else if (servoPosition < servoDestination)
+                {
+                    if (servoDestination - servoPosition > brakeDis) { servoPosition += speedOffset; }
+                    else { servoPosition++; }
+                }
             }
             return servoPosition;
         }
