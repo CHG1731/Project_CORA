@@ -7,6 +7,9 @@ using SlimDX.DirectInput;
 
 namespace Project_CORA
 {
+    /*
+     * Satic class that reads and stores the input on the joystick.
+     */
     static class JoyStickState
     {
         public static bool connected { get; set; }
@@ -27,6 +30,7 @@ namespace Project_CORA
         DirectInput Input = new DirectInput();
         SlimDX.DirectInput.Joystick stick;
         Joystick[] Sticks;
+
         public void Run()
         {
             if (JoyStickState.connected)
@@ -42,6 +46,10 @@ namespace Project_CORA
                 }
             }
         }
+
+        /*
+         * Searches for a joystick and connects it if one is found.
+         */ 
         private Joystick[] Connect()
         {
             List<SlimDX.DirectInput.Joystick> sticks = new List<SlimDX.DirectInput.Joystick>();
@@ -70,6 +78,11 @@ namespace Project_CORA
             }
             return sticks.ToArray();
         }
+
+        /*
+         * Polls the joystick and stores the values of
+         * every component.
+         */ 
         private void stickHandle(Joystick stick, int id)
         {
             JoystickState state = new JoystickState();

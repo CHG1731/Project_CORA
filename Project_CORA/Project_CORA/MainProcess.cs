@@ -85,7 +85,6 @@ namespace Project_CORA
                 //Read joystick and update Servo Positionues
                 calculateServoPositions();
                 //Send Servoor Positionues to servo's
-
                 sendServoPositions();
             }
         }
@@ -97,6 +96,7 @@ namespace Project_CORA
          */
         private void registerMods()
         {
+            //TODO Put module information in XML-format.
             String modName;
             int index = 0;
             System.IO.StreamReader modFile = new System.IO.StreamReader("D:\\Documents\\TI\\Project CORA\\Project_CORA\\modList.txt");
@@ -109,10 +109,10 @@ namespace Project_CORA
         }
 
         /*
-         * Function to reset the robot. If a module is currently
-         * equiped it is ejected and stored.
-         * All Servoor-Positionues are then set to their default positions
-         * and the robot moves to it's starting position.
+         * Function takes an array containing the target positions for each servo.
+         * First all the joints of the arm are moved to their target values,
+         * the the rotation and frame positions are set.
+         * This is done in this order to prevent te arm from slamming into the frame.
          */
         private void setRobotPosition(int[] destinations)
         {
@@ -126,7 +126,7 @@ namespace Project_CORA
                 //ServoPositions.coupleServo = checkServoPosition(ServoPositions.coupleServo, destinations[6]);
                 sendServoPositions();
             }
-            while (ServoPositions.rotServo != destinations[4])
+            while (!(ServoPositions.rotServo == destinations[4] /*&& ServoPositions.frameServo == destinations[5]*/))
             {
                 ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
                 ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
@@ -134,6 +134,12 @@ namespace Project_CORA
             }
         }
 
+        /*
+         * Help functions used by position setting functions to determine
+         * if a servo has reached it's target position and if not return
+         * a new value higher or lower by the speedOffset.
+         * This value is then givin to the respective servo.
+         */
         private int checkServoPosition(int servoPosition, int servoDestination)
         {
             int brakeDis = 10, speedOffset = 10;
@@ -153,7 +159,7 @@ namespace Project_CORA
         /*
          * Function stores a module on, or gets a module from
          * the specified index of the module rack.
-         * Based on the Positionue of "eject", module is either coupled
+         * Based on the value of "eject", module is either coupled
          * or decoupled.
          */ 
         private void changeMod()
@@ -172,7 +178,9 @@ namespace Project_CORA
                 rotServoDefault, frameModInterval * this.modEquiped , coupleServoDefault});
         }
 
-               
+        /*
+         * Helper function used by changeMod()
+         */ 
         private void coupleMod(bool eject)
         {
             while(!(ServoPositions.baseServo == baseCoupleVal && ServoPositions.endServo == endCoupleVal && ServoPositions.moduleServo
@@ -204,9 +212,9 @@ namespace Project_CORA
         }
 
         /*
-         * Function calculates the Positionues of all the joints
+         * Function calculates the Positions of all the joints
          * based on input from the controller and stores
-         * the Positionues in the globally defined variables.
+         * the Positionues in the ServoPositions class.
          */
         private void calculateServoPositions()
         {
@@ -236,6 +244,10 @@ namespace Project_CORA
             else if(ServoPositions.rotServo < rotServoMin) { ServoPositions.rotServo = rotServoMin; }
         }
 
+        /*
+         * Function that writes all the values in ServoPositions to the servo's
+         * in order to move them.
+         */ 
         private void sendServoPositions()
         {
             dynamixel.setPosition(serialPort, baseServo, ServoPositions.baseServo);

@@ -33,6 +33,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.equipButton = new System.Windows.Forms.Button();
             this.manualDisplay = new System.Windows.Forms.RichTextBox();
             this.modList = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -58,7 +59,9 @@
             this.axisLabel = new System.Windows.Forms.Label();
             this.baseRotationPanel = new System.Windows.Forms.Panel();
             this.resetButton = new System.Windows.Forms.Button();
-            this.equipButton = new System.Windows.Forms.Button();
+            this.positionPanelLabel = new System.Windows.Forms.Label();
+            this.rotationPanelLabel = new System.Windows.Forms.Label();
+            this.frameLabelPosition = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
@@ -86,7 +89,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1081, 366);
+            this.tabPage1.Size = new System.Drawing.Size(1081, 668);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Camera feed";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -103,6 +106,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Module selection";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // equipButton
+            // 
+            this.equipButton.Location = new System.Drawing.Point(85, 492);
+            this.equipButton.Name = "equipButton";
+            this.equipButton.Size = new System.Drawing.Size(75, 23);
+            this.equipButton.TabIndex = 2;
+            this.equipButton.Text = "Equip";
+            this.equipButton.UseVisualStyleBackColor = true;
+            this.equipButton.Click += new System.EventHandler(this.equipButton_Click);
             // 
             // manualDisplay
             // 
@@ -127,7 +140,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1081, 366);
+            this.tabPage3.Size = new System.Drawing.Size(1081, 668);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Macro management";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -137,7 +150,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1081, 366);
+            this.tabPage4.Size = new System.Drawing.Size(1081, 668);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -146,7 +159,7 @@
             // 
             this.Asstatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Asstatus.Enabled = false;
-            this.Asstatus.Location = new System.Drawing.Point(1107, 668);
+            this.Asstatus.Location = new System.Drawing.Point(1103, 557);
             this.Asstatus.Maximum = 100;
             this.Asstatus.Minimum = -100;
             this.Asstatus.Name = "Asstatus";
@@ -259,9 +272,9 @@
             // 
             this.robotPositionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.robotPositionPanel.BackColor = System.Drawing.Color.SteelBlue;
-            this.robotPositionPanel.Location = new System.Drawing.Point(1107, 97);
+            this.robotPositionPanel.Location = new System.Drawing.Point(1123, 118);
             this.robotPositionPanel.Name = "robotPositionPanel";
-            this.robotPositionPanel.Size = new System.Drawing.Size(224, 176);
+            this.robotPositionPanel.Size = new System.Drawing.Size(200, 176);
             this.robotPositionPanel.TabIndex = 5;
             // 
             // povLabel
@@ -292,14 +305,14 @@
             // 
             this.baseRotationPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.baseRotationPanel.BackColor = System.Drawing.Color.SteelBlue;
-            this.baseRotationPanel.Location = new System.Drawing.Point(1123, 279);
+            this.baseRotationPanel.Location = new System.Drawing.Point(1123, 317);
             this.baseRotationPanel.Name = "baseRotationPanel";
             this.baseRotationPanel.Size = new System.Drawing.Size(200, 182);
             this.baseRotationPanel.TabIndex = 8;
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(1167, 488);
+            this.resetButton.Location = new System.Drawing.Point(1181, 672);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 9;
@@ -307,15 +320,32 @@
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
-            // equipButton
+            // positionPanelLabel
             // 
-            this.equipButton.Location = new System.Drawing.Point(85, 492);
-            this.equipButton.Name = "equipButton";
-            this.equipButton.Size = new System.Drawing.Size(75, 23);
-            this.equipButton.TabIndex = 2;
-            this.equipButton.Text = "Equip";
-            this.equipButton.UseVisualStyleBackColor = true;
-            this.equipButton.Click += new System.EventHandler(this.equipButton_Click);
+            this.positionPanelLabel.AutoSize = true;
+            this.positionPanelLabel.Location = new System.Drawing.Point(1108, 95);
+            this.positionPanelLabel.Name = "positionPanelLabel";
+            this.positionPanelLabel.Size = new System.Drawing.Size(136, 17);
+            this.positionPanelLabel.TabIndex = 10;
+            this.positionPanelLabel.Text = "Current arm position";
+            // 
+            // rotationPanelLabel
+            // 
+            this.rotationPanelLabel.AutoSize = true;
+            this.rotationPanelLabel.Location = new System.Drawing.Point(1108, 297);
+            this.rotationPanelLabel.Name = "rotationPanelLabel";
+            this.rotationPanelLabel.Size = new System.Drawing.Size(171, 17);
+            this.rotationPanelLabel.TabIndex = 11;
+            this.rotationPanelLabel.Text = "Current rotational position";
+            // 
+            // frameLabelPosition
+            // 
+            this.frameLabelPosition.AutoSize = true;
+            this.frameLabelPosition.Location = new System.Drawing.Point(1108, 528);
+            this.frameLabelPosition.Name = "frameLabelPosition";
+            this.frameLabelPosition.Size = new System.Drawing.Size(148, 17);
+            this.frameLabelPosition.TabIndex = 12;
+            this.frameLabelPosition.Text = "Current frame position";
             // 
             // UserInterface
             // 
@@ -324,6 +354,9 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(1343, 740);
+            this.Controls.Add(this.frameLabelPosition);
+            this.Controls.Add(this.rotationPanelLabel);
+            this.Controls.Add(this.positionPanelLabel);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.baseRotationPanel);
             this.Controls.Add(this.robotPositionPanel);
@@ -382,6 +415,9 @@
         private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button equipButton;
+        private System.Windows.Forms.Label positionPanelLabel;
+        private System.Windows.Forms.Label rotationPanelLabel;
+        private System.Windows.Forms.Label frameLabelPosition;
     }
 }
 

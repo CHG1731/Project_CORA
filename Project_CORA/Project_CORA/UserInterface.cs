@@ -26,9 +26,9 @@ namespace Project_CORA
 
         Graphics positionPanelGraphics;
         Graphics rotationValueGraphics;
-        Pen blackPen = new Pen(Color.Black, 10);
-        Pen bluePen = new Pen(Color.Blue, 10);
-        Pen redPen = new Pen(Color.Red, 10);
+        Pen blackPen = new Pen(Color.Black, 7);
+        Pen bluePen = new Pen(Color.Blue, 7);
+        Pen redPen = new Pen(Color.Red, 7);
         Pen circlePen = new Pen(Color.Black, 1);
         SolidBrush redBrush = new SolidBrush(Color.Red);
 
@@ -77,6 +77,11 @@ namespace Project_CORA
             x.Run();
         }
 
+        /*
+         * Timer that calls the updateGUI method at set intervals.
+         * This way the GUI updates itself withiut needing to be controlled
+         * by the main process.
+         */ 
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (JoyStickState.connected)
@@ -117,6 +122,10 @@ namespace Project_CORA
                 updateGUI();
         }
 
+        /*
+         * Function that changes the displayed module manual
+         * when a new value is selected on modList.
+         */ 
         private void modList_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.modSelected = modList.SelectedIndex;
@@ -131,12 +140,22 @@ namespace Project_CORA
             manualDisplay.Text = manual;
         }
 
+        /*
+         * Function calls all methods needed to update the graphical elements
+         * of the interface and provides them with their respective
+         * arguments.
+         */ 
         public void updateGUI()
         {
             updateRobotPositon(ServoPositions.baseServo, ServoPositions.midServo, ServoPositions.endServo);
             updateRotationPosition(ServoPositions.rotServo);
         }
 
+        /*
+         * Function calculates and displays the positions of the graphical elements
+         * that represent the current configuration of the robot arm
+         * based on the positional values of the joints.
+         */ 
         private void updateRobotPositon(int baseValue, int midValue, int endValue)
         {
             float baselength = positionPanelGraphics.DpiX / 2, midlength = positionPanelGraphics.DpiX / 2, endlength = positionPanelGraphics.DpiX / 2;
@@ -155,10 +174,14 @@ namespace Project_CORA
             positionPanelGraphics.DrawLine(bluePen, (float)midX, positionPanelGraphics.DpiY - (float)midY, (float)endX, positionPanelGraphics.DpiY - (float)endY);
         }
 
+        /*
+         * Function calculates and draws the graphical elements representing the
+         * current configuration of the rotation of the arm.
+         */ 
         private void updateRotationPosition(int rotValue)
         {
             int xCor, yCor;
-            double a, b;
+            double a = 0, b = 0;
             rotationValueGraphics.Clear(Color.LightGray);
             Rectangle rectangle = new Rectangle(5, 5, 140, 140);
             Rectangle pointRectangle;
@@ -168,35 +191,30 @@ namespace Project_CORA
             {
                 a = 70 + (rotValue * 0.27);
                 b = 70 + Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
-                pointRectangle = new Rectangle((int)a, (int)b, 10, 10);
-                rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
             }
             else if (rotValue >= 260 && rotValue < 513)
             {
                 rotValue = 512 - rotValue;
                 a = 70 + (rotValue * 0.27);
                 b = 70 - Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
-                pointRectangle = new Rectangle((int)a, (int)b, 10, 10);
-                rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
             }
             else if (rotValue >= 513 && rotValue < 768)
             {
                 rotValue = rotValue - 512;
                 a = 70 - (rotValue * 0.27);
                 b = 70 - Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
-                pointRectangle = new Rectangle((int)a, (int)b, 10, 10);
-                rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
             }
             else if (rotValue >= 768 && rotValue < 1024)
             {
                 rotValue = 1023 - rotValue;
                 a = 70 - (rotValue * 0.27);
                 b = 70 + Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
-                pointRectangle = new Rectangle((int)a, (int)b, 10, 10);
-                rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
             }
+            pointRectangle = new Rectangle((int)a, (int)b, 10, 10);
+            rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
         }
 
+        //Adds the name of the given mod to the list of mudules.
         public void addMod(String mod)
         {
             modList.Items.Add(mod);
@@ -212,11 +230,13 @@ namespace Project_CORA
             ServoPositions.COM = toolStripComboBox1.SelectedItem.ToString();
         }
 
+        //Sets the requestedReset flag when button is pressed.
         private void resetButton_Click(object sender, EventArgs e)
         {
             this.requestedReset = true;
         }
 
+        //Sets the modEquiped flag with the index value of the selected mod from modList.
         private void equipButton_Click(object sender, EventArgs e)
         {
             this.modEquiped = modList.SelectedIndex;
