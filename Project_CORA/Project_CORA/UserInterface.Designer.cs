@@ -57,6 +57,8 @@
             this.buttonLabel = new System.Windows.Forms.Label();
             this.axisLabel = new System.Windows.Forms.Label();
             this.baseRotationPanel = new System.Windows.Forms.Panel();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.equipButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
@@ -76,7 +78,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1089, 395);
+            this.tabControl1.Size = new System.Drawing.Size(1089, 697);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -91,12 +93,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.equipButton);
             this.tabPage2.Controls.Add(this.manualDisplay);
             this.tabPage2.Controls.Add(this.modList);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1148, 794);
+            this.tabPage2.Size = new System.Drawing.Size(1081, 668);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Module selection";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -124,7 +127,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1148, 794);
+            this.tabPage3.Size = new System.Drawing.Size(1081, 366);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Macro management";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -134,7 +137,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1148, 794);
+            this.tabPage4.Size = new System.Drawing.Size(1081, 366);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Options";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -143,7 +146,7 @@
             // 
             this.Asstatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Asstatus.Enabled = false;
-            this.Asstatus.Location = new System.Drawing.Point(1107, 366);
+            this.Asstatus.Location = new System.Drawing.Point(1107, 668);
             this.Asstatus.Maximum = 100;
             this.Asstatus.Minimum = -100;
             this.Asstatus.Name = "Asstatus";
@@ -294,13 +297,34 @@
             this.baseRotationPanel.Size = new System.Drawing.Size(200, 182);
             this.baseRotationPanel.TabIndex = 8;
             // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(1167, 488);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(75, 23);
+            this.resetButton.TabIndex = 9;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
+            // equipButton
+            // 
+            this.equipButton.Location = new System.Drawing.Point(85, 492);
+            this.equipButton.Name = "equipButton";
+            this.equipButton.Size = new System.Drawing.Size(75, 23);
+            this.equipButton.TabIndex = 2;
+            this.equipButton.Text = "Equip";
+            this.equipButton.UseVisualStyleBackColor = true;
+            this.equipButton.Click += new System.EventHandler(this.equipButton_Click);
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1343, 438);
+            this.ClientSize = new System.Drawing.Size(1343, 740);
+            this.Controls.Add(this.resetButton);
             this.Controls.Add(this.baseRotationPanel);
             this.Controls.Add(this.robotPositionPanel);
             this.Controls.Add(this.axisLabel);
@@ -356,6 +380,8 @@
         private System.Windows.Forms.Label axisLabel;
         private System.Windows.Forms.Panel baseRotationPanel;
         private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
+        private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Button equipButton;
     }
 }
 

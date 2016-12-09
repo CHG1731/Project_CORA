@@ -58,6 +58,7 @@ namespace Project_CORA
             foreach (String port in ports)
             {
                 x.Items.Add(port);
+                x.SelectedIndex = 0;
             }
             if (ports.Length < 1)
             {
@@ -99,7 +100,7 @@ namespace Project_CORA
                 povLabel.Text = String.Concat("POV: ", JoyStickState.pov.ToString());
                 bool[] button = JoyStickState.buttons;
                 string buttons = "";
-                if (!button.Equals(null))
+                if (false)
                 {
                     for (int i = 0; i < button.Length - 100; i++)
                     {
@@ -113,16 +114,11 @@ namespace Project_CORA
                 string axispos = String.Concat("X: ", JoyStickState.Xaxis, " Y: ", JoyStickState.Yaxis, " Z: ", JoyStickState.Zaxis, " Zrot: ", JoyStickState.Zrotation);
                 axisLabel.Text = axispos;
             }
-            if (updateInterval++ == 3)
-            {
                 updateGUI();
-                updateInterval = 0;
-            }
         }
 
         private void modList_SelectedIndexChanged(object sender, EventArgs e)
         {
-        /*
             this.modSelected = modList.SelectedIndex;
             String manual = "", tmp;
             String path = "D:\\Documents\\TI\\Project CORA\\Project_CORA\\Manuals\\" + modList.SelectedItem + "_Manual.txt";
@@ -132,8 +128,7 @@ namespace Project_CORA
                 manual += tmp +"\n";
             }
             manFile.Close();
-            manualDisplay.Text = manual
-            */
+            manualDisplay.Text = manual;
         }
 
         public void updateGUI()
@@ -147,15 +142,15 @@ namespace Project_CORA
             float baselength = positionPanelGraphics.DpiX / 2, midlength = positionPanelGraphics.DpiX / 2, endlength = positionPanelGraphics.DpiX / 2;
             double toRadians = Math.PI / 180;
             double baseAngle = ((850 - baseValue) * 0.352) * toRadians;
-            double midAngle = ((90 + ((850 - midValue) * 0.352)) * toRadians) - baseAngle;
-            double endAngle = ((90 + ((512 - endValue) * 0.352)) * toRadians) + midAngle;
+            double midAngle = ((90 + ((810 - midValue) * 0.352)) * toRadians) - baseAngle;
+            double endAngle = ((90 + ((512 - endValue) * 0.352)) * toRadians) - midAngle;
 
-            double baseX = Math.Sin(baseAngle) * baselength, baseY = Math.Cos(baseAngle) * baselength;
+            double baseX = Math.Sin(baseAngle) * baselength + 10, baseY = Math.Cos(baseAngle) * baselength;
             double midX = baseX + Math.Sin(midAngle) * midlength, midY = baseY - Math.Cos(midAngle) * midlength;
-            double endX = midX + Math.Sin(endAngle) * endlength, endY = midY + Math.Cos(endAngle) * endlength;
+            double endX = midX - Math.Sin(endAngle) * endlength, endY = midY - Math.Cos(endAngle) * endlength;
 
             positionPanelGraphics.Clear(Color.LightGray);
-            positionPanelGraphics.DrawLine(blackPen, 0, positionPanelGraphics.DpiY, (float)baseX, positionPanelGraphics.DpiY - (float)baseY);
+            positionPanelGraphics.DrawLine(blackPen, 10, positionPanelGraphics.DpiY, (float)baseX, positionPanelGraphics.DpiY - (float)baseY);
             positionPanelGraphics.DrawLine(redPen, (float)baseX, positionPanelGraphics.DpiY - (float)baseY, (float)midX, positionPanelGraphics.DpiY - (float)midY);
             positionPanelGraphics.DrawLine(bluePen, (float)midX, positionPanelGraphics.DpiY - (float)midY, (float)endX, positionPanelGraphics.DpiY - (float)endY);
         }
@@ -192,6 +187,16 @@ namespace Project_CORA
         private void connectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ServoPositions.COM = toolStripComboBox1.SelectedItem.ToString();
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            this.requestedReset = true;
+        }
+
+        private void equipButton_Click(object sender, EventArgs e)
+        {
+            this.modEquiped = modList.SelectedIndex;
         }
     }
 }
