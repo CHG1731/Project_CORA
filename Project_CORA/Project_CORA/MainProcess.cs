@@ -144,7 +144,7 @@ namespace Project_CORA
         {
             if (!userControls.emergencyStopActive)
             {
-                int brakeDis = 10, speedOffset = 10;
+                int brakeDis = 10, speedOffset = Settings.speedSetting;
                 if (servoPosition > servoDestination)
                 {
                     if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }
@@ -221,7 +221,7 @@ namespace Project_CORA
          */
         private void calculateServoPositions()
         {
-            int speedSetting = 10;
+            int speedSetting = Settings.speedSetting;
             ServoPositions.baseServo -= (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis / speedSetting);
             ServoPositions.midServo -= (JoyStickState.Yaxis / speedSetting);
             ServoPositions.endServo += (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis /speedSetting);

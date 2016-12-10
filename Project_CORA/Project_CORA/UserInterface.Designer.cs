@@ -30,14 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserInterface));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.equipButton = new System.Windows.Forms.Button();
-            this.manualDisplay = new System.Windows.Forms.RichTextBox();
-            this.modList = new System.Windows.Forms.ListBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.Asstatus = new System.Windows.Forms.TrackBar();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,101 +54,31 @@
             this.positionPanelLabel = new System.Windows.Forms.Label();
             this.rotationPanelLabel = new System.Windows.Forms.Label();
             this.frameLabelPosition = new System.Windows.Forms.Label();
-            this.tabControl1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.modList = new System.Windows.Forms.ListBox();
+            this.manualDisplay = new System.Windows.Forms.RichTextBox();
+            this.equipButton = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.speedSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.speed6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.speed7ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.speed8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.speed9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.speed10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(12, 31);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1089, 889);
-            this.tabControl1.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1081, 860);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Camera feed";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.equipButton);
-            this.tabPage2.Controls.Add(this.manualDisplay);
-            this.tabPage2.Controls.Add(this.modList);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1081, 860);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Module selection";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // equipButton
-            // 
-            this.equipButton.Location = new System.Drawing.Point(85, 492);
-            this.equipButton.Name = "equipButton";
-            this.equipButton.Size = new System.Drawing.Size(75, 23);
-            this.equipButton.TabIndex = 2;
-            this.equipButton.Text = "Equip";
-            this.equipButton.UseVisualStyleBackColor = true;
-            this.equipButton.Click += new System.EventHandler(this.equipButton_Click);
-            // 
-            // manualDisplay
-            // 
-            this.manualDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.manualDisplay.Location = new System.Drawing.Point(254, 6);
-            this.manualDisplay.Name = "manualDisplay";
-            this.manualDisplay.Size = new System.Drawing.Size(888, 782);
-            this.manualDisplay.TabIndex = 1;
-            this.manualDisplay.Text = "";
-            // 
-            // modList
-            // 
-            this.modList.FormattingEnabled = true;
-            this.modList.ItemHeight = 16;
-            this.modList.Location = new System.Drawing.Point(6, 6);
-            this.modList.Name = "modList";
-            this.modList.Size = new System.Drawing.Size(242, 468);
-            this.modList.TabIndex = 0;
-            this.modList.SelectedIndexChanged += new System.EventHandler(this.modList_SelectedIndexChanged);
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1081, 860);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Macro management";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1081, 860);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Options";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // Asstatus
             // 
@@ -190,7 +112,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startToolStripMenuItem1,
             this.connectionToolStripMenuItem,
-            this.quitToolStripMenuItem});
+            this.quitToolStripMenuItem,
+            this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1343, 28);
@@ -354,6 +277,179 @@
             this.frameLabelPosition.TabIndex = 12;
             this.frameLabelPosition.Text = "Current frame position";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1081, 860);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Macro management";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.equipButton);
+            this.tabPage2.Controls.Add(this.manualDisplay);
+            this.tabPage2.Controls.Add(this.modList);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1081, 860);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Module selection";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // modList
+            // 
+            this.modList.FormattingEnabled = true;
+            this.modList.ItemHeight = 16;
+            this.modList.Location = new System.Drawing.Point(6, 6);
+            this.modList.Name = "modList";
+            this.modList.Size = new System.Drawing.Size(242, 468);
+            this.modList.TabIndex = 0;
+            this.modList.SelectedIndexChanged += new System.EventHandler(this.modList_SelectedIndexChanged);
+            // 
+            // manualDisplay
+            // 
+            this.manualDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.manualDisplay.Location = new System.Drawing.Point(254, 6);
+            this.manualDisplay.Name = "manualDisplay";
+            this.manualDisplay.Size = new System.Drawing.Size(888, 782);
+            this.manualDisplay.TabIndex = 1;
+            this.manualDisplay.Text = "";
+            // 
+            // equipButton
+            // 
+            this.equipButton.Location = new System.Drawing.Point(85, 492);
+            this.equipButton.Name = "equipButton";
+            this.equipButton.Size = new System.Drawing.Size(75, 23);
+            this.equipButton.TabIndex = 2;
+            this.equipButton.Text = "Equip";
+            this.equipButton.UseVisualStyleBackColor = true;
+            this.equipButton.Click += new System.EventHandler(this.equipButton_Click);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1081, 860);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Camera feed";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(12, 31);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1089, 889);
+            this.tabControl1.TabIndex = 0;
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.speedSettingToolStripMenuItem});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // speedSettingToolStripMenuItem
+            // 
+            this.speedSettingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem4,
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem6,
+            this.speed6ToolStripMenuItem,
+            this.speed7ToolStripMenuItem,
+            this.speed8ToolStripMenuItem,
+            this.speed9ToolStripMenuItem,
+            this.speed10ToolStripMenuItem});
+            this.speedSettingToolStripMenuItem.Name = "speedSettingToolStripMenuItem";
+            this.speedSettingToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.speedSettingToolStripMenuItem.Text = "Speed Setting";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(181, 26);
+            this.toolStripMenuItem2.Text = "Speed 1";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(181, 26);
+            this.toolStripMenuItem3.Text = "Speed 2";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(181, 26);
+            this.toolStripMenuItem4.Text = "Speed 3";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(181, 26);
+            this.toolStripMenuItem5.Text = "Speed 4";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(181, 26);
+            this.toolStripMenuItem6.Text = "Speed 5";
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            // 
+            // speed6ToolStripMenuItem
+            // 
+            this.speed6ToolStripMenuItem.Name = "speed6ToolStripMenuItem";
+            this.speed6ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.speed6ToolStripMenuItem.Text = "Speed 6";
+            this.speed6ToolStripMenuItem.Click += new System.EventHandler(this.speed6ToolStripMenuItem_Click);
+            // 
+            // speed7ToolStripMenuItem
+            // 
+            this.speed7ToolStripMenuItem.Name = "speed7ToolStripMenuItem";
+            this.speed7ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.speed7ToolStripMenuItem.Text = "Speed 7";
+            this.speed7ToolStripMenuItem.Click += new System.EventHandler(this.speed7ToolStripMenuItem_Click);
+            // 
+            // speed8ToolStripMenuItem
+            // 
+            this.speed8ToolStripMenuItem.Name = "speed8ToolStripMenuItem";
+            this.speed8ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.speed8ToolStripMenuItem.Text = "Speed 8";
+            this.speed8ToolStripMenuItem.Click += new System.EventHandler(this.speed8ToolStripMenuItem_Click);
+            // 
+            // speed9ToolStripMenuItem
+            // 
+            this.speed9ToolStripMenuItem.Name = "speed9ToolStripMenuItem";
+            this.speed9ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.speed9ToolStripMenuItem.Text = "Speed 9";
+            this.speed9ToolStripMenuItem.Click += new System.EventHandler(this.speed9ToolStripMenuItem_Click);
+            // 
+            // speed10ToolStripMenuItem
+            // 
+            this.speed10ToolStripMenuItem.Name = "speed10ToolStripMenuItem";
+            this.speed10ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.speed10ToolStripMenuItem.Text = "Speed 10";
+            this.speed10ToolStripMenuItem.Click += new System.EventHandler(this.speed10ToolStripMenuItem_Click);
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -380,24 +476,18 @@
             this.Name = "UserInterface";
             this.Text = "CORA";
             this.Load += new System.EventHandler(this.Hoofdscherm_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -410,8 +500,6 @@
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.ComponentModel.BackgroundWorker PollJoyStick;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.RichTextBox manualDisplay;
-        private System.Windows.Forms.ListBox modList;
         private System.ComponentModel.BackgroundWorker MainProcess;
         public System.Windows.Forms.TrackBar Asstatus;
         private System.Windows.Forms.Panel robotPositionPanel;
@@ -421,10 +509,28 @@
         private System.Windows.Forms.Panel baseRotationPanel;
         private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
         private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Button equipButton;
         private System.Windows.Forms.Label positionPanelLabel;
         private System.Windows.Forms.Label rotationPanelLabel;
         private System.Windows.Forms.Label frameLabelPosition;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button equipButton;
+        private System.Windows.Forms.RichTextBox manualDisplay;
+        private System.Windows.Forms.ListBox modList;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem speedSettingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem speed6ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem speed7ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem speed8ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem speed9ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem speed10ToolStripMenuItem;
     }
 }
 

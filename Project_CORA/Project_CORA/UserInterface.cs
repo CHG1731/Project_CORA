@@ -32,6 +32,7 @@ namespace Project_CORA
 
         public UserInterface()
         {
+            Settings.speedSetting = 10;
             blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
@@ -221,16 +222,6 @@ namespace Project_CORA
             modList.Items.Add(mod);
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            MainProcess x = new MainProcess(this);
-        }
-
-        private void connectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ServoPositions.COM = toolStripComboBox1.SelectedItem.ToString();
-        }
-
         //Sets the requestedReset flag when button is pressed.
         private void resetButton_Click(object sender, EventArgs e)
         {
@@ -242,5 +233,67 @@ namespace Project_CORA
         {
             this.modEquiped = modList.SelectedIndex;
         }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            MainProcess x = new MainProcess(this);
+        }
+
+        private void connectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ServoPositions.COM = toolStripComboBox1.SelectedItem.ToString();
+        }
+
+        #region speedsettings
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Settings.speedSetting = 1;
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            Settings.speedSetting = 2;
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            Settings.speedSetting = 3;
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            Settings.speedSetting = 4;
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            Settings.speedSetting = 5;
+        }
+
+        private void speed6ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.speedSetting = 6;
+        }
+
+        private void speed7ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.speedSetting = 7;
+        }
+
+        private void speed8ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.speedSetting = 8;
+        }
+
+        private void speed9ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.speedSetting = 9;
+        }
+
+        private void speed10ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.speedSetting = 10;
+        }
+        #endregion
     }
 }
