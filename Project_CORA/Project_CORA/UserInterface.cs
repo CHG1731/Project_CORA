@@ -295,5 +295,17 @@ namespace Project_CORA
             Settings.speedSetting = 10;
         }
         #endregion
+
+        private void calmMetallicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.BackColor = System.Drawing.Color.SteelBlue;
+            this.menuStrip1.BackColor = System.Drawing.Color.DimGray;
+        }
+
+        private void matrixToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.Black;
+            this.menuStrip1.BackColor = Color.LightGreen;
+        }
     }
 }

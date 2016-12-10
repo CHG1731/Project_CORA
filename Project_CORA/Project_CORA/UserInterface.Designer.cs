@@ -73,6 +73,11 @@
             this.speed8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.speed9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.speed10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorSchemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calmMetallicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.matrixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.whiteAndBlandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.superFancyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -358,7 +363,8 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.speedSettingToolStripMenuItem});
+            this.speedSettingToolStripMenuItem,
+            this.colorSchemeToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -450,6 +456,43 @@
             this.speed10ToolStripMenuItem.Text = "Speed 10";
             this.speed10ToolStripMenuItem.Click += new System.EventHandler(this.speed10ToolStripMenuItem_Click);
             // 
+            // colorSchemeToolStripMenuItem
+            // 
+            this.colorSchemeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.calmMetallicToolStripMenuItem,
+            this.matrixToolStripMenuItem,
+            this.whiteAndBlandToolStripMenuItem,
+            this.superFancyToolStripMenuItem});
+            this.colorSchemeToolStripMenuItem.Name = "colorSchemeToolStripMenuItem";
+            this.colorSchemeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.colorSchemeToolStripMenuItem.Text = "Color Scheme";
+            // 
+            // calmMetallicToolStripMenuItem
+            // 
+            this.calmMetallicToolStripMenuItem.Name = "calmMetallicToolStripMenuItem";
+            this.calmMetallicToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.calmMetallicToolStripMenuItem.Text = "Calm Metallic";
+            this.calmMetallicToolStripMenuItem.Click += new System.EventHandler(this.calmMetallicToolStripMenuItem_Click);
+            // 
+            // matrixToolStripMenuItem
+            // 
+            this.matrixToolStripMenuItem.Name = "matrixToolStripMenuItem";
+            this.matrixToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.matrixToolStripMenuItem.Text = "Matrix";
+            this.matrixToolStripMenuItem.Click += new System.EventHandler(this.matrixToolStripMenuItem_Click);
+            // 
+            // whiteAndBlandToolStripMenuItem
+            // 
+            this.whiteAndBlandToolStripMenuItem.Name = "whiteAndBlandToolStripMenuItem";
+            this.whiteAndBlandToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.whiteAndBlandToolStripMenuItem.Text = "White and bland";
+            // 
+            // superFancyToolStripMenuItem
+            // 
+            this.superFancyToolStripMenuItem.Name = "superFancyToolStripMenuItem";
+            this.superFancyToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.superFancyToolStripMenuItem.Text = "Super Fancy";
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -531,6 +574,11 @@
         private System.Windows.Forms.ToolStripMenuItem speed8ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem speed9ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem speed10ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colorSchemeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calmMetallicToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem matrixToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem whiteAndBlandToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem superFancyToolStripMenuItem;
     }
 }
 
