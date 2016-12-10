@@ -33,6 +33,7 @@ namespace Project_CORA
         public UserInterface()
         {
             Settings.speedSetting = 10;
+            Settings.colorPositionPanes = Color.LightGray;
             blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
@@ -101,7 +102,7 @@ namespace Project_CORA
                         Asstatus.Value = 100;
                     }
                 }
-                povLabel.Text = String.Concat("POV: ", JoyStickState.pov.ToString());
+                //povLabel.Text = String.Concat("POV: ", JoyStickState.pov.ToString());
                 bool[] button = JoyStickState.buttons;
                 string buttons = "";
                 if (false)
@@ -114,9 +115,9 @@ namespace Project_CORA
                         }
                     }
                 }
-                buttonLabel.Text = "BUTTONS: " + buttons;
-                string axispos = String.Concat("X: ", JoyStickState.Xaxis, " Y: ", JoyStickState.Yaxis, " Z: ", JoyStickState.Zaxis, " Zrot: ", JoyStickState.Zrotation);
-                axisLabel.Text = axispos;
+               // buttonLabel.Text = "BUTTONS: " + buttons;
+               // string axispos = String.Concat("X: ", JoyStickState.Xaxis, " Y: ", JoyStickState.Yaxis, " Z: ", JoyStickState.Zaxis, " Zrot: ", JoyStickState.Zrotation);
+//axisLabel.Text = axispos;
             }
                 updateGUI();
         }
@@ -168,7 +169,7 @@ namespace Project_CORA
             double endX = midX - Math.Sin(endAngle) * endlength, endY = midY - Math.Cos(endAngle) * endlength;
             float yLength = positionPanelGraphics.DpiY + 40;
 
-            positionPanelGraphics.Clear(Color.LightGray);
+            positionPanelGraphics.Clear(Settings.colorPositionPanes);
             positionPanelGraphics.DrawLine(blackPen, 10, yLength, (float)baseX, yLength - (float)baseY);
             positionPanelGraphics.DrawLine(redPen, (float)baseX, yLength - (float)baseY, (float)midX, yLength - (float)midY);
             positionPanelGraphics.DrawLine(bluePen, (float)midX, yLength - (float)midY, (float)endX, yLength - (float)endY);
@@ -184,7 +185,7 @@ namespace Project_CORA
         {
             int xCor, yCor;
             double a = 0, b = 0;
-            rotationValueGraphics.Clear(Color.LightGray);
+            rotationValueGraphics.Clear(Settings.colorPositionPanes);
             Rectangle rectangle = new Rectangle(5, 5, 140, 140);
             Rectangle pointRectangle;
             rotationValueGraphics.DrawEllipse(circlePen, rectangle);
@@ -296,16 +297,41 @@ namespace Project_CORA
         }
         #endregion
 
+        #region color settings
         private void calmMetallicToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.menuStrip1.BackColor = System.Drawing.Color.DimGray;
+            Settings.colorPositionPanes = Color.LightGray;
         }
 
         private void matrixToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Black;
-            this.menuStrip1.BackColor = Color.LightGreen;
+            this.menuStrip1.BackColor = Color.DarkGreen;
+            Settings.colorPositionPanes = Color.White;
         }
+
+        private void whiteAndBlandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.White;
+            this.menuStrip1.BackColor = Color.DarkBlue;
+            Settings.colorPositionPanes = Color.SkyBlue;
+        }
+
+        private void superFancyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.HotPink;
+            this.menuStrip1.BackColor = Color.Purple;
+            Settings.colorPositionPanes = Color.Pink;
+        }
+
+        private void kinkyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.DarkRed;
+            this.menuStrip1.BackColor = Color.DarkGoldenrod;
+            Settings.colorPositionPanes = Color.Plum;
+        }
+        #endregion
     }
 }

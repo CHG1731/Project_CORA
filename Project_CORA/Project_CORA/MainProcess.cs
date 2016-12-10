@@ -144,7 +144,7 @@ namespace Project_CORA
         {
             if (!userControls.emergencyStopActive)
             {
-                int brakeDis = 10, speedOffset = Settings.speedSetting;
+                int brakeDis = 10, speedOffset = 15;
                 if (servoPosition > servoDestination)
                 {
                     if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }
