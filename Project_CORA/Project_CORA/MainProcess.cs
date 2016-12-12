@@ -172,7 +172,7 @@ namespace Project_CORA
                     Thread.Sleep(200);
                 }
             }
-            int brakeDis = 15, speedOffset = 25;
+            int speedOffset = Settings.speedSetting, brakeDis = (speedOffset / 2)+1;
             if (servoPosition > servoDestination)
             {
                 if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }

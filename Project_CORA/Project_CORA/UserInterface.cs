@@ -47,15 +47,18 @@ namespace Project_CORA
             this.macroList.Items.Add("Demo macro 1");
             this.macroList.Items.Add("Demo macro 2");
         }
+
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
         private void Hoofdscherm_Load(object sender, EventArgs e)
         {
             fetchCom(toolStripComboBox1);
             PollJoyStick.RunWorkerAsync();
         }
+
         private void fetchCom(ToolStripComboBox x)
         {
             String[] ports = System.IO.Ports.SerialPort.GetPortNames();
@@ -88,39 +91,7 @@ namespace Project_CORA
         private void timer1_Tick(object sender, EventArgs e)
         {
             //TODO clean up this code.
-            if (JoyStickState.connected)
-            {
-                int updateslider = JoyStickState.slider / 10;
-                if (Asstatus.Value + updateslider < 100 && Asstatus.Value + updateslider > -100)
-                {
-                    Asstatus.Value += updateslider;
-                }
-                else
-                {
-                    if (Asstatus.Value < 0)
-                    {
-                        Asstatus.Value = -100;
-                    }
-                    else
-                    {
-                        Asstatus.Value = 100;
-                    }
-                }
-                //povLabel.Text = String.Concat("POV: ", JoyStickState.pov.ToString());
-                bool[] button = JoyStickState.buttons;
-                string buttons = "";
-                if (false)
-                {
-                    for (int i = 0; i < button.Length - 100; i++)
-                    {
-                        if (button[i])
-                        {
-                            buttons += string.Concat(i.ToString(), " ");
-                        }
-                    }
-                }
-            }
-                updateGUI();
+            updateGUI();
         }
 
         /*
@@ -141,22 +112,52 @@ namespace Project_CORA
             manualDisplay.Text = manual;
         }
 
+        //Adds the name of the given mod to the list of mudules.
+        public void addMod(String mod)
+        {
+            modList.Items.Add(mod);
+        }
+
+        //Sets the requestedReset flag when button is pressed.
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            this.requestedReset = true;
+        }
+
+        //Sets the modEquiped flag with the index value of the selected mod from modList.
+        private void equipButton_Click(object sender, EventArgs e)
+        {
+            this.modEquiped = modList.SelectedIndex;
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            MainProcess x = new MainProcess(this);
+        }
+
+        private void connectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ServoPositions.COM = toolStripComboBox1.SelectedItem.ToString();
+        }
+
         /*
          * Function calls all methods needed to update the graphical elements
          * of the interface and provides them with their respective
          * arguments.
-         */ 
+         */
         public void updateGUI()
         {
             updateRobotPositon(ServoPositions.baseServo, ServoPositions.midServo, ServoPositions.endServo);
             updateRotationPosition(ServoPositions.rotServo);
+            updateSliderValue();
         }
 
+        #region methods called by updateGUI
         /*
          * Function calculates and displays the positions of the graphical elements
          * that represent the current configuration of the robot arm
          * based on the positional values of the joints.
-         */ 
+         */
         private void updateRobotPositon(int baseValue, int midValue, int endValue)
         {
             float baselength = positionPanelGraphics.DpiX / 2, midlength = positionPanelGraphics.DpiX / 2, endlength = positionPanelGraphics.DpiX / 2;
@@ -218,83 +219,46 @@ namespace Project_CORA
             rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
         }
 
-        //Adds the name of the given mod to the list of mudules.
-        public void addMod(String mod)
+        private void updateSliderValue()
         {
-            modList.Items.Add(mod);
+            if (JoyStickState.connected)
+            {
+                this.axisPositionBar.Value = ServoPositions.frameServo * (100/1000);
+            }
+        }
+        #endregion
+
+        #region code for macro management
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            this.macroQueue.Items.Add(this.macroList.SelectedItem);
         }
 
-        //Sets the requestedReset flag when button is pressed.
-        private void resetButton_Click(object sender, EventArgs e)
+        private void runQueueButton_Click(object sender, EventArgs e)
         {
-            this.requestedReset = true;
+            this.runMacro = true;
+            for (int i = 0; i < macroQueue.Items.Count; i++)
+            {
+                macroQueue.SelectedIndex = i;
+                this.macroToRun = (String)macroQueue.SelectedItem;
+                stillNotDone = true;
+                while (stillNotDone)
+                {
+                    this.updateGUI();
+                    Thread.Sleep(1);
+                }
+            }
+            this.runMacro = false;
         }
 
-        //Sets the modEquiped flag with the index value of the selected mod from modList.
-        private void equipButton_Click(object sender, EventArgs e)
+        public void setMacroProgressBar(int percentage)
         {
-            this.modEquiped = modList.SelectedIndex;
+            this.macroProgressBar.Increment(percentage);
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void removeButton_Click(object sender, EventArgs e)
         {
-            MainProcess x = new MainProcess(this);
-        }
-
-        private void connectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ServoPositions.COM = toolStripComboBox1.SelectedItem.ToString();
-        }
-
-        #region speedsettings
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            Settings.speedSetting = 1;
-        }
-
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-            Settings.speedSetting = 2;
-        }
-
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
-        {
-            Settings.speedSetting = 3;
-        }
-
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
-        {
-            Settings.speedSetting = 4;
-        }
-
-        private void toolStripMenuItem6_Click(object sender, EventArgs e)
-        {
-            Settings.speedSetting = 5;
-        }
-
-        private void speed6ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Settings.speedSetting = 6;
-        }
-
-        private void speed7ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Settings.speedSetting = 7;
-        }
-
-        private void speed8ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Settings.speedSetting = 8;
-        }
-
-        private void speed9ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Settings.speedSetting = 9;
-        }
-
-        private void speed10ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Settings.speedSetting = 10;
+            this.macroQueue.Items.Remove(macroQueue.SelectedItem);
         }
         #endregion
 
@@ -335,36 +299,33 @@ namespace Project_CORA
         }
         #endregion
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void speedSettingSlider_Scroll(object sender, EventArgs e)
         {
-            this.macroQueue.Items.Add(this.macroList.SelectedItem);
-        }
-
-        private void runQueueButton_Click(object sender, EventArgs e)
-        {
-            this.runMacro = true;
-            for (int i = 0; i < macroQueue.Items.Count; i++)
+            int speedSetting = 0;
+            switch (this.speedSettingSlider.Value)
             {
-                macroQueue.SelectedIndex = i;
-                this.macroToRun = (String)macroQueue.SelectedItem;
-                stillNotDone = true;
-                while (stillNotDone)
-                {
-                    this.updateGUI();
-                    Thread.Sleep(1);
-                }
+                case 0:
+                    Settings.speedSetting = 40;
+                    break;
+                case 1:
+                    Settings.speedSetting = 35;
+                    break;
+                case 2:
+                    Settings.speedSetting = 30;
+                    break;
+                case 3:
+                    Settings.speedSetting = 25;
+                    break;
+                case 4:
+                    Settings.speedSetting = 20;
+                    break;
+                case 5:
+                    Settings.speedSetting = 15;
+                    break;
+                case 6:
+                    Settings.speedSetting = 10;
+                    break;
             }
-            this.runMacro = false;
-        }
-
-        public void setMacroProgressBar(int percentage)
-        {
-            this.macroProgressBar.Increment(percentage);
-        }
-
-        private void removeButton_Click(object sender, EventArgs e)
-        {
-            this.macroQueue.Items.Remove(macroQueue.SelectedItem);
         }
     }
 }
