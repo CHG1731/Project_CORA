@@ -16,6 +16,9 @@ namespace Project_CORA
         public bool emergencyStopActive = false;
         public bool requestedReset = false;
         public bool RobotConnected = false;
+        public bool runMacro;
+        public bool stillNotDone = false;
+        public String macroToRun;
 
         public int modSelected = 0;
         public int modEquiped = 0;
@@ -29,17 +32,20 @@ namespace Project_CORA
         SolidBrush redBrush = new SolidBrush(Color.Red);
 
         public UserInterface()
-        {
-                Settings.speedSetting = 10;
-                Settings.colorPositionPanes = Color.LightGray;
-                blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
-                bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
-                redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
-                InitializeComponent();
-                positionPanelGraphics = this.robotPositionPanel.CreateGraphics();
-                rotationValueGraphics = this.baseRotationPanel.CreateGraphics();
-                timer1.Start();
-                MainProcess.RunWorkerAsync();
+        { 
+            Settings.speedSetting = 10;
+            Settings.colorPositionPanes = Color.LightGray;
+            blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            InitializeComponent();
+            positionPanelGraphics = this.robotPositionPanel.CreateGraphics();
+            rotationValueGraphics = this.baseRotationPanel.CreateGraphics();
+            timer1.Start();
+            MainProcess.RunWorkerAsync();
+            //Testing purposes
+            this.macroList.Items.Add("Demo macro 1");
+            this.macroList.Items.Add("Demo macro 2");
         }
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -328,5 +334,37 @@ namespace Project_CORA
             Settings.colorPositionPanes = Color.Plum;
         }
         #endregion
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            this.macroQueue.Items.Add(this.macroList.SelectedItem);
+        }
+
+        private void runQueueButton_Click(object sender, EventArgs e)
+        {
+            this.runMacro = true;
+            for (int i = 0; i < macroQueue.Items.Count; i++)
+            {
+                macroQueue.SelectedIndex = i;
+                this.macroToRun = (String)macroQueue.SelectedItem;
+                stillNotDone = true;
+                while (stillNotDone)
+                {
+                    this.updateGUI();
+                    Thread.Sleep(1);
+                }
+            }
+            this.runMacro = false;
+        }
+
+        public void setMacroProgressBar(int percentage)
+        {
+            this.macroProgressBar.Increment(percentage);
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            this.macroQueue.Items.Remove(macroQueue.SelectedItem);
+        }
     }
 }

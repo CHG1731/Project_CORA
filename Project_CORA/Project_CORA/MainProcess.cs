@@ -24,7 +24,7 @@ namespace Project_CORA
         public int baseServoMin = 300, baseServoMax = 850, baseServo = 11, baseServoDefault = 850;
         private int midServoMin = 0, midServoMax = 810, midServo = 9, midServoDefault = 810;
         private int endServoMin = 512, endServoMax = 1023, endServo = 4, endServoDefault = 512;
-        private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 0;
+        private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 20;
         private int frameServoMin = 0, frameServoMax = 0 /*TODO Add actual value*/, frameServoDefault = 0; 
         private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
         private int coupleServoMin = 0, coupleServoMax = 1023, coupleServo = 7, coupleServoDefault = 512;
@@ -89,6 +89,10 @@ namespace Project_CORA
                 {
                     changeMod();
                 }
+                if (userControls.runMacro)
+                {
+                    runMacro(userControls.macroToRun);
+                }
                 /*
                 if (userControls.macroRequested)
                 {
@@ -143,7 +147,7 @@ namespace Project_CORA
                 while (!(ServoPositions.rotServo == destinations[4] /*&& ServoPositions.frameServo == destinations[5]*/))
                 {
                     ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
-                    ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
+                    //ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
                     sendServoPositions();
                     Thread.Sleep(1);
                 }
@@ -157,7 +161,7 @@ namespace Project_CORA
          */
         private int checkServoPosition(int servoPosition, int servoDestination)
         {
-            emergencyStopInEffect = JoyStickState.buttons[1];
+            //emergencyStopInEffect = JoyStickState.buttons[1];
             while (emergencyStopInEffect)
             {
                 Thread.Sleep(200);
@@ -168,7 +172,7 @@ namespace Project_CORA
                     Thread.Sleep(200);
                 }
             }
-            int brakeDis = 10, speedOffset = 15;
+            int brakeDis = 15, speedOffset = 25;
             if (servoPosition > servoDestination)
             {
                 if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }
@@ -270,6 +274,49 @@ namespace Project_CORA
             else if(ServoPositions.endServo < endServoMin) { ServoPositions.endServo = endServoMin; }
             if(ServoPositions.rotServo > rotServoMax) { ServoPositions.rotServo = rotServoMax; }
             else if(ServoPositions.rotServo < rotServoMin) { ServoPositions.rotServo = rotServoMin; }
+        }
+
+        private void runMacro(String macro)
+        {
+            if (macro == "Demo macro 1")
+            {
+                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 512, 512,
+                    moduleServoDefault, rotServoDefault - 300, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 512, 512,
+                    moduleServoDefault, rotServoDefault + 300, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 512, endServoDefault,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 512, 512,
+                    512, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 512, endServoDefault,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+            }
+            if (macro == "Demo macro 2")
+            {
+                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { 512, 512, 1023,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 850, 850,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 850, 1023,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 512, 1023,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 512, 1023,
+                    moduleServoDefault, rotServoDefault + 300, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 512, 1023,
+                    moduleServoDefault, rotServoDefault - 300, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, 850, endServoDefault,
+                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+            }
+            userControls.stillNotDone = false;
         }
 
         /*
