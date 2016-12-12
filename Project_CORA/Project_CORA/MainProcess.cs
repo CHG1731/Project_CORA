@@ -17,6 +17,7 @@ namespace Project_CORA
         SerialPort2Dynamixel serialPort;
 
         private bool emergencyStopInEffect = false;
+        private Boolean emergencyReset = false;
 
         private int baseCoupleVal = 650, endCoupleVal = 712, moduleCoupleVal = 850;
         //Declaration of Servoor Positionues.
@@ -60,18 +61,24 @@ namespace Project_CORA
             while (true)
             {
                 //Check if emergency stop is in effect
-                //emergencyStopInEffect = JoyStickState.buttons[emergencyStopButton];
+                if (JoyStickState.buttons != null)
+                {
+                    bool[] button = JoyStickState.buttons;
+                    emergencyStopInEffect = button[1];
+                }
                 while (emergencyStopInEffect)
                 {
-                    Thread.Sleep(25);
-                    if(userControls.requestedReset || JoyStickState.buttons[emergencyStopButton])
+                    Thread.Sleep(200);
+                    if(userControls.requestedReset || JoyStickState.buttons[1])
                     {
                         emergencyStopInEffect = false;
+                        Thread.Sleep(200);
                     }
                 }
                 //check if robot needs to reset
                 if (userControls.requestedReset)
                 {
+                    emergencyReset = false;
                     setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
                         moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
                     userControls.requestedReset = false;
@@ -82,6 +89,11 @@ namespace Project_CORA
                 {
                     changeMod();
                 }
+                /*
+                if (userControls.macroRequested)
+                {
+                    runMacros();
+                }*/
                 //Read joystick and update Servo Positionues
                 calculateServoPositions();
                 //Send Servoor Positionues to servo's
@@ -117,24 +129,24 @@ namespace Project_CORA
          */
         private void setRobotPosition(int[] destinations)
         {
-            while (!(ServoPositions.baseServo == destinations[0] && ServoPositions.midServo == destinations[1] 
-                && ServoPositions.endServo == destinations[2] && ServoPositions.moduleServo == destinations[3]))
-            {
-                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, destinations[0]);
-                ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, destinations[1]);
-                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, destinations[2]);
-                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, destinations[3]);
-                //ServoPositions.coupleServo = checkServoPosition(ServoPositions.coupleServo, destinations[6]);
-                sendServoPositions();
-                Thread.Sleep(1);
-            }
-            while (!(ServoPositions.rotServo == destinations[4] /*&& ServoPositions.frameServo == destinations[5]*/))
-            {
-                ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
-                ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
-                sendServoPositions();
-                Thread.Sleep(1);
-            }
+                while (!(ServoPositions.baseServo == destinations[0] && ServoPositions.midServo == destinations[1]
+                    && ServoPositions.endServo == destinations[2] && ServoPositions.moduleServo == destinations[3]))
+                {
+                    ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, destinations[0]);
+                    ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, destinations[1]);
+                    ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, destinations[2]);
+                    ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, destinations[3]);
+                    //ServoPositions.coupleServo = checkServoPosition(ServoPositions.coupleServo, destinations[6]);
+                    sendServoPositions();
+                    Thread.Sleep(1);
+                }
+                while (!(ServoPositions.rotServo == destinations[4] /*&& ServoPositions.frameServo == destinations[5]*/))
+                {
+                    ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
+                    ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
+                    sendServoPositions();
+                    Thread.Sleep(1);
+                }
         }
 
         /*
@@ -145,19 +157,27 @@ namespace Project_CORA
          */
         private int checkServoPosition(int servoPosition, int servoDestination)
         {
-            if (!userControls.emergencyStopActive)
+            emergencyStopInEffect = JoyStickState.buttons[1];
+            while (emergencyStopInEffect)
             {
-                int brakeDis = 10, speedOffset = 15;
-                if (servoPosition > servoDestination)
+                Thread.Sleep(200);
+                if (userControls.requestedReset || JoyStickState.buttons[1])
                 {
-                    if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }
-                    else { servoPosition--; }
+                    emergencyStopInEffect = false;
+                    if (userControls.requestedReset) { emergencyReset = true; }
+                    Thread.Sleep(200);
                 }
-                else if (servoPosition < servoDestination)
-                {
-                    if (servoDestination - servoPosition > brakeDis) { servoPosition += speedOffset; }
-                    else { servoPosition++; }
-                }
+            }
+            int brakeDis = 10, speedOffset = 15;
+            if (servoPosition > servoDestination)
+            {
+                if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }
+                else { servoPosition--; }
+            }
+            else if (servoPosition < servoDestination)
+            {
+                if (servoDestination - servoPosition > brakeDis) { servoPosition += speedOffset; }
+                else { servoPosition++; }
             }
             return servoPosition;
         }
@@ -258,12 +278,15 @@ namespace Project_CORA
          */ 
         private void sendServoPositions()
         {
-            dynamixel.setPosition(serialPort, baseServo, ServoPositions.baseServo);
-            dynamixel.setPosition(serialPort, midServo, ServoPositions.midServo);
-            dynamixel.setPosition(serialPort, endServo, ServoPositions.endServo);
-            dynamixel.setPosition(serialPort, rotServo, ServoPositions.rotServo);
-            dynamixel.setPosition(serialPort, moduleServo, ServoPositions.moduleServo);
-            dynamixel.setPosition(serialPort, coupleServo, ServoPositions.coupleServo);
+            if (!emergencyReset)
+            {
+                dynamixel.setPosition(serialPort, baseServo, ServoPositions.baseServo);
+                dynamixel.setPosition(serialPort, midServo, ServoPositions.midServo);
+                dynamixel.setPosition(serialPort, endServo, ServoPositions.endServo);
+                dynamixel.setPosition(serialPort, rotServo, ServoPositions.rotServo);
+                dynamixel.setPosition(serialPort, moduleServo, ServoPositions.moduleServo);
+                dynamixel.setPosition(serialPort, coupleServo, ServoPositions.coupleServo);
+            }
         }
 
     }

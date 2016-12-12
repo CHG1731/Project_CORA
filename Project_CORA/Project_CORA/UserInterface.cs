@@ -16,8 +16,6 @@ namespace Project_CORA
         public bool emergencyStopActive = false;
         public bool requestedReset = false;
         public bool RobotConnected = false;
-        static Dynamixel dynamixel;
-        static SerialPort2Dynamixel serialPort;
 
         public int modSelected = 0;
         public int modEquiped = 0;
@@ -32,17 +30,16 @@ namespace Project_CORA
 
         public UserInterface()
         {
-            Settings.speedSetting = 10;
-            Settings.colorPositionPanes = Color.LightGray;
-            blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
-            bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
-            redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
-            InitializeComponent();
-            positionPanelGraphics = this.robotPositionPanel.CreateGraphics();
-            rotationValueGraphics = this.baseRotationPanel.CreateGraphics();
-            PollJoyStick.RunWorkerAsync();
-            timer1.Start();
-            MainProcess.RunWorkerAsync();
+                Settings.speedSetting = 10;
+                Settings.colorPositionPanes = Color.LightGray;
+                blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+                bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+                redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+                InitializeComponent();
+                positionPanelGraphics = this.robotPositionPanel.CreateGraphics();
+                rotationValueGraphics = this.baseRotationPanel.CreateGraphics();
+                timer1.Start();
+                MainProcess.RunWorkerAsync();
         }
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -51,6 +48,7 @@ namespace Project_CORA
         private void Hoofdscherm_Load(object sender, EventArgs e)
         {
             fetchCom(toolStripComboBox1);
+            PollJoyStick.RunWorkerAsync();
         }
         private void fetchCom(ToolStripComboBox x)
         {
@@ -115,9 +113,6 @@ namespace Project_CORA
                         }
                     }
                 }
-               // buttonLabel.Text = "BUTTONS: " + buttons;
-               // string axispos = String.Concat("X: ", JoyStickState.Xaxis, " Y: ", JoyStickState.Yaxis, " Z: ", JoyStickState.Zaxis, " Zrot: ", JoyStickState.Zrotation);
-//axisLabel.Text = axispos;
             }
                 updateGUI();
         }

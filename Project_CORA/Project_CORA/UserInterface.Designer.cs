@@ -73,7 +73,8 @@
             this.rotationPanelLabel = new System.Windows.Forms.Label();
             this.frameLabelPosition = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.macroDescription = new System.Windows.Forms.RichTextBox();
+            this.createMacroButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.macroProgressBar = new System.Windows.Forms.ProgressBar();
             this.removeButton = new System.Windows.Forms.Button();
@@ -88,7 +89,8 @@
             this.modList = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.macroDescription = new System.Windows.Forms.RichTextBox();
+            this.deleteMacroButton = new System.Windows.Forms.Button();
+            this.runQueueButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Asstatus)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -440,8 +442,10 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.DimGray;
+            this.tabPage3.Controls.Add(this.runQueueButton);
+            this.tabPage3.Controls.Add(this.deleteMacroButton);
             this.tabPage3.Controls.Add(this.macroDescription);
-            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.createMacroButton);
             this.tabPage3.Controls.Add(this.label3);
             this.tabPage3.Controls.Add(this.macroProgressBar);
             this.tabPage3.Controls.Add(this.removeButton);
@@ -457,14 +461,26 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Macro management";
             // 
-            // button1
+            // macroDescription
             // 
-            this.button1.Location = new System.Drawing.Point(606, 625);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.macroDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.macroDescription.Location = new System.Drawing.Point(575, 31);
+            this.macroDescription.Name = "macroDescription";
+            this.macroDescription.Size = new System.Drawing.Size(487, 534);
+            this.macroDescription.TabIndex = 9;
+            this.macroDescription.Text = "";
+            // 
+            // createMacroButton
+            // 
+            this.createMacroButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.createMacroButton.Location = new System.Drawing.Point(575, 630);
+            this.createMacroButton.Name = "createMacroButton";
+            this.createMacroButton.Size = new System.Drawing.Size(227, 23);
+            this.createMacroButton.TabIndex = 8;
+            this.createMacroButton.Text = "Creat Macro";
+            this.createMacroButton.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -556,7 +572,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1082, 714);
+            this.tabPage2.Size = new System.Drawing.Size(1082, 727);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Module selection";
             // 
@@ -597,7 +613,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1082, 704);
+            this.tabPage1.Size = new System.Drawing.Size(1082, 727);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Camera feed";
             // 
@@ -615,16 +631,25 @@
             this.tabControl1.Size = new System.Drawing.Size(1090, 756);
             this.tabControl1.TabIndex = 0;
             // 
-            // macroDescription
+            // deleteMacroButton
             // 
-            this.macroDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.macroDescription.Location = new System.Drawing.Point(575, 31);
-            this.macroDescription.Name = "macroDescription";
-            this.macroDescription.Size = new System.Drawing.Size(487, 580);
-            this.macroDescription.TabIndex = 9;
-            this.macroDescription.Text = "";
+            this.deleteMacroButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deleteMacroButton.Location = new System.Drawing.Point(835, 630);
+            this.deleteMacroButton.Name = "deleteMacroButton";
+            this.deleteMacroButton.Size = new System.Drawing.Size(227, 23);
+            this.deleteMacroButton.TabIndex = 10;
+            this.deleteMacroButton.Text = "Delete Macro";
+            this.deleteMacroButton.UseVisualStyleBackColor = true;
+            // 
+            // runQueueButton
+            // 
+            this.runQueueButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.runQueueButton.Location = new System.Drawing.Point(575, 588);
+            this.runQueueButton.Name = "runQueueButton";
+            this.runQueueButton.Size = new System.Drawing.Size(487, 23);
+            this.runQueueButton.TabIndex = 11;
+            this.runQueueButton.Text = "Run Queue";
+            this.runQueueButton.UseVisualStyleBackColor = true;
             // 
             // UserInterface
             // 
@@ -721,10 +746,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button removeButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button createMacroButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ProgressBar macroProgressBar;
         private System.Windows.Forms.RichTextBox macroDescription;
+        private System.Windows.Forms.Button runQueueButton;
+        private System.Windows.Forms.Button deleteMacroButton;
     }
 }
 
