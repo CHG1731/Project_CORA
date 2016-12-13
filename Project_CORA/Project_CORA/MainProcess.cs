@@ -87,7 +87,7 @@ namespace Project_CORA
                 calculateServoPositions();
                 //Send Servoor Positionues to servo's
                 sendServoPositions();
-                Thread.Sleep(1);
+                //Thread.Sleep(1);
             }
         }
 

@@ -313,16 +313,16 @@ namespace Project_CORA
                     Settings.speedSetting = 30;
                     break;
                 case 3:
-                    Settings.speedSetting = 25;
-                    break;
-                case 4:
                     Settings.speedSetting = 20;
                     break;
+                case 4:
+                    Settings.speedSetting = 10;
+                    break;
                 case 5:
-                    Settings.speedSetting = 15;
+                    Settings.speedSetting = 7;
                     break;
                 case 6:
-                    Settings.speedSetting = 10;
+                    Settings.speedSetting = 5;
                     break;
             }
         }
