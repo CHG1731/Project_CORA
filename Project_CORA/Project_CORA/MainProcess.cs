@@ -149,7 +149,7 @@ namespace Project_CORA
         private int checkServoPosition(int servoPosition, int servoDestination)
         {
             checkForEmergencyStop();
-            int speedOffset = Settings.speedSetting, brakeDis = (speedOffset / 2)+1;
+            int speedOffset = 100 / Settings.speedSetting, brakeDis = 10;
             if (servoPosition > servoDestination)
             {
                 if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }

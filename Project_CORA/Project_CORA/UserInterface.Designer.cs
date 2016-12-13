@@ -296,7 +296,7 @@
             // resetButton
             // 
             this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.resetButton.Location = new System.Drawing.Point(1203, 768);
+            this.resetButton.Location = new System.Drawing.Point(1203, 732);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 9;
@@ -328,7 +328,7 @@
             // 
             this.frameLabelPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.frameLabelPosition.AutoSize = true;
-            this.frameLabelPosition.Location = new System.Drawing.Point(1142, 571);
+            this.frameLabelPosition.Location = new System.Drawing.Point(1134, 683);
             this.frameLabelPosition.Name = "frameLabelPosition";
             this.frameLabelPosition.Size = new System.Drawing.Size(148, 17);
             this.frameLabelPosition.TabIndex = 12;
@@ -353,7 +353,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1116, 817);
+            this.tabPage3.Size = new System.Drawing.Size(1116, 753);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Macro management";
             // 
@@ -370,7 +370,7 @@
             // runQueueButton
             // 
             this.runQueueButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.runQueueButton.Location = new System.Drawing.Point(575, 678);
+            this.runQueueButton.Location = new System.Drawing.Point(575, 614);
             this.runQueueButton.Name = "runQueueButton";
             this.runQueueButton.Size = new System.Drawing.Size(487, 23);
             this.runQueueButton.TabIndex = 11;
@@ -381,7 +381,7 @@
             // deleteMacroButton
             // 
             this.deleteMacroButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.deleteMacroButton.Location = new System.Drawing.Point(835, 720);
+            this.deleteMacroButton.Location = new System.Drawing.Point(835, 656);
             this.deleteMacroButton.Name = "deleteMacroButton";
             this.deleteMacroButton.Size = new System.Drawing.Size(227, 23);
             this.deleteMacroButton.TabIndex = 10;
@@ -395,14 +395,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.macroDescription.Location = new System.Drawing.Point(575, 31);
             this.macroDescription.Name = "macroDescription";
-            this.macroDescription.Size = new System.Drawing.Size(521, 624);
+            this.macroDescription.Size = new System.Drawing.Size(521, 560);
             this.macroDescription.TabIndex = 9;
             this.macroDescription.Text = "";
             // 
             // createMacroButton
             // 
             this.createMacroButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.createMacroButton.Location = new System.Drawing.Point(575, 720);
+            this.createMacroButton.Location = new System.Drawing.Point(575, 656);
             this.createMacroButton.Name = "createMacroButton";
             this.createMacroButton.Size = new System.Drawing.Size(227, 23);
             this.createMacroButton.TabIndex = 8;
@@ -413,7 +413,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 765);
+            this.label3.Location = new System.Drawing.Point(7, 701);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 17);
             this.label3.TabIndex = 7;
@@ -424,7 +424,7 @@
             this.macroProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.macroProgressBar.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this.macroProgressBar.Location = new System.Drawing.Point(6, 788);
+            this.macroProgressBar.Location = new System.Drawing.Point(6, 724);
             this.macroProgressBar.Name = "macroProgressBar";
             this.macroProgressBar.Size = new System.Drawing.Size(1104, 23);
             this.macroProgressBar.TabIndex = 6;
@@ -432,7 +432,7 @@
             // removeButton
             // 
             this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.removeButton.Location = new System.Drawing.Point(284, 720);
+            this.removeButton.Location = new System.Drawing.Point(284, 656);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(257, 23);
             this.removeButton.TabIndex = 5;
@@ -443,7 +443,7 @@
             // addButton
             // 
             this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addButton.Location = new System.Drawing.Point(10, 720);
+            this.addButton.Location = new System.Drawing.Point(10, 656);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(257, 23);
             this.addButton.TabIndex = 4;
@@ -478,7 +478,7 @@
             this.macroQueue.Location = new System.Drawing.Point(284, 31);
             this.macroQueue.Name = "macroQueue";
             this.macroQueue.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.macroQueue.Size = new System.Drawing.Size(257, 660);
+            this.macroQueue.Size = new System.Drawing.Size(257, 580);
             this.macroQueue.TabIndex = 1;
             // 
             // macroList
@@ -489,7 +489,7 @@
             this.macroList.ItemHeight = 16;
             this.macroList.Location = new System.Drawing.Point(10, 31);
             this.macroList.Name = "macroList";
-            this.macroList.Size = new System.Drawing.Size(257, 660);
+            this.macroList.Size = new System.Drawing.Size(257, 580);
             this.macroList.TabIndex = 0;
             // 
             // tabPage2
@@ -542,7 +542,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1116, 817);
+            this.tabPage1.Size = new System.Drawing.Size(1116, 757);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Camera feed";
             // 
@@ -557,13 +557,13 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 35);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1124, 846);
+            this.tabControl1.Size = new System.Drawing.Size(1124, 782);
             this.tabControl1.TabIndex = 0;
             // 
             // speedSettingSlider
             // 
             this.speedSettingSlider.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.speedSettingSlider.Location = new System.Drawing.Point(1141, 646);
+            this.speedSettingSlider.Location = new System.Drawing.Point(1141, 589);
             this.speedSettingSlider.Maximum = 6;
             this.speedSettingSlider.Name = "speedSettingSlider";
             this.speedSettingSlider.Size = new System.Drawing.Size(220, 56);
@@ -574,7 +574,7 @@
             // axisPositionBar
             // 
             this.axisPositionBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.axisPositionBar.Location = new System.Drawing.Point(1145, 591);
+            this.axisPositionBar.Location = new System.Drawing.Point(1141, 703);
             this.axisPositionBar.Name = "axisPositionBar";
             this.axisPositionBar.Size = new System.Drawing.Size(216, 23);
             this.axisPositionBar.TabIndex = 14;
@@ -583,7 +583,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1142, 626);
+            this.label5.Location = new System.Drawing.Point(1142, 569);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(97, 17);
             this.label5.TabIndex = 15;
@@ -592,7 +592,7 @@
             // moduleTextBox
             // 
             this.moduleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.moduleTextBox.Location = new System.Drawing.Point(1145, 718);
+            this.moduleTextBox.Location = new System.Drawing.Point(1145, 777);
             this.moduleTextBox.Name = "moduleTextBox";
             this.moduleTextBox.Size = new System.Drawing.Size(216, 22);
             this.moduleTextBox.TabIndex = 16;
@@ -601,7 +601,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1145, 695);
+            this.label6.Location = new System.Drawing.Point(1142, 755);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(105, 17);
             this.label6.TabIndex = 17;
@@ -613,7 +613,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1377, 880);
+            this.ClientSize = new System.Drawing.Size(1377, 823);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.moduleTextBox);
             this.Controls.Add(this.label5);
