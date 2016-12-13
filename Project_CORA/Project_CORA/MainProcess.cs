@@ -11,7 +11,6 @@ namespace Project_CORA
     {
         UserInterface userControls;
 
-        private int modSelected = 0;
         private int modEquiped = 0;
         Dynamixel dynamixel;
         SerialPort2Dynamixel serialPort;
@@ -21,6 +20,7 @@ namespace Project_CORA
 
         private int baseCoupleVal = 650, endCoupleVal = 712, moduleCoupleVal = 850;
         //Declaration of Servoor Positionues.
+        //TODO properly set contraints.
         public int baseServoMin = 300, baseServoMax = 850, baseServo = 11, baseServoDefault = 850;
         private int midServoMin = 0, midServoMax = 810, midServo = 9, midServoDefault = 810;
         private int endServoMin = 512, endServoMax = 1023, endServo = 4, endServoDefault = 512;
@@ -29,8 +29,6 @@ namespace Project_CORA
         private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
         private int coupleServoMin = 0, coupleServoMax = 1023, coupleServo = 7, coupleServoDefault = 512;
         private int frameModInterval = 10;
-
-        private int emergencyStopButton = 3;
 
         private String[] modules = new String[20];
 
@@ -149,7 +147,7 @@ namespace Project_CORA
         private int checkServoPosition(int servoPosition, int servoDestination)
         {
             checkForEmergencyStop();
-            int speedOffset = 100 / Settings.speedSetting, brakeDis = 10;
+            int speedOffset = 100 / Settings.speedSetting, brakeDis = 100 / Settings.speedSetting;
             if (servoPosition > servoDestination)
             {
                 if (servoPosition - servoDestination > brakeDis) { servoPosition -= speedOffset; }

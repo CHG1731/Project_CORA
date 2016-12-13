@@ -186,7 +186,6 @@ namespace Project_CORA
          */ 
         private void updateRotationPosition(int rotValue)
         {
-            int xCor, yCor;
             double a = 0, b = 0;
             rotationValueGraphics.Clear(Settings.colorPositionPanes);
             Rectangle rectangle = new Rectangle(5, 5, 140, 140);
@@ -302,7 +301,6 @@ namespace Project_CORA
 
         private void speedSettingSlider_Scroll(object sender, EventArgs e)
         {
-            int speedSetting = 0;
             switch (this.speedSettingSlider.Value)
             {
                 case 0:
