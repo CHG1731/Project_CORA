@@ -128,6 +128,7 @@ namespace Project_CORA
         private void equipButton_Click(object sender, EventArgs e)
         {
             this.modEquiped = modList.SelectedIndex;
+            this.moduleTextBox.Text = (String)modList.SelectedItem;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)

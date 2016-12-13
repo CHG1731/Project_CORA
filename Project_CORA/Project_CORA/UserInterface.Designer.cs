@@ -61,6 +61,7 @@
             this.rotationPanelLabel = new System.Windows.Forms.Label();
             this.frameLabelPosition = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
             this.runQueueButton = new System.Windows.Forms.Button();
             this.deleteMacroButton = new System.Windows.Forms.Button();
             this.macroDescription = new System.Windows.Forms.RichTextBox();
@@ -79,10 +80,11 @@
             this.modList = new System.Windows.Forms.ListBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.label4 = new System.Windows.Forms.Label();
             this.speedSettingSlider = new System.Windows.Forms.TrackBar();
             this.axisPositionBar = new System.Windows.Forms.ProgressBar();
             this.label5 = new System.Windows.Forms.Label();
+            this.moduleTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -116,7 +118,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1343, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1377, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -188,7 +190,7 @@
             this.superFancyToolStripMenuItem,
             this.kinkyToolStripMenuItem});
             this.colorSchemeToolStripMenuItem.Name = "colorSchemeToolStripMenuItem";
-            this.colorSchemeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.colorSchemeToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
             this.colorSchemeToolStripMenuItem.Text = "Color Scheme";
             // 
             // calmMetallicToolStripMenuItem
@@ -231,7 +233,7 @@
             this.statusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.statusLabel.AutoSize = true;
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.Location = new System.Drawing.Point(1100, 56);
+            this.statusLabel.Location = new System.Drawing.Point(1134, 56);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(223, 38);
             this.statusLabel.TabIndex = 4;
@@ -253,7 +255,7 @@
             // 
             this.robotPositionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.robotPositionPanel.BackColor = System.Drawing.Color.SteelBlue;
-            this.robotPositionPanel.Location = new System.Drawing.Point(1123, 118);
+            this.robotPositionPanel.Location = new System.Drawing.Point(1157, 118);
             this.robotPositionPanel.Name = "robotPositionPanel";
             this.robotPositionPanel.Size = new System.Drawing.Size(200, 235);
             this.robotPositionPanel.TabIndex = 5;
@@ -286,7 +288,7 @@
             // 
             this.baseRotationPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.baseRotationPanel.BackColor = System.Drawing.Color.SteelBlue;
-            this.baseRotationPanel.Location = new System.Drawing.Point(1123, 376);
+            this.baseRotationPanel.Location = new System.Drawing.Point(1157, 376);
             this.baseRotationPanel.Name = "baseRotationPanel";
             this.baseRotationPanel.Size = new System.Drawing.Size(200, 182);
             this.baseRotationPanel.TabIndex = 8;
@@ -294,7 +296,7 @@
             // resetButton
             // 
             this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.resetButton.Location = new System.Drawing.Point(1189, 708);
+            this.resetButton.Location = new System.Drawing.Point(1203, 768);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 9;
@@ -306,7 +308,7 @@
             // 
             this.positionPanelLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.positionPanelLabel.AutoSize = true;
-            this.positionPanelLabel.Location = new System.Drawing.Point(1108, 95);
+            this.positionPanelLabel.Location = new System.Drawing.Point(1142, 95);
             this.positionPanelLabel.Name = "positionPanelLabel";
             this.positionPanelLabel.Size = new System.Drawing.Size(136, 17);
             this.positionPanelLabel.TabIndex = 10;
@@ -316,7 +318,7 @@
             // 
             this.rotationPanelLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rotationPanelLabel.AutoSize = true;
-            this.rotationPanelLabel.Location = new System.Drawing.Point(1108, 356);
+            this.rotationPanelLabel.Location = new System.Drawing.Point(1142, 356);
             this.rotationPanelLabel.Name = "rotationPanelLabel";
             this.rotationPanelLabel.Size = new System.Drawing.Size(171, 17);
             this.rotationPanelLabel.TabIndex = 11;
@@ -326,7 +328,7 @@
             // 
             this.frameLabelPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.frameLabelPosition.AutoSize = true;
-            this.frameLabelPosition.Location = new System.Drawing.Point(1108, 571);
+            this.frameLabelPosition.Location = new System.Drawing.Point(1142, 571);
             this.frameLabelPosition.Name = "frameLabelPosition";
             this.frameLabelPosition.Size = new System.Drawing.Size(148, 17);
             this.frameLabelPosition.TabIndex = 12;
@@ -351,14 +353,24 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1082, 727);
+            this.tabPage3.Size = new System.Drawing.Size(1116, 817);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Macro management";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(606, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(122, 17);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Macro Description";
             // 
             // runQueueButton
             // 
             this.runQueueButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.runQueueButton.Location = new System.Drawing.Point(575, 588);
+            this.runQueueButton.Location = new System.Drawing.Point(575, 678);
             this.runQueueButton.Name = "runQueueButton";
             this.runQueueButton.Size = new System.Drawing.Size(487, 23);
             this.runQueueButton.TabIndex = 11;
@@ -369,7 +381,7 @@
             // deleteMacroButton
             // 
             this.deleteMacroButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.deleteMacroButton.Location = new System.Drawing.Point(835, 630);
+            this.deleteMacroButton.Location = new System.Drawing.Point(835, 720);
             this.deleteMacroButton.Name = "deleteMacroButton";
             this.deleteMacroButton.Size = new System.Drawing.Size(227, 23);
             this.deleteMacroButton.TabIndex = 10;
@@ -383,14 +395,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.macroDescription.Location = new System.Drawing.Point(575, 31);
             this.macroDescription.Name = "macroDescription";
-            this.macroDescription.Size = new System.Drawing.Size(487, 534);
+            this.macroDescription.Size = new System.Drawing.Size(521, 624);
             this.macroDescription.TabIndex = 9;
             this.macroDescription.Text = "";
             // 
             // createMacroButton
             // 
             this.createMacroButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.createMacroButton.Location = new System.Drawing.Point(575, 630);
+            this.createMacroButton.Location = new System.Drawing.Point(575, 720);
             this.createMacroButton.Name = "createMacroButton";
             this.createMacroButton.Size = new System.Drawing.Size(227, 23);
             this.createMacroButton.TabIndex = 8;
@@ -401,7 +413,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 675);
+            this.label3.Location = new System.Drawing.Point(7, 765);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 17);
             this.label3.TabIndex = 7;
@@ -412,15 +424,15 @@
             this.macroProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.macroProgressBar.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this.macroProgressBar.Location = new System.Drawing.Point(6, 698);
+            this.macroProgressBar.Location = new System.Drawing.Point(6, 788);
             this.macroProgressBar.Name = "macroProgressBar";
-            this.macroProgressBar.Size = new System.Drawing.Size(1070, 23);
+            this.macroProgressBar.Size = new System.Drawing.Size(1104, 23);
             this.macroProgressBar.TabIndex = 6;
             // 
             // removeButton
             // 
             this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.removeButton.Location = new System.Drawing.Point(284, 630);
+            this.removeButton.Location = new System.Drawing.Point(284, 720);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(257, 23);
             this.removeButton.TabIndex = 5;
@@ -431,7 +443,7 @@
             // addButton
             // 
             this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addButton.Location = new System.Drawing.Point(10, 630);
+            this.addButton.Location = new System.Drawing.Point(10, 720);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(257, 23);
             this.addButton.TabIndex = 4;
@@ -466,7 +478,7 @@
             this.macroQueue.Location = new System.Drawing.Point(284, 31);
             this.macroQueue.Name = "macroQueue";
             this.macroQueue.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.macroQueue.Size = new System.Drawing.Size(257, 580);
+            this.macroQueue.Size = new System.Drawing.Size(257, 660);
             this.macroQueue.TabIndex = 1;
             // 
             // macroList
@@ -477,7 +489,7 @@
             this.macroList.ItemHeight = 16;
             this.macroList.Location = new System.Drawing.Point(10, 31);
             this.macroList.Name = "macroList";
-            this.macroList.Size = new System.Drawing.Size(257, 580);
+            this.macroList.Size = new System.Drawing.Size(257, 660);
             this.macroList.TabIndex = 0;
             // 
             // tabPage2
@@ -489,7 +501,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1082, 727);
+            this.tabPage2.Size = new System.Drawing.Size(1116, 817);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Module selection";
             // 
@@ -530,7 +542,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1082, 727);
+            this.tabPage1.Size = new System.Drawing.Size(1116, 817);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Camera feed";
             // 
@@ -545,23 +557,13 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 35);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1090, 756);
+            this.tabControl1.Size = new System.Drawing.Size(1124, 846);
             this.tabControl1.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(572, 11);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(122, 17);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Macro Description";
             // 
             // speedSettingSlider
             // 
             this.speedSettingSlider.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.speedSettingSlider.Location = new System.Drawing.Point(1107, 646);
+            this.speedSettingSlider.Location = new System.Drawing.Point(1141, 646);
             this.speedSettingSlider.Maximum = 6;
             this.speedSettingSlider.Name = "speedSettingSlider";
             this.speedSettingSlider.Size = new System.Drawing.Size(220, 56);
@@ -572,7 +574,7 @@
             // axisPositionBar
             // 
             this.axisPositionBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.axisPositionBar.Location = new System.Drawing.Point(1111, 591);
+            this.axisPositionBar.Location = new System.Drawing.Point(1145, 591);
             this.axisPositionBar.Name = "axisPositionBar";
             this.axisPositionBar.Size = new System.Drawing.Size(216, 23);
             this.axisPositionBar.TabIndex = 14;
@@ -581,11 +583,29 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1108, 626);
+            this.label5.Location = new System.Drawing.Point(1142, 626);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(97, 17);
             this.label5.TabIndex = 15;
             this.label5.Text = "Speed Setting";
+            // 
+            // moduleTextBox
+            // 
+            this.moduleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.moduleTextBox.Location = new System.Drawing.Point(1145, 718);
+            this.moduleTextBox.Name = "moduleTextBox";
+            this.moduleTextBox.Size = new System.Drawing.Size(216, 22);
+            this.moduleTextBox.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1145, 695);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(105, 17);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Current Module";
             // 
             // UserInterface
             // 
@@ -593,7 +613,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1343, 790);
+            this.ClientSize = new System.Drawing.Size(1377, 880);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.moduleTextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.axisPositionBar);
             this.Controls.Add(this.speedSettingSlider);
@@ -682,6 +704,8 @@
         private System.Windows.Forms.TrackBar speedSettingSlider;
         private System.Windows.Forms.ProgressBar axisPositionBar;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox moduleTextBox;
+        private System.Windows.Forms.Label label6;
     }
 }
 

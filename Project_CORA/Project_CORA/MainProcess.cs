@@ -54,29 +54,16 @@ namespace Project_CORA
         {
             serialPort = new SerialPort2Dynamixel();
             dynamixel = new Dynamixel();
-            if (serialPort.open("COM6") == false)
+            if (serialPort.open("COM7") == false)
             {
                 dynamixel.sendTossModeCommand(serialPort);
             }
             while (true)
             {
                 //Check if emergency stop is in effect
-                if (JoyStickState.buttons != null)
-                {
-                    bool[] button = JoyStickState.buttons;
-                    emergencyStopInEffect = button[1];
-                }
-                while (emergencyStopInEffect)
-                {
-                    Thread.Sleep(200);
-                    if(userControls.requestedReset || JoyStickState.buttons[1])
-                    {
-                        emergencyStopInEffect = false;
-                        Thread.Sleep(200);
-                    }
-                }
+                checkForEmergencyStop();
                 //check if robot needs to reset
-                if (userControls.requestedReset)
+                if (userControls.requestedReset || checkResetButton())
                 {
                     emergencyReset = false;
                     setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
@@ -161,17 +148,7 @@ namespace Project_CORA
          */
         private int checkServoPosition(int servoPosition, int servoDestination)
         {
-            //emergencyStopInEffect = JoyStickState.buttons[1];
-            while (emergencyStopInEffect)
-            {
-                Thread.Sleep(200);
-                if (userControls.requestedReset || JoyStickState.buttons[1])
-                {
-                    emergencyStopInEffect = false;
-                    if (userControls.requestedReset) { emergencyReset = true; }
-                    Thread.Sleep(200);
-                }
-            }
+            checkForEmergencyStop();
             int speedOffset = Settings.speedSetting, brakeDis = (speedOffset / 2)+1;
             if (servoPosition > servoDestination)
             {
@@ -336,5 +313,31 @@ namespace Project_CORA
             }
         }
 
+        private void checkForEmergencyStop()
+        {
+            if (JoyStickState.buttons != null)
+            {
+                emergencyStopInEffect = JoyStickState.buttons[1];
+            }
+            while (emergencyStopInEffect)
+            {
+                Thread.Sleep(200);
+                if (userControls.requestedReset || JoyStickState.buttons[1])
+                {
+                    emergencyStopInEffect = false;
+                    Thread.Sleep(200);
+                }
+            }
+        }
+
+        private bool checkResetButton()
+        {
+            bool state = false;
+            if (JoyStickState.buttons != null)
+            {
+                state = JoyStickState.buttons[11];
+            }
+            return state;
+        }
     }
 }
