@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="JoyStickState.cs" />
     <Compile Include="Dynamixel.cs" />
+    <Compile Include="MacroLib.cs" />
     <Compile Include="MainProcess.cs" />
     <Compile Include="ServoPositions.cs" />
     <Compile Include="Settings.cs" />

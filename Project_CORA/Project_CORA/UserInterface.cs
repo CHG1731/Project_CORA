@@ -30,9 +30,11 @@ namespace Project_CORA
         Pen redPen = new Pen(Color.Red, 7);
         Pen circlePen = new Pen(Color.Black, 2);
         SolidBrush redBrush = new SolidBrush(Color.Red);
+        MacroLib macroLib = new MacroLib();
 
         public UserInterface()
-        { 
+        {
+            this.FormClosing += UserInterface_FormClosing;
             Settings.speedSetting = 10;
             Settings.colorPositionPanes = Color.LightGray;
             blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
@@ -51,6 +53,14 @@ namespace Project_CORA
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void UserInterface_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(MacroLib));
+            System.IO.StreamWriter writer = new System.IO.StreamWriter("MacroLib.xml");
+            serializer.Serialize(writer, macroLib);
+            writer.Close();
         }
 
         private void Hoofdscherm_Load(object sender, EventArgs e)

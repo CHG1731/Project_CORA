@@ -10,6 +10,7 @@ namespace Project_CORA
     class MainProcess
     {
         UserInterface userControls;
+        MacroLib macroLib;
 
         private int modEquiped = 0;
         Dynamixel dynamixel;
