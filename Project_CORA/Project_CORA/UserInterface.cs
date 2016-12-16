@@ -281,20 +281,20 @@ namespace Project_CORA
         private void runQueueButton_Click(object sender, EventArgs e)
         {
             int listIndex;
-            this.runMacro = true;
             for (int i = 0; i < macroQueue.Items.Count; i++)
             {
                 macroQueue.SelectedIndex = i;
                 listIndex = macroList.FindStringExact((String)macroQueue.SelectedItem);
                 this.macroToRun = macroLib.macroStorage.ElementAt<List<int[]>>(listIndex);
+                runMacro = true;
                 stillNotDone = true;
                 while (stillNotDone)
                 {
                     this.updateGUI();
                     Thread.Sleep(1);
                 }
+                runMacro = false;
             }
-            this.runMacro = false;
         }
 
         public void setMacroProgressBar(int percentage)
