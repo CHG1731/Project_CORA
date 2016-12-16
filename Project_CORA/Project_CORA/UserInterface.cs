@@ -18,7 +18,7 @@ namespace Project_CORA
         public bool RobotConnected = false;
         public bool runMacro;
         public bool stillNotDone = false;
-        public String macroToRun;
+        public List<int[]> macroToRun;
 
         public int modSelected = 0;
         public int modEquiped = 0;
@@ -45,9 +45,15 @@ namespace Project_CORA
             rotationValueGraphics = this.baseRotationPanel.CreateGraphics();
             timer1.Start();
             MainProcess.RunWorkerAsync();
-            //Testing purposes
-            this.macroList.Items.Add("Demo macro 1");
-            this.macroList.Items.Add("Demo macro 2");
+            //Testing purpuses
+            List<int[]> testList = new List<int[]>();
+            testList.Add(new int[] { 512, 512, 512, 512, 512, 512, 512 });
+            testList.Add(new int[] { 850, 850, 850, 850, 850, 850, 850 });
+            testList.Add(new int[] { 512, 512, 512, 512, 512, 512, 512 });
+            macroLib.macroStorage.AddLast(testList);
+            int dinges = macroLib.macroStorage.Count;
+            macroLib.macroNames[macroLib.macroStorage.Count - 1] = "test macro";
+            setMacroList();
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,10 +63,12 @@ namespace Project_CORA
 
         private void UserInterface_FormClosing(object sender, FormClosingEventArgs e)
         {
+            /*
             System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(MacroLib));
             System.IO.StreamWriter writer = new System.IO.StreamWriter("MacroLib.xml");
             serializer.Serialize(writer, macroLib);
             writer.Close();
+            */
         }
 
         private void Hoofdscherm_Load(object sender, EventArgs e)
@@ -241,16 +249,25 @@ namespace Project_CORA
         #region code for macro management
         private void addButton_Click(object sender, EventArgs e)
         {
-            this.macroQueue.Items.Add(this.macroList.SelectedItem);
+            try
+            {
+                this.macroQueue.Items.Add(this.macroList.SelectedItem);
+            }
+            catch(ArgumentNullException bleh)
+            {
+
+            }
         }
 
         private void runQueueButton_Click(object sender, EventArgs e)
         {
+            int listIndex;
             this.runMacro = true;
             for (int i = 0; i < macroQueue.Items.Count; i++)
             {
                 macroQueue.SelectedIndex = i;
-                this.macroToRun = (String)macroQueue.SelectedItem;
+                listIndex = macroList.FindStringExact((String)macroQueue.SelectedItem);
+                this.macroToRun = macroLib.macroStorage.ElementAt<List<int[]>>(listIndex);
                 stillNotDone = true;
                 while (stillNotDone)
                 {
@@ -335,6 +352,19 @@ namespace Project_CORA
                     Settings.speedSetting = 5;
                     break;
             }
+        }
+
+        private void setMacroList()
+        {
+            for(int i = 0; i < macroLib.macroStorage.Count; i++)
+            {
+                this.macroList.Items.Add(macroLib.macroNames[i]);
+            }
+        }
+
+        private void createMacroButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

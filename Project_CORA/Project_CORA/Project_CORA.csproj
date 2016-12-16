@@ -50,6 +50,12 @@
   <ItemGroup>
     <Compile Include="JoyStickState.cs" />
     <Compile Include="Dynamixel.cs" />
+    <Compile Include="MacroCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MacroCreator.Designer.cs">
+      <DependentUpon>MacroCreator.cs</DependentUpon>
+    </Compile>
     <Compile Include="MacroLib.cs" />
     <Compile Include="MainProcess.cs" />
     <Compile Include="ServoPositions.cs" />
@@ -63,6 +69,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerialPort2Dynamixel.cs" />
+    <EmbeddedResource Include="MacroCreator.resx">
+      <DependentUpon>MacroCreator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserInterface.resx">
       <DependentUpon>UserInterface.cs</DependentUpon>
     </EmbeddedResource>

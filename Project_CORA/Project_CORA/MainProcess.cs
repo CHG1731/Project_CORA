@@ -79,11 +79,6 @@ namespace Project_CORA
                 {
                     runMacro(userControls.macroToRun);
                 }
-                /*
-                if (userControls.macroRequested)
-                {
-                    runMacros();
-                }*/
                 //Read joystick and update Servo Positionues
                 calculateServoPositions();
                 //Send Servoor Positionues to servo's
@@ -252,46 +247,12 @@ namespace Project_CORA
             else if(ServoPositions.rotServo < rotServoMin) { ServoPositions.rotServo = rotServoMin; }
         }
 
-        private void runMacro(String macro)
+        private void runMacro(List<int[]> macroCommands)
         {
-            if (macro == "Demo macro 1")
+            for(int i = 0; i < userControls.macroToRun.Count; i++)
             {
-                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 512, 512,
-                    moduleServoDefault, rotServoDefault - 300, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 512, 512,
-                    moduleServoDefault, rotServoDefault + 300, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 512, endServoDefault,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 512, 512,
-                    512, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 512, endServoDefault,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-            }
-            if (macro == "Demo macro 2")
-            {
-                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { 512, 512, 1023,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 850, 850,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 850, 1023,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 512, 1023,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 512, 1023,
-                    moduleServoDefault, rotServoDefault + 300, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 512, 1023,
-                    moduleServoDefault, rotServoDefault - 300, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, 850, endServoDefault,
-                    moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-            }
+                setRobotPosition(userControls.macroToRun.ElementAt<int[]>(i));   
+            } 
             userControls.stillNotDone = false;
         }
 
