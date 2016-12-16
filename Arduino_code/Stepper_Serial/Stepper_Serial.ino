@@ -12,7 +12,7 @@ void loop(){
   {
     String command = Serial.readStringUntil('#');
     //Serial.println(command);
-    if(command.equals("reset"))
+    if(command.startsWith("reset"))
     {
       step(false,pos);
       pos = 0;
