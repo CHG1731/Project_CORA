@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Project_CORA
 {
@@ -34,6 +36,7 @@ namespace Project_CORA
 
         public UserInterface()
         {
+            deserializeMacros();
             this.FormClosing += UserInterface_FormClosing;
             Settings.speedSetting = 10;
             Settings.colorPositionPanes = Color.LightGray;
@@ -46,13 +49,15 @@ namespace Project_CORA
             timer1.Start();
             MainProcess.RunWorkerAsync();
             //Testing purpuses
+            /*
             List<int[]> testList = new List<int[]>();
             testList.Add(new int[] { 512, 512, 512, 512, 512, 512, 512 });
             testList.Add(new int[] { 850, 850, 850, 850, 850, 850, 850 });
             testList.Add(new int[] { 512, 512, 512, 512, 512, 512, 512 });
-            macroLib.macroStorage.AddLast(testList);
+            macroLib.macroStorage.Add(testList);
             int dinges = macroLib.macroStorage.Count;
             macroLib.macroNames[macroLib.macroStorage.Count - 1] = "test macro";
+            */
             setMacroList();
         }
 
@@ -63,12 +68,26 @@ namespace Project_CORA
 
         private void UserInterface_FormClosing(object sender, FormClosingEventArgs e)
         {
-            /*
-            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(MacroLib));
+            XmlSerializer serializer = new XmlSerializer(typeof(MacroLib));
             System.IO.StreamWriter writer = new System.IO.StreamWriter("MacroLib.xml");
             serializer.Serialize(writer, macroLib);
             writer.Close();
-            */
+        }
+
+        private void deserializeMacros()
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(MacroLib));
+                FileStream stream = new FileStream("MacroLib.xml", FileMode.Open);
+                macroLib = (MacroLib)
+                    serializer.Deserialize(stream);
+                stream.Close();
+            }
+            catch (FileNotFoundException f)
+            {
+
+            }
         }
 
         private void Hoofdscherm_Load(object sender, EventArgs e)

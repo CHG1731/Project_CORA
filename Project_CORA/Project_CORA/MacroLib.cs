@@ -8,7 +8,7 @@ namespace Project_CORA
 {
     public class MacroLib
     {
-        public LinkedList<List<int[]>> macroStorage = new LinkedList<List<int[]>>();
+        public List<List<int[]>> macroStorage = new List<List<int[]>>();
         public String[] macroNames = new String[100];
     }
 }
