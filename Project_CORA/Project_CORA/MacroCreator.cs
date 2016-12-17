@@ -14,17 +14,24 @@ namespace Project_CORA
     {
         MacroLib macroLib;
         List<int[]> newMacro = new List<int[]>();
-        int counter = 0;
+        int counter = 1;
 
-        public MacroCreator(MacroLib m)
+        public MacroCreator(MacroLib m, ListBox l)
         {
             this.macroLib = m;
             InitializeComponent();
+            this.modList.Visible = false;
+            this.previewBox.Text = "Command nr.\tBase\tMiddle\tEnd\tModule\tRotation\tFrame\n";
             this.baseServoValueBox.Text = this.baseServoValueBar.Value.ToString();
             this.midServoValueBox.Text = this.midServoValueBar.Value.ToString();
             this.endServoValueBox.Text = this.endServoValueBar.Value.ToString();
             this.moduleServoValueBox.Text = this.moduleServoValueBar.Value.ToString();
             this.rotationServoValueBox.Text = this.rotationServoValueBar.Value.ToString();
+            for (int i = 0; i < l.Items.Count; i++)
+            {
+                l.SelectedIndex = i;
+                this.modList.Items.Add(l.SelectedItem);
+            }
         }
 
         #region all the code handling the value changes
@@ -121,16 +128,36 @@ namespace Project_CORA
 
         private void addToMacroButton_Click(object sender, EventArgs e)
         {
-            newMacro.Add(new int[] {baseServoValueBar.Value, midServoValueBar.Value, endServoValueBar.Value, moduleServoValueBar.Value,
-                rotationServoValueBar.Value, 0,0});
-            counter++;
-            textBox1.Text = counter.ToString();
+            int[] newCommand = new int[] {baseServoValueBar.Value, midServoValueBar.Value, endServoValueBar.Value, moduleServoValueBar.Value,
+                rotationServoValueBar.Value, 0,0};
+            newMacro.Add(newCommand);
+            previewBox.Text += counter++ + "\t\t";
+            for(int i = 0; i<newCommand.Length - 1; i++)
+            {
+                previewBox.Text += newCommand[i] + "\t";
+            }
+            previewBox.Text += "\n";
         }
 
         private void finalizeMacro_Click(object sender, EventArgs e)
         {
             macroLib.macroStorage.Add(newMacro);
-            macroLib.macroNames[macroLib.macroStorage.Count - 1] = this.macroNameBox.Text;
+            macroLib.macroNames[macroLib.macroStorage.Count - 1] = macroNameBox.Text;
+            this.Close();
+        }
+
+        private void switchModuleButton_Click(object sender, EventArgs e)
+        {
+            this.modList.Visible = true;
+            this.Refresh();
+        }
+
+        private void modList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            newMacro.Add(new int[] { modList.SelectedIndex,0,0,0,0,0,0,});
+            previewBox.Text += counter + "\t\tSwitch to module: " + (string)modList.SelectedItem + "\n";
+            this.modList.Visible = false;
+            this.Refresh();
         }
     }
 }

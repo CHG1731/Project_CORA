@@ -370,7 +370,7 @@
             // runQueueButton
             // 
             this.runQueueButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.runQueueButton.Location = new System.Drawing.Point(575, 614);
+            this.runQueueButton.Location = new System.Drawing.Point(575, 627);
             this.runQueueButton.Name = "runQueueButton";
             this.runQueueButton.Size = new System.Drawing.Size(487, 23);
             this.runQueueButton.TabIndex = 11;
@@ -395,7 +395,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.macroDescription.Location = new System.Drawing.Point(575, 31);
             this.macroDescription.Name = "macroDescription";
-            this.macroDescription.Size = new System.Drawing.Size(521, 560);
+            this.macroDescription.Size = new System.Drawing.Size(521, 580);
             this.macroDescription.TabIndex = 9;
             this.macroDescription.Text = "";
             // 

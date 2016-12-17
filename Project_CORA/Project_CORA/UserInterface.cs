@@ -48,16 +48,6 @@ namespace Project_CORA
             rotationValueGraphics = this.baseRotationPanel.CreateGraphics();
             timer1.Start();
             MainProcess.RunWorkerAsync();
-            //Testing purpuses
-            /*
-            List<int[]> testList = new List<int[]>();
-            testList.Add(new int[] { 512, 512, 512, 512, 512, 512, 512 });
-            testList.Add(new int[] { 850, 850, 850, 850, 850, 850, 850 });
-            testList.Add(new int[] { 512, 512, 512, 512, 512, 512, 512 });
-            macroLib.macroStorage.Add(testList);
-            int dinges = macroLib.macroStorage.Count;
-            macroLib.macroNames[macroLib.macroStorage.Count - 1] = "test macro";
-            */
             setMacroList();
         }
 
@@ -127,7 +117,6 @@ namespace Project_CORA
          */ 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //TODO clean up this code.
             updateGUI();
         }
 
@@ -377,7 +366,7 @@ namespace Project_CORA
 
         private void createMacroButton_Click(object sender, EventArgs e)
         {
-            MacroCreator macroCreator = new MacroCreator(macroLib);
+            MacroCreator macroCreator = new MacroCreator(macroLib, modList);
             macroCreator.Show();
         }
     }

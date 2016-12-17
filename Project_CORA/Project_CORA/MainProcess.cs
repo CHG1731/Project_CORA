@@ -263,7 +263,16 @@ namespace Project_CORA
                 macro = userControls.macrosToRun.ElementAt(i);
                 for(int macroIndex = 0; macroIndex < macro.Count; macroIndex++)
                 {
-                    setRobotPosition(macro.ElementAt(macroIndex));
+                    if (macro.ElementAt(macroIndex)[0] < 300)
+                    {
+                        userControls.modEquiped = macro.ElementAt(macroIndex)[0];
+                        this.modEquiped = macro.ElementAt(macroIndex)[0];
+                        changeMod();
+                    }
+                    else
+                    {
+                        setRobotPosition(macro.ElementAt(macroIndex));
+                    }
                     Settings.percentage += percentageStep;
                 }
             }
