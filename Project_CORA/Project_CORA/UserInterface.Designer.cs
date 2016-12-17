@@ -406,7 +406,7 @@
             this.createMacroButton.Name = "createMacroButton";
             this.createMacroButton.Size = new System.Drawing.Size(227, 23);
             this.createMacroButton.TabIndex = 8;
-            this.createMacroButton.Text = "Creat Macro";
+            this.createMacroButton.Text = "Create Macro";
             this.createMacroButton.UseVisualStyleBackColor = true;
             this.createMacroButton.Click += new System.EventHandler(this.createMacroButton_Click);
             // 

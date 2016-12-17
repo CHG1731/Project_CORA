@@ -189,6 +189,10 @@ namespace Project_CORA
             updateRotationPosition(ServoPositions.rotServo);
             this.macroProgressBar.Value = (int)Settings.percentage;
             updateSliderValue();
+            if(macroLib.macroStorage.Count > this.macroList.Items.Count)
+            {
+                macroList.Items.Add(macroLib.macroNames[macroLib.macroStorage.Count - 1]);
+            }
         }
 
         #region methods called by updateGUI
@@ -292,11 +296,6 @@ namespace Project_CORA
             this.runMacro = true;
         }
 
-        public void setMacroProgressBar(int percentage)
-        {
-            this.macroProgressBar.Increment(percentage);
-        }
-
         private void removeButton_Click(object sender, EventArgs e)
         {
             this.macroQueue.Items.Remove(macroQueue.SelectedItem);
@@ -378,7 +377,8 @@ namespace Project_CORA
 
         private void createMacroButton_Click(object sender, EventArgs e)
         {
-
+            MacroCreator macroCreator = new MacroCreator(macroLib);
+            macroCreator.Show();
         }
     }
 }

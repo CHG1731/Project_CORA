@@ -12,9 +12,125 @@ namespace Project_CORA
 {
     public partial class MacroCreator : Form
     {
-        public MacroCreator()
+        MacroLib macroLib;
+        List<int[]> newMacro = new List<int[]>();
+        int counter = 0;
+
+        public MacroCreator(MacroLib m)
         {
+            this.macroLib = m;
             InitializeComponent();
+            this.baseServoValueBox.Text = this.baseServoValueBar.Value.ToString();
+            this.midServoValueBox.Text = this.midServoValueBar.Value.ToString();
+            this.endServoValueBox.Text = this.endServoValueBar.Value.ToString();
+            this.moduleServoValueBox.Text = this.moduleServoValueBar.Value.ToString();
+            this.rotationServoValueBox.Text = this.rotationServoValueBar.Value.ToString();
+        }
+
+        #region all the code handling the value changes
+        private void baseServoValueBar_Scroll(object sender, EventArgs e)
+        {
+            this.baseServoValueBox.Text = this.baseServoValueBar.Value.ToString();
+        }
+
+        private void baseServoValueBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int value = Int32.Parse(baseServoValueBox.Text);
+                if(value >= baseServoValueBar.Minimum && value <= baseServoValueBar.Maximum)
+                {
+                    baseServoValueBar.Value = value;
+                }
+            }
+            catch(Exception pfff) { }
+        }
+
+        private void midServoValueBar_Scroll(object sender, EventArgs e)
+        {
+            this.midServoValueBox.Text = this.midServoValueBar.Value.ToString();
+        }
+
+        private void midServoValueBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int value = Int32.Parse(midServoValueBox.Text);
+                if (value >= midServoValueBar.Minimum && value <= midServoValueBar.Maximum)
+                {
+                    midServoValueBar.Value = value;
+                }
+            }
+            catch (Exception pfff) { }
+        }
+
+        private void endServoValueBar_Scroll(object sender, EventArgs e)
+        {
+            this.endServoValueBox.Text = this.endServoValueBar.Value.ToString();
+        }
+
+        private void endServoValueBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int value = Int32.Parse(endServoValueBox.Text);
+                if (value >= endServoValueBar.Minimum && value <= endServoValueBar.Maximum)
+                {
+                    endServoValueBar.Value = value;
+                }
+            }
+            catch (Exception pfff) { }
+        }
+
+        private void moduleServoBar_Scroll(object sender, EventArgs e)
+        {
+            this.moduleServoValueBox.Text = this.moduleServoValueBar.Value.ToString();
+        }
+
+        private void moduleServoValueBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int value = Int32.Parse(moduleServoValueBox.Text);
+                if (value >= moduleServoValueBar.Minimum && value <= moduleServoValueBar.Maximum)
+                {
+                    moduleServoValueBar.Value = value;
+                }
+            }
+            catch (Exception pfff) { }
+        }
+
+        private void rotationServoValueBar_Scroll(object sender, EventArgs e)
+        {
+            this.rotationServoValueBox.Text = this.rotationServoValueBar.Value.ToString();
+        }
+
+        private void rotationServoValueBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int value = Int32.Parse(rotationServoValueBox.Text);
+                if (value >= rotationServoValueBar.Minimum && value <= rotationServoValueBar.Maximum)
+                {
+                    rotationServoValueBar.Value = value;
+                }
+            }
+            catch (Exception pfff) { }
+        }
+        #endregion
+
+        private void addToMacroButton_Click(object sender, EventArgs e)
+        {
+            newMacro.Add(new int[] {baseServoValueBar.Value, midServoValueBar.Value, endServoValueBar.Value, moduleServoValueBar.Value,
+                rotationServoValueBar.Value, 0,0});
+            counter++;
+            textBox1.Text = counter.ToString();
+        }
+
+        private void finalizeMacro_Click(object sender, EventArgs e)
+        {
+            macroLib.macroStorage.Add(newMacro);
+            macroLib.macroNames[macroLib.macroStorage.Count - 1] = this.macroNameBox.Text;
         }
     }
 }
