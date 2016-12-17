@@ -187,6 +187,7 @@ namespace Project_CORA
         {
             updateRobotPositon(ServoPositions.baseServo, ServoPositions.midServo, ServoPositions.endServo);
             updateRotationPosition(ServoPositions.rotServo);
+            this.macroProgressBar.Value = (int)Settings.percentage;
             updateSliderValue();
         }
 

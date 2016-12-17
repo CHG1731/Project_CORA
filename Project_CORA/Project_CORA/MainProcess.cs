@@ -251,14 +251,23 @@ namespace Project_CORA
         private void runMacro()
         {
             List<int[]> macro;
+            float percentageStep = 0;
+            Settings.percentage = 0;
+            for(int i = 0; i < userControls.macrosToRun.Count; i++)
+            {
+                percentageStep += userControls.macrosToRun.ElementAt(i).Count;
+            }
+            percentageStep = 100 / percentageStep;
             for(int i = 0; i < userControls.macrosToRun.Count; i++)
             {
                 macro = userControls.macrosToRun.ElementAt(i);
                 for(int macroIndex = 0; macroIndex < macro.Count; macroIndex++)
                 {
                     setRobotPosition(macro.ElementAt(macroIndex));
+                    Settings.percentage += percentageStep;
                 }
             }
+            Settings.percentage = 100;
             userControls.runMacro = false;
         }
         

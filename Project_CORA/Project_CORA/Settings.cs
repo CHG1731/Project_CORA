@@ -11,5 +11,6 @@ namespace Project_CORA
     {
         public static int speedSetting { get; set; }
         public static Color colorPositionPanes { get; set; }
+        public static float percentage { get; set; }
     }
 }
