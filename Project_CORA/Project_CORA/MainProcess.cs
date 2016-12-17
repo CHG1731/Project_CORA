@@ -269,15 +269,42 @@ namespace Project_CORA
                         this.modEquiped = macro.ElementAt(macroIndex)[0];
                         changeMod();
                     }
+                    else if(macro.ElementAt(macroIndex)[2] < 300)
+                    {
+                        runMacro(userControls.macroLib.macroStorage.ElementAt(macro.ElementAt(macroIndex)[2]), percentageStep);
+                    }
                     else
                     {
                         setRobotPosition(macro.ElementAt(macroIndex));
+                        Settings.percentage += percentageStep;
                     }
-                    Settings.percentage += percentageStep;
                 }
             }
             Settings.percentage = 100;
             userControls.runMacro = false;
+        }
+
+        private void runMacro(List<int[]> macro, float percentageStep)
+        {
+            percentageStep = percentageStep / macro.Count;
+            for(int i = 0; i < macro.Count; i++)
+            {
+                if (macro.ElementAt(i)[0] < 300)
+                {
+                    userControls.modEquiped = macro.ElementAt(i)[0];
+                    this.modEquiped = macro.ElementAt(i)[0];
+                    changeMod();
+                }
+                else if (macro.ElementAt(i)[2] < 300)
+                {
+                    runMacro(userControls.macroLib.macroStorage.ElementAt(macro.ElementAt(i)[2]), percentageStep);
+                }
+                else
+                {
+                    setRobotPosition(macro.ElementAt(i));
+                }
+                Settings.percentage += percentageStep;
+            }
         }
         
         /*

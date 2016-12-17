@@ -54,6 +54,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.switchModuleButton = new System.Windows.Forms.Button();
             this.modList = new System.Windows.Forms.ListBox();
+            this.macroList = new System.Windows.Forms.ListBox();
+            this.runMacroButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.baseServoValueBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.midServoValueBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endServoValueBar)).BeginInit();
@@ -289,12 +291,34 @@
             this.modList.TabIndex = 26;
             this.modList.SelectedIndexChanged += new System.EventHandler(this.modList_SelectedIndexChanged);
             // 
+            // macroList
+            // 
+            this.macroList.FormattingEnabled = true;
+            this.macroList.ItemHeight = 16;
+            this.macroList.Location = new System.Drawing.Point(774, 564);
+            this.macroList.Name = "macroList";
+            this.macroList.Size = new System.Drawing.Size(640, 244);
+            this.macroList.TabIndex = 27;
+            this.macroList.SelectedIndexChanged += new System.EventHandler(this.macroList_SelectedIndexChanged);
+            // 
+            // runMacroButton
+            // 
+            this.runMacroButton.Location = new System.Drawing.Point(312, 753);
+            this.runMacroButton.Name = "runMacroButton";
+            this.runMacroButton.Size = new System.Drawing.Size(200, 23);
+            this.runMacroButton.TabIndex = 28;
+            this.runMacroButton.Text = "Run Macro";
+            this.runMacroButton.UseVisualStyleBackColor = true;
+            this.runMacroButton.Click += new System.EventHandler(this.runMacroButton_Click);
+            // 
             // MacroCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1462, 827);
+            this.Controls.Add(this.runMacroButton);
+            this.Controls.Add(this.macroList);
             this.Controls.Add(this.modList);
             this.Controls.Add(this.switchModuleButton);
             this.Controls.Add(this.label8);
@@ -361,5 +385,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button switchModuleButton;
         private System.Windows.Forms.ListBox modList;
+        private System.Windows.Forms.ListBox macroList;
+        private System.Windows.Forms.Button runMacroButton;
     }
 }

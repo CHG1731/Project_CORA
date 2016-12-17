@@ -16,11 +16,12 @@ namespace Project_CORA
         List<int[]> newMacro = new List<int[]>();
         int counter = 1;
 
-        public MacroCreator(MacroLib m, ListBox l)
+        public MacroCreator(MacroLib m, ListBox l, ListBox b)
         {
             this.macroLib = m;
             InitializeComponent();
             this.modList.Visible = false;
+            this.macroList.Visible = false;
             this.previewBox.Text = "Command nr.\tBase\tMiddle\tEnd\tModule\tRotation\tFrame\n";
             this.baseServoValueBox.Text = this.baseServoValueBar.Value.ToString();
             this.midServoValueBox.Text = this.midServoValueBar.Value.ToString();
@@ -31,6 +32,11 @@ namespace Project_CORA
             {
                 l.SelectedIndex = i;
                 this.modList.Items.Add(l.SelectedItem);
+            }
+            for (int i = 0; i < b.Items.Count; i++)
+            {
+                b.SelectedIndex = i;
+                this.macroList.Items.Add(b.SelectedItem);
             }
         }
 
@@ -141,23 +147,46 @@ namespace Project_CORA
 
         private void finalizeMacro_Click(object sender, EventArgs e)
         {
-            macroLib.macroStorage.Add(newMacro);
-            macroLib.macroNames[macroLib.macroStorage.Count - 1] = macroNameBox.Text;
-            this.Close();
+            if (macroNameBox.TextLength > 2)
+            {
+                macroLib.macroStorage.Add(newMacro);
+                macroLib.macroNames[macroLib.macroStorage.Count - 1] = macroNameBox.Text;
+                this.Close();
+            }
         }
 
         private void switchModuleButton_Click(object sender, EventArgs e)
         {
-            this.modList.Visible = true;
-            this.Refresh();
+            if (this.modList.Items.Count > 0)
+            {
+                this.modList.Visible = true;
+                this.Refresh();
+            }
         }
 
         private void modList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            newMacro.Add(new int[] { modList.SelectedIndex,0,0,0,0,0,0,});
-            previewBox.Text += counter + "\t\tSwitch to module: " + (string)modList.SelectedItem + "\n";
+            newMacro.Add(new int[] { modList.SelectedIndex,2000,2000,2000,2000,2000,2000,});
+            previewBox.Text += counter++ + "\t\tSwitch to module: " + (string)modList.SelectedItem + "\n";
             this.modList.Visible = false;
             this.Refresh();
+        }
+
+        private void macroList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            newMacro.Add(new int[] { 2000, 2000, macroList.SelectedIndex, 2000, 2000, 2000, 2000, });
+            previewBox.Text += counter++ + "\t\tRun macro: " + (string)macroList.SelectedItem + "\n";
+            this.macroList.Visible = false;
+            this.Refresh();
+        }
+
+        private void runMacroButton_Click(object sender, EventArgs e)
+        {
+            if (macroList.Items.Count > 0)
+            {
+                this.macroList.Visible = true;
+                this.Refresh();
+            }
         }
     }
 }

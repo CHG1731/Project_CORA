@@ -32,7 +32,7 @@ namespace Project_CORA
         Pen redPen = new Pen(Color.Red, 7);
         Pen circlePen = new Pen(Color.Black, 2);
         SolidBrush redBrush = new SolidBrush(Color.Red);
-        MacroLib macroLib = new MacroLib();
+        public MacroLib macroLib = new MacroLib();
 
         public UserInterface()
         {
@@ -366,7 +366,7 @@ namespace Project_CORA
 
         private void createMacroButton_Click(object sender, EventArgs e)
         {
-            MacroCreator macroCreator = new MacroCreator(macroLib, modList);
+            MacroCreator macroCreator = new MacroCreator(macroLib, modList, macroList);
             macroCreator.Show();
         }
     }
