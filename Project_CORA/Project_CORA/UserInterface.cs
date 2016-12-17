@@ -20,7 +20,7 @@ namespace Project_CORA
         public bool RobotConnected = false;
         public bool runMacro;
         public bool stillNotDone = false;
-        public List<int[]> macroToRun;
+        public List<List<int[]>> macrosToRun = new List<List<int[]>>();
 
         public int modSelected = 0;
         public int modEquiped = 0;
@@ -281,20 +281,14 @@ namespace Project_CORA
         private void runQueueButton_Click(object sender, EventArgs e)
         {
             int listIndex;
-            for (int i = 0; i < macroQueue.Items.Count; i++)
+            if (macrosToRun.Count > 0) { macrosToRun.Clear(); }
+            for(int i = 0; i < macroQueue.Items.Count; i++)
             {
                 macroQueue.SelectedIndex = i;
                 listIndex = macroList.FindStringExact((String)macroQueue.SelectedItem);
-                this.macroToRun = macroLib.macroStorage.ElementAt<List<int[]>>(listIndex);
-                runMacro = true;
-                stillNotDone = true;
-                while (stillNotDone)
-                {
-                    this.updateGUI();
-                    Thread.Sleep(1);
-                }
-                runMacro = false;
+                macrosToRun.Add(macroLib.macroStorage.ElementAt(listIndex));
             }
+            this.runMacro = true;
         }
 
         public void setMacroProgressBar(int percentage)

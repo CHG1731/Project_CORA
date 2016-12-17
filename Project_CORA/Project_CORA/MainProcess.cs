@@ -78,7 +78,7 @@ namespace Project_CORA
                 }
                 if (userControls.runMacro)
                 {
-                    runMacro(userControls.macroToRun);
+                    runMacro();
                 }
                 //Read joystick and update Servo Positionues
                 calculateServoPositions();
@@ -247,16 +247,21 @@ namespace Project_CORA
             if(ServoPositions.rotServo > rotServoMax) { ServoPositions.rotServo = rotServoMax; }
             else if(ServoPositions.rotServo < rotServoMin) { ServoPositions.rotServo = rotServoMin; }
         }
-
-        private void runMacro(List<int[]> macroCommands)
+        
+        private void runMacro()
         {
-            for(int i = 0; i < userControls.macroToRun.Count; i++)
+            List<int[]> macro;
+            for(int i = 0; i < userControls.macrosToRun.Count; i++)
             {
-                setRobotPosition(userControls.macroToRun.ElementAt<int[]>(i));   
-            } 
-            userControls.stillNotDone = false;
+                macro = userControls.macrosToRun.ElementAt(i);
+                for(int macroIndex = 0; macroIndex < macro.Count; macroIndex++)
+                {
+                    setRobotPosition(macro.ElementAt(macroIndex));
+                }
+            }
+            userControls.runMacro = false;
         }
-
+        
         /*
          * Function that writes all the values in ServoPositions to the servo's
          * in order to move them.
