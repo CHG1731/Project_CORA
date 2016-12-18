@@ -250,7 +250,6 @@ namespace Project_CORA
                     if (macro.ElementAt(macroIndex)[0] < 300)
                     {
                         userControls.modEquiped = macro.ElementAt(macroIndex)[0];
-                        this.modEquiped = macro.ElementAt(macroIndex)[0];
                         changeMod();
                     }
                     else if(macro.ElementAt(macroIndex)[2] < 300)
