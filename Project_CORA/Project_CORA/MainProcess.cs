@@ -10,7 +10,6 @@ namespace Project_CORA
     class MainProcess
     {
         UserInterface userControls;
-        MacroLib macroLib;
 
         private int modEquiped = 0;
         Dynamixel dynamixel;
@@ -28,7 +27,7 @@ namespace Project_CORA
         private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 20;
         private int frameServoMin = 0, frameServoMax = 0 /*TODO Add actual value*/, frameServoDefault = 0; 
         private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
-        private int coupleServoMin = 0, coupleServoMax = 1023, coupleServo = 7, coupleServoDefault = 512;
+        private int coupleServo = 7, coupleServoDefault = 512;
         private int frameModInterval = 10;
 
         private String[] modules = new String[20];

@@ -28,10 +28,7 @@ namespace Module_Configuration_Tool
                     serializer.Deserialize(stream);
                 stream.Close();
             }
-            catch (FileNotFoundException f)
-            {
-
-            }
+            catch (FileNotFoundException f){}
             updateModuleList();
         }
 

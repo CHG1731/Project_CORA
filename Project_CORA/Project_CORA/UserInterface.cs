@@ -71,10 +71,7 @@ namespace Project_CORA
                     serializer.Deserialize(stream);
                 stream.Close();
             }
-            catch (FileNotFoundException f)
-            {
-
-            }
+            catch (FileNotFoundException f){}
         }
 
         private void deserializeModules()
@@ -86,15 +83,12 @@ namespace Project_CORA
                 moduleLib = (ModuleLib)
                     serializer.Deserialize(stream);
                 stream.Close();
+                for (int i = 0; i < moduleLib.nameList.Count; i++)
+                {
+                    modList.Items.Add(moduleLib.nameList.ElementAt(i));
+                }
             }
-            catch (FileNotFoundException f)
-            {
-
-            }
-            for(int i = 0; i < moduleLib.nameList.Count; i++)
-            {
-                modList.Items.Add(moduleLib.nameList.ElementAt(i));
-            }
+            catch (FileNotFoundException f){}
         }
 
         private void Hoofdscherm_Load(object sender, EventArgs e)
@@ -275,10 +269,7 @@ namespace Project_CORA
             {
                 this.macroQueue.Items.Add(this.macroList.SelectedItem);
             }
-            catch(ArgumentNullException bleh)
-            {
-
-            }
+            catch(ArgumentNullException bleh) {}
         }
 
         private void runQueueButton_Click(object sender, EventArgs e)
