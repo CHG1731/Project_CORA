@@ -42,7 +42,6 @@ namespace Project_CORA
             ServoPositions.moduleServo = moduleServoDefault;
             ServoPositions.coupleServo = coupleServoDefault;
             this.userControls = u;
-            registerMods();
             runMainProcess();
             //hurdurdur
         }
@@ -86,25 +85,6 @@ namespace Project_CORA
                 sendServoPositions();
                 //Thread.Sleep(1);
             }
-        }
-
-        /*
-         * Function reads the file that specifies which modules are stored
-         * in the rack and at what index, and stores the information
-         * in the modules array.
-         */
-        private void registerMods()
-        {
-            //TODO Put module information in XML-format.
-            String modName;
-            int index = 0;
-            System.IO.StreamReader modFile = new System.IO.StreamReader("D:\\Documents\\TI\\Project CORA\\Project_CORA\\modList.txt");
-            while ((modName = modFile.ReadLine()) != null)
-            {
-                modules[index++] = modName;
-                userControls.addMod(modName);
-            }
-            modFile.Close();
         }
 
         /*
@@ -248,6 +228,10 @@ namespace Project_CORA
             else if(ServoPositions.rotServo < rotServoMin) { ServoPositions.rotServo = rotServoMin; }
         }
         
+        /*
+         * Function called when the runMacro flag has been raised by userControls.
+         * The function takes a list of macro's from userControls and executes them one by one.
+         */
         private void runMacro()
         {
             List<int[]> macro;
@@ -284,6 +268,12 @@ namespace Project_CORA
             userControls.runMacro = false;
         }
 
+        /*
+         * Overload of runMacro. Called when a macro is called by the first
+         * runMacro functionn when a macro is called from within another macro.
+         * Function can be used recusively when the macro called from within a macro
+         * contains yet another macro. 
+         */
         private void runMacro(List<int[]> macro, float percentageStep)
         {
             percentageStep = percentageStep / macro.Count;

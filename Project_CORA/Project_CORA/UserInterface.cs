@@ -33,6 +33,7 @@ namespace Project_CORA
         Pen circlePen = new Pen(Color.Black, 2);
         SolidBrush redBrush = new SolidBrush(Color.Red);
         public MacroLib macroLib = new MacroLib();
+        public ModuleLib moduleLib = new ModuleLib();
 
         public UserInterface()
         {
@@ -44,16 +45,12 @@ namespace Project_CORA
             bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             InitializeComponent();
+            deserializeModules();
             positionPanelGraphics = this.robotPositionPanel.CreateGraphics();
             rotationValueGraphics = this.baseRotationPanel.CreateGraphics();
             timer1.Start();
             MainProcess.RunWorkerAsync();
             setMacroList();
-        }
-
-        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void UserInterface_FormClosing(object sender, FormClosingEventArgs e)
@@ -77,6 +74,26 @@ namespace Project_CORA
             catch (FileNotFoundException f)
             {
 
+            }
+        }
+
+        private void deserializeModules()
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(ModuleLib));
+                FileStream stream = new FileStream("ModuleLib.xml", FileMode.Open);
+                moduleLib = (ModuleLib)
+                    serializer.Deserialize(stream);
+                stream.Close();
+            }
+            catch (FileNotFoundException f)
+            {
+
+            }
+            for(int i = 0; i < moduleLib.nameList.Count; i++)
+            {
+                modList.Items.Add(moduleLib.nameList.ElementAt(i));
             }
         }
 
@@ -127,15 +144,7 @@ namespace Project_CORA
         private void modList_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.modSelected = modList.SelectedIndex;
-            String manual = "", tmp;
-            String path = "D:\\Documents\\TI\\Project CORA\\Project_CORA\\Manuals\\" + modList.SelectedItem + "_Manual.txt";
-            System.IO.StreamReader manFile = new System.IO.StreamReader(path);
-            while ((tmp = manFile.ReadLine()) != null)
-            {
-                manual += tmp +"\n";
-            }
-            manFile.Close();
-            manualDisplay.Text = manual;
+            manualDisplay.Text = moduleLib.descriptionList.ElementAt(modList.SelectedIndex);
         }
 
         //Adds the name of the given mod to the list of mudules.
