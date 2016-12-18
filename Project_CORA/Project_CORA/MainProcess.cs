@@ -30,8 +30,6 @@ namespace Project_CORA
         private int coupleServo = 7, coupleServoDefault = 512;
         private int frameModInterval = 10;
 
-        private String[] modules = new String[20];
-
         public MainProcess(UserInterface u)
         {
             ServoPositions.baseServo = baseServoDefault;
@@ -42,7 +40,6 @@ namespace Project_CORA
             ServoPositions.coupleServo = coupleServoDefault;
             this.userControls = u;
             runMainProcess();
-            //hurdurdur
         }
 
         /*
@@ -82,7 +79,7 @@ namespace Project_CORA
                 calculateServoPositions();
                 //Send Servoor Positionues to servo's
                 sendServoPositions();
-                //Thread.Sleep(1);
+                Thread.Sleep(1);
             }
         }
 
@@ -94,24 +91,24 @@ namespace Project_CORA
          */
         private void setRobotPosition(int[] destinations)
         {
-                while (!(ServoPositions.baseServo == destinations[0] && ServoPositions.midServo == destinations[1]
+            while (!(ServoPositions.baseServo == destinations[0] && ServoPositions.midServo == destinations[1]
                     && ServoPositions.endServo == destinations[2] && ServoPositions.moduleServo == destinations[3]))
-                {
-                    ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, destinations[0]);
-                    ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, destinations[1]);
-                    ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, destinations[2]);
-                    ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, destinations[3]);
-                    //ServoPositions.coupleServo = checkServoPosition(ServoPositions.coupleServo, destinations[6]);
-                    sendServoPositions();
-                    Thread.Sleep(1);
-                }
-                while (!(ServoPositions.rotServo == destinations[4] /*&& ServoPositions.frameServo == destinations[5]*/))
-                {
-                    ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
-                    //ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
-                    sendServoPositions();
-                    Thread.Sleep(1);
-                }
+            {
+                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, destinations[0]);
+                ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, destinations[1]);
+                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, destinations[2]);
+                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, destinations[3]);
+                //ServoPositions.coupleServo = checkServoPosition(ServoPositions.coupleServo, destinations[6]);
+                sendServoPositions();
+                Thread.Sleep(1);
+            }
+            while (!(ServoPositions.rotServo == destinations[4] /*&& ServoPositions.frameServo == destinations[5]*/))
+            {
+                ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
+                //ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
+                sendServoPositions();
+                Thread.Sleep(1);
+            }
         }
 
         /*

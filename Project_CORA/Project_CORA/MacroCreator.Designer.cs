@@ -71,6 +71,9 @@
             // 
             // baseServoValueBar
             // 
+            this.baseServoValueBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.baseServoValueBar.Location = new System.Drawing.Point(27, 32);
             this.baseServoValueBar.Maximum = 850;
             this.baseServoValueBar.Minimum = 300;
@@ -83,6 +86,9 @@
             // 
             // midServoValueBar
             // 
+            this.midServoValueBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.midServoValueBar.Location = new System.Drawing.Point(27, 122);
             this.midServoValueBar.Maximum = 810;
             this.midServoValueBar.Name = "midServoValueBar";
@@ -94,6 +100,9 @@
             // 
             // endServoValueBar
             // 
+            this.endServoValueBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.endServoValueBar.Location = new System.Drawing.Point(27, 214);
             this.endServoValueBar.Maximum = 1023;
             this.endServoValueBar.Minimum = 512;
@@ -105,6 +114,9 @@
             // 
             // moduleServoValueBar
             // 
+            this.moduleServoValueBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.moduleServoValueBar.Location = new System.Drawing.Point(27, 308);
             this.moduleServoValueBar.Maximum = 1023;
             this.moduleServoValueBar.Name = "moduleServoValueBar";
@@ -122,6 +134,8 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(38, 10);
             this.label1.Name = "label1";
@@ -131,6 +145,8 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(38, 101);
             this.label2.Name = "label2";
@@ -140,6 +156,8 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(38, 193);
             this.label3.Name = "label3";
@@ -176,6 +194,8 @@
             // 
             // baseServoValueBox
             // 
+            this.baseServoValueBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.baseServoValueBox.Location = new System.Drawing.Point(41, 71);
             this.baseServoValueBox.Name = "baseServoValueBox";
             this.baseServoValueBox.Size = new System.Drawing.Size(100, 22);
@@ -184,6 +204,8 @@
             // 
             // midServoValueBox
             // 
+            this.midServoValueBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.midServoValueBox.Location = new System.Drawing.Point(41, 163);
             this.midServoValueBox.Name = "midServoValueBox";
             this.midServoValueBox.Size = new System.Drawing.Size(100, 22);
@@ -192,6 +214,8 @@
             // 
             // endServoValueBox
             // 
+            this.endServoValueBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.endServoValueBox.Location = new System.Drawing.Point(41, 255);
             this.endServoValueBox.Name = "endServoValueBox";
             this.endServoValueBox.Size = new System.Drawing.Size(100, 22);
@@ -200,6 +224,8 @@
             // 
             // moduleServoValueBox
             // 
+            this.moduleServoValueBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.moduleServoValueBox.Location = new System.Drawing.Point(41, 352);
             this.moduleServoValueBox.Name = "moduleServoValueBox";
             this.moduleServoValueBox.Size = new System.Drawing.Size(100, 22);
@@ -208,6 +234,9 @@
             // 
             // rotationServoValueBar
             // 
+            this.rotationServoValueBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rotationServoValueBar.Location = new System.Drawing.Point(27, 405);
             this.rotationServoValueBar.Maximum = 1023;
             this.rotationServoValueBar.Name = "rotationServoValueBar";
@@ -254,7 +283,7 @@
             // 
             this.previewBox.Location = new System.Drawing.Point(345, 562);
             this.previewBox.Name = "previewBox";
-            this.previewBox.Size = new System.Drawing.Size(496, 245);
+            this.previewBox.Size = new System.Drawing.Size(617, 245);
             this.previewBox.TabIndex = 22;
             this.previewBox.Text = "";
             // 
@@ -292,7 +321,7 @@
             this.modList.ItemHeight = 16;
             this.modList.Location = new System.Drawing.Point(345, 560);
             this.modList.Name = "modList";
-            this.modList.Size = new System.Drawing.Size(496, 244);
+            this.modList.Size = new System.Drawing.Size(617, 244);
             this.modList.TabIndex = 26;
             this.modList.SelectedIndexChanged += new System.EventHandler(this.modList_SelectedIndexChanged);
             // 
@@ -302,7 +331,7 @@
             this.macroList.ItemHeight = 16;
             this.macroList.Location = new System.Drawing.Point(345, 560);
             this.macroList.Name = "macroList";
-            this.macroList.Size = new System.Drawing.Size(496, 244);
+            this.macroList.Size = new System.Drawing.Size(617, 244);
             this.macroList.TabIndex = 27;
             this.macroList.SelectedIndexChanged += new System.EventHandler(this.macroList_SelectedIndexChanged);
             // 
@@ -320,7 +349,7 @@
             // 
             this.robotPositionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.robotPositionPanel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.robotPositionPanel.Location = new System.Drawing.Point(864, 560);
+            this.robotPositionPanel.Location = new System.Drawing.Point(993, 560);
             this.robotPositionPanel.Name = "robotPositionPanel";
             this.robotPositionPanel.Size = new System.Drawing.Size(200, 235);
             this.robotPositionPanel.TabIndex = 29;
@@ -329,7 +358,7 @@
             // 
             this.baseRotationPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.baseRotationPanel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.baseRotationPanel.Location = new System.Drawing.Point(1083, 560);
+            this.baseRotationPanel.Location = new System.Drawing.Point(1214, 560);
             this.baseRotationPanel.Name = "baseRotationPanel";
             this.baseRotationPanel.Size = new System.Drawing.Size(200, 182);
             this.baseRotationPanel.TabIndex = 30;
@@ -337,7 +366,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(861, 540);
+            this.label9.Location = new System.Drawing.Point(990, 540);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(111, 17);
             this.label9.TabIndex = 31;
