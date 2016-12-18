@@ -15,6 +15,14 @@ namespace Project_CORA
         MacroLib macroLib;
         List<int[]> newMacro = new List<int[]>();
         int counter = 1;
+        Graphics positionPanelGraphics;
+        Graphics rotationValueGraphics;
+        Pen blackPen = new Pen(Color.Black, 7);
+        Pen bluePen = new Pen(Color.Blue, 7);
+        Pen redPen = new Pen(Color.Red, 7);
+        Pen circlePen = new Pen(Color.Black, 2);
+        SolidBrush redBrush = new SolidBrush(Color.Red);
+        public ModuleLib moduleLib = new ModuleLib();
 
         public MacroCreator(MacroLib m, ListBox l, ListBox b)
         {
@@ -38,6 +46,68 @@ namespace Project_CORA
                 b.SelectedIndex = i;
                 this.macroList.Items.Add(b.SelectedItem);
             }
+            positionPanelGraphics = this.robotPositionPanel.CreateGraphics();
+            rotationValueGraphics = this.baseRotationPanel.CreateGraphics();
+            blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
+            timer1.Start();
+        }
+
+        private void updateRobotPositon(int baseValue, int midValue, int endValue)
+        {
+            float baselength = positionPanelGraphics.DpiX / 2, midlength = positionPanelGraphics.DpiX / 2, endlength = positionPanelGraphics.DpiX / 2;
+            double toRadians = Math.PI / 180;
+            double baseAngle = ((850 - baseValue) * 0.352) * toRadians;
+            double midAngle = ((90 + ((810 - midValue) * 0.352)) * toRadians) - baseAngle;
+            double endAngle = ((90 + ((512 - endValue) * 0.352)) * toRadians) - midAngle;
+
+            double baseX = Math.Sin(baseAngle) * baselength + 10, baseY = Math.Cos(baseAngle) * baselength;
+            double midX = baseX + Math.Sin(midAngle) * midlength, midY = baseY - Math.Cos(midAngle) * midlength;
+            double endX = midX - Math.Sin(endAngle) * endlength, endY = midY - Math.Cos(endAngle) * endlength;
+            float yLength = positionPanelGraphics.DpiY + 40;
+
+            positionPanelGraphics.Clear(Settings.colorPositionPanes);
+            positionPanelGraphics.DrawLine(blackPen, 10, yLength, (float)baseX, yLength - (float)baseY);
+            positionPanelGraphics.DrawLine(redPen, (float)baseX, yLength - (float)baseY, (float)midX, yLength - (float)midY);
+            positionPanelGraphics.DrawLine(bluePen, (float)midX, yLength - (float)midY, (float)endX, yLength - (float)endY);
+            positionPanelGraphics.DrawLine(circlePen, 0, yLength, 30, yLength);
+            positionPanelGraphics.DrawLine(circlePen, 30, yLength, 30, yLength + 60);
+        }
+
+        private void updateRotationPosition(int rotValue)
+        {
+            double a = 0, b = 0;
+            rotationValueGraphics.Clear(Settings.colorPositionPanes);
+            Rectangle rectangle = new Rectangle(5, 5, 140, 140);
+            Rectangle pointRectangle;
+            rotationValueGraphics.DrawEllipse(circlePen, rectangle);
+
+            if (rotValue >= 0 && rotValue < 260)
+            {
+                a = 70 + (rotValue * 0.27);
+                b = 70 + Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
+            }
+            else if (rotValue >= 260 && rotValue < 513)
+            {
+                rotValue = 512 - rotValue;
+                a = 70 + (rotValue * 0.27);
+                b = 70 - Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
+            }
+            else if (rotValue >= 513 && rotValue < 768)
+            {
+                rotValue = rotValue - 512;
+                a = 70 - (rotValue * 0.27);
+                b = 70 - Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
+            }
+            else if (rotValue >= 768 && rotValue < 1024)
+            {
+                rotValue = 1023 - rotValue;
+                a = 70 - (rotValue * 0.27);
+                b = 70 + Math.Sqrt(Math.Pow(70, 2) - Math.Pow(rotValue * 0.27, 2));
+            }
+            pointRectangle = new Rectangle((int)a, (int)b, 10, 10);
+            rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
         }
 
         #region all the code handling the value changes
@@ -187,6 +257,12 @@ namespace Project_CORA
                 this.macroList.Visible = true;
                 this.Refresh();
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            updateRobotPositon(baseServoValueBar.Value, midServoValueBar.Value, endServoValueBar.Value);
+            updateRotationPosition(rotationServoValueBar.Value);
         }
     }
 }

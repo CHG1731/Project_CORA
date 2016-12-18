@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MacroCreator));
             this.baseServoValueBar = new System.Windows.Forms.TrackBar();
             this.midServoValueBar = new System.Windows.Forms.TrackBar();
@@ -56,6 +57,10 @@
             this.modList = new System.Windows.Forms.ListBox();
             this.macroList = new System.Windows.Forms.ListBox();
             this.runMacroButton = new System.Windows.Forms.Button();
+            this.robotPositionPanel = new System.Windows.Forms.Panel();
+            this.baseRotationPanel = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.baseServoValueBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.midServoValueBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endServoValueBar)).BeginInit();
@@ -213,9 +218,9 @@
             // 
             // addToMacroButton
             // 
-            this.addToMacroButton.Location = new System.Drawing.Point(41, 674);
+            this.addToMacroButton.Location = new System.Drawing.Point(41, 617);
             this.addToMacroButton.Name = "addToMacroButton";
-            this.addToMacroButton.Size = new System.Drawing.Size(201, 51);
+            this.addToMacroButton.Size = new System.Drawing.Size(134, 51);
             this.addToMacroButton.TabIndex = 18;
             this.addToMacroButton.Text = "Add and new";
             this.addToMacroButton.UseVisualStyleBackColor = true;
@@ -223,9 +228,9 @@
             // 
             // finalizeMacro
             // 
-            this.finalizeMacro.Location = new System.Drawing.Point(312, 674);
+            this.finalizeMacro.Location = new System.Drawing.Point(188, 617);
             this.finalizeMacro.Name = "finalizeMacro";
-            this.finalizeMacro.Size = new System.Drawing.Size(200, 51);
+            this.finalizeMacro.Size = new System.Drawing.Size(134, 51);
             this.finalizeMacro.TabIndex = 19;
             this.finalizeMacro.Text = "Finalize and store";
             this.finalizeMacro.UseVisualStyleBackColor = true;
@@ -233,9 +238,9 @@
             // 
             // macroNameBox
             // 
-            this.macroNameBox.Location = new System.Drawing.Point(41, 563);
+            this.macroNameBox.Location = new System.Drawing.Point(41, 560);
             this.macroNameBox.Name = "macroNameBox";
-            this.macroNameBox.Size = new System.Drawing.Size(471, 22);
+            this.macroNameBox.Size = new System.Drawing.Size(281, 22);
             this.macroNameBox.TabIndex = 20;
             // 
             // rotationServoValueBox
@@ -247,9 +252,9 @@
             // 
             // previewBox
             // 
-            this.previewBox.Location = new System.Drawing.Point(774, 563);
+            this.previewBox.Location = new System.Drawing.Point(345, 562);
             this.previewBox.Name = "previewBox";
-            this.previewBox.Size = new System.Drawing.Size(640, 245);
+            this.previewBox.Size = new System.Drawing.Size(496, 245);
             this.previewBox.TabIndex = 22;
             this.previewBox.Text = "";
             // 
@@ -265,7 +270,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(771, 540);
+            this.label8.Location = new System.Drawing.Point(342, 540);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(128, 17);
             this.label8.TabIndex = 24;
@@ -273,9 +278,9 @@
             // 
             // switchModuleButton
             // 
-            this.switchModuleButton.Location = new System.Drawing.Point(41, 753);
+            this.switchModuleButton.Location = new System.Drawing.Point(41, 720);
             this.switchModuleButton.Name = "switchModuleButton";
-            this.switchModuleButton.Size = new System.Drawing.Size(201, 23);
+            this.switchModuleButton.Size = new System.Drawing.Size(134, 23);
             this.switchModuleButton.TabIndex = 25;
             this.switchModuleButton.Text = "Switch Module";
             this.switchModuleButton.UseVisualStyleBackColor = true;
@@ -285,9 +290,9 @@
             // 
             this.modList.FormattingEnabled = true;
             this.modList.ItemHeight = 16;
-            this.modList.Location = new System.Drawing.Point(774, 564);
+            this.modList.Location = new System.Drawing.Point(345, 560);
             this.modList.Name = "modList";
-            this.modList.Size = new System.Drawing.Size(640, 244);
+            this.modList.Size = new System.Drawing.Size(496, 244);
             this.modList.TabIndex = 26;
             this.modList.SelectedIndexChanged += new System.EventHandler(this.modList_SelectedIndexChanged);
             // 
@@ -295,28 +300,62 @@
             // 
             this.macroList.FormattingEnabled = true;
             this.macroList.ItemHeight = 16;
-            this.macroList.Location = new System.Drawing.Point(774, 564);
+            this.macroList.Location = new System.Drawing.Point(345, 560);
             this.macroList.Name = "macroList";
-            this.macroList.Size = new System.Drawing.Size(640, 244);
+            this.macroList.Size = new System.Drawing.Size(496, 244);
             this.macroList.TabIndex = 27;
             this.macroList.SelectedIndexChanged += new System.EventHandler(this.macroList_SelectedIndexChanged);
             // 
             // runMacroButton
             // 
-            this.runMacroButton.Location = new System.Drawing.Point(312, 753);
+            this.runMacroButton.Location = new System.Drawing.Point(188, 720);
             this.runMacroButton.Name = "runMacroButton";
-            this.runMacroButton.Size = new System.Drawing.Size(200, 23);
+            this.runMacroButton.Size = new System.Drawing.Size(134, 23);
             this.runMacroButton.TabIndex = 28;
             this.runMacroButton.Text = "Run Macro";
             this.runMacroButton.UseVisualStyleBackColor = true;
             this.runMacroButton.Click += new System.EventHandler(this.runMacroButton_Click);
+            // 
+            // robotPositionPanel
+            // 
+            this.robotPositionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.robotPositionPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.robotPositionPanel.Location = new System.Drawing.Point(864, 560);
+            this.robotPositionPanel.Name = "robotPositionPanel";
+            this.robotPositionPanel.Size = new System.Drawing.Size(200, 235);
+            this.robotPositionPanel.TabIndex = 29;
+            // 
+            // baseRotationPanel
+            // 
+            this.baseRotationPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.baseRotationPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.baseRotationPanel.Location = new System.Drawing.Point(1083, 560);
+            this.baseRotationPanel.Name = "baseRotationPanel";
+            this.baseRotationPanel.Size = new System.Drawing.Size(200, 182);
+            this.baseRotationPanel.TabIndex = 30;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(861, 540);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(111, 17);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Position Preview";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // MacroCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1462, 827);
+            this.ClientSize = new System.Drawing.Size(1462, 816);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.baseRotationPanel);
+            this.Controls.Add(this.robotPositionPanel);
             this.Controls.Add(this.runMacroButton);
             this.Controls.Add(this.macroList);
             this.Controls.Add(this.modList);
@@ -387,5 +426,9 @@
         private System.Windows.Forms.ListBox modList;
         private System.Windows.Forms.ListBox macroList;
         private System.Windows.Forms.Button runMacroButton;
+        private System.Windows.Forms.Panel robotPositionPanel;
+        private System.Windows.Forms.Panel baseRotationPanel;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Timer timer1;
     }
 }
