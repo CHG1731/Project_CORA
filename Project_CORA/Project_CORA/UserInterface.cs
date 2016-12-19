@@ -20,7 +20,7 @@ namespace Project_CORA
         public bool RobotConnected = false;
         public bool runMacro;
         public bool stillNotDone = false;
-        public List<int[]> macroToRun;
+        public List<List<int[]>> macrosToRun = new List<List<int[]>>();
 
         public int modSelected = 0;
         public int modEquiped = 0;
@@ -32,7 +32,8 @@ namespace Project_CORA
         Pen redPen = new Pen(Color.Red, 7);
         Pen circlePen = new Pen(Color.Black, 2);
         SolidBrush redBrush = new SolidBrush(Color.Red);
-        MacroLib macroLib = new MacroLib();
+        public MacroLib macroLib = new MacroLib();
+        public ModuleLib moduleLib = new ModuleLib();
 
         public UserInterface()
         {
@@ -44,26 +45,12 @@ namespace Project_CORA
             bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             InitializeComponent();
+            deserializeModules();
             positionPanelGraphics = this.robotPositionPanel.CreateGraphics();
             rotationValueGraphics = this.baseRotationPanel.CreateGraphics();
             timer1.Start();
             MainProcess.RunWorkerAsync();
-            //Testing purpuses
-            /*
-            List<int[]> testList = new List<int[]>();
-            testList.Add(new int[] { 512, 512, 512, 512, 512, 512, 512 });
-            testList.Add(new int[] { 850, 850, 850, 850, 850, 850, 850 });
-            testList.Add(new int[] { 512, 512, 512, 512, 512, 512, 512 });
-            macroLib.macroStorage.Add(testList);
-            int dinges = macroLib.macroStorage.Count;
-            macroLib.macroNames[macroLib.macroStorage.Count - 1] = "test macro";
-            */
             setMacroList();
-        }
-
-        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void UserInterface_FormClosing(object sender, FormClosingEventArgs e)
@@ -84,10 +71,24 @@ namespace Project_CORA
                     serializer.Deserialize(stream);
                 stream.Close();
             }
-            catch (FileNotFoundException f)
-            {
+            catch (FileNotFoundException f){}
+        }
 
+        private void deserializeModules()
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(ModuleLib));
+                FileStream stream = new FileStream("ModuleLib.xml", FileMode.Open);
+                moduleLib = (ModuleLib)
+                    serializer.Deserialize(stream);
+                stream.Close();
+                for (int i = 0; i < moduleLib.nameList.Count; i++)
+                {
+                    modList.Items.Add(moduleLib.nameList.ElementAt(i));
+                }
             }
+            catch (FileNotFoundException f){}
         }
 
         private void Hoofdscherm_Load(object sender, EventArgs e)
@@ -127,7 +128,6 @@ namespace Project_CORA
          */ 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //TODO clean up this code.
             updateGUI();
         }
 
@@ -138,15 +138,7 @@ namespace Project_CORA
         private void modList_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.modSelected = modList.SelectedIndex;
-            String manual = "", tmp;
-            String path = "D:\\Documents\\TI\\Project CORA\\Project_CORA\\Manuals\\" + modList.SelectedItem + "_Manual.txt";
-            System.IO.StreamReader manFile = new System.IO.StreamReader(path);
-            while ((tmp = manFile.ReadLine()) != null)
-            {
-                manual += tmp +"\n";
-            }
-            manFile.Close();
-            manualDisplay.Text = manual;
+            manualDisplay.Text = moduleLib.descriptionList.ElementAt(modList.SelectedIndex);
         }
 
         //Adds the name of the given mod to the list of mudules.
@@ -187,7 +179,12 @@ namespace Project_CORA
         {
             updateRobotPositon(ServoPositions.baseServo, ServoPositions.midServo, ServoPositions.endServo);
             updateRotationPosition(ServoPositions.rotServo);
+            this.macroProgressBar.Value = (int)Settings.percentage;
             updateSliderValue();
+            if(macroLib.macroStorage.Count > this.macroList.Items.Count)
+            {
+                macroList.Items.Add(macroLib.macroNames[macroLib.macroStorage.Count - 1]);
+            }
         }
 
         #region methods called by updateGUI
@@ -272,34 +269,20 @@ namespace Project_CORA
             {
                 this.macroQueue.Items.Add(this.macroList.SelectedItem);
             }
-            catch(ArgumentNullException bleh)
-            {
-
-            }
+            catch(ArgumentNullException bleh) {}
         }
 
         private void runQueueButton_Click(object sender, EventArgs e)
         {
             int listIndex;
-            this.runMacro = true;
-            for (int i = 0; i < macroQueue.Items.Count; i++)
+            if (macrosToRun.Count > 0) { macrosToRun.Clear(); }
+            for(int i = 0; i < macroQueue.Items.Count; i++)
             {
                 macroQueue.SelectedIndex = i;
                 listIndex = macroList.FindStringExact((String)macroQueue.SelectedItem);
-                this.macroToRun = macroLib.macroStorage.ElementAt<List<int[]>>(listIndex);
-                stillNotDone = true;
-                while (stillNotDone)
-                {
-                    this.updateGUI();
-                    Thread.Sleep(1);
-                }
+                macrosToRun.Add(macroLib.macroStorage.ElementAt(listIndex));
             }
-            this.runMacro = false;
-        }
-
-        public void setMacroProgressBar(int percentage)
-        {
-            this.macroProgressBar.Increment(percentage);
+            this.runMacro = true;
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -383,7 +366,8 @@ namespace Project_CORA
 
         private void createMacroButton_Click(object sender, EventArgs e)
         {
-
+            MacroCreator macroCreator = new MacroCreator(macroLib, modList, macroList);
+            macroCreator.Show();
         }
     }
 }

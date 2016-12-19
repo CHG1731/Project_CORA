@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_CORA", "Project_CORA\Project_CORA.csproj", "{C95FF218-3EAE-4E28-B036-7A6A6BE2647D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module Configuration Tool", "Module Configuration Tool\Module Configuration Tool.csproj", "{19DA8AFD-F382-4FA4-90C3-550B2049A55A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C95FF218-3EAE-4E28-B036-7A6A6BE2647D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C95FF218-3EAE-4E28-B036-7A6A6BE2647D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C95FF218-3EAE-4E28-B036-7A6A6BE2647D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19DA8AFD-F382-4FA4-90C3-550B2049A55A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19DA8AFD-F382-4FA4-90C3-550B2049A55A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19DA8AFD-F382-4FA4-90C3-550B2049A55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19DA8AFD-F382-4FA4-90C3-550B2049A55A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

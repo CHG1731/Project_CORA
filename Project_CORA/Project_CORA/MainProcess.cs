@@ -10,7 +10,6 @@ namespace Project_CORA
     class MainProcess
     {
         UserInterface userControls;
-        MacroLib macroLib;
 
         private int modEquiped = 0;
         Dynamixel dynamixel;
@@ -28,10 +27,8 @@ namespace Project_CORA
         private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 20;
         private int frameServoMin = 0, frameServoMax = 0 /*TODO Add actual value*/, frameServoDefault = 0; 
         private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
-        private int coupleServoMin = 0, coupleServoMax = 1023, coupleServo = 7, coupleServoDefault = 512;
+        private int coupleServo = 7, coupleServoDefault = 512;
         private int frameModInterval = 10;
-
-        private String[] modules = new String[20];
 
         public MainProcess(UserInterface u)
         {
@@ -42,7 +39,6 @@ namespace Project_CORA
             ServoPositions.moduleServo = moduleServoDefault;
             ServoPositions.coupleServo = coupleServoDefault;
             this.userControls = u;
-            registerMods();
             runMainProcess();
         }
 
@@ -77,35 +73,14 @@ namespace Project_CORA
                 }
                 if (userControls.runMacro)
                 {
-                    runMacro(userControls.macroToRun);
+                    runMacro();
                 }
                 //Read joystick and update Servo Positionues
                 calculateServoPositions();
                 //Send Servoor Positionues to servo's
                 sendServoPositions();
-                //Thread.Sleep(1);
+                Thread.Sleep(1);
             }
-        }
-
-        /*
-         * Function reads the file that specifies which modules are stored
-         * in the rack and at what index, and stores the information
-         * in the modules array.
-         */
-        private void registerMods()
-        {
-            //TODO Put module information in XML-format.
-            /*
-            String modName;
-            int index = 0;
-            System.IO.StreamReader modFile = new System.IO.StreamReader("D:\\Documents\\TI\\Project CORA\\Project_CORA\\modList.txt");
-            while ((modName = modFile.ReadLine()) != null)
-            {
-                modules[index++] = modName;
-                userControls.addMod(modName);
-            }
-            modFile.Close();
-            */
         }
 
         /*
@@ -116,24 +91,24 @@ namespace Project_CORA
          */
         private void setRobotPosition(int[] destinations)
         {
-                while (!(ServoPositions.baseServo == destinations[0] && ServoPositions.midServo == destinations[1]
+            while (!(ServoPositions.baseServo == destinations[0] && ServoPositions.midServo == destinations[1]
                     && ServoPositions.endServo == destinations[2] && ServoPositions.moduleServo == destinations[3]))
-                {
-                    ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, destinations[0]);
-                    ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, destinations[1]);
-                    ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, destinations[2]);
-                    ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, destinations[3]);
-                    //ServoPositions.coupleServo = checkServoPosition(ServoPositions.coupleServo, destinations[6]);
-                    sendServoPositions();
-                    Thread.Sleep(1);
-                }
-                while (!(ServoPositions.rotServo == destinations[4] /*&& ServoPositions.frameServo == destinations[5]*/))
-                {
-                    ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
-                    //ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
-                    sendServoPositions();
-                    Thread.Sleep(1);
-                }
+            {
+                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, destinations[0]);
+                ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, destinations[1]);
+                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, destinations[2]);
+                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, destinations[3]);
+                //ServoPositions.coupleServo = checkServoPosition(ServoPositions.coupleServo, destinations[6]);
+                sendServoPositions();
+                Thread.Sleep(1);
+            }
+            while (!(ServoPositions.rotServo == destinations[4] /*&& ServoPositions.frameServo == destinations[5]*/))
+            {
+                ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
+                //ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
+                sendServoPositions();
+                Thread.Sleep(1);
+            }
         }
 
         /*
@@ -248,16 +223,75 @@ namespace Project_CORA
             if(ServoPositions.rotServo > rotServoMax) { ServoPositions.rotServo = rotServoMax; }
             else if(ServoPositions.rotServo < rotServoMin) { ServoPositions.rotServo = rotServoMin; }
         }
-
-        private void runMacro(List<int[]> macroCommands)
+        
+        /*
+         * Function called when the runMacro flag has been raised by userControls.
+         * The function takes a list of macro's from userControls and executes them one by one.
+         */
+        private void runMacro()
         {
-            for(int i = 0; i < userControls.macroToRun.Count; i++)
+            List<int[]> macro;
+            float percentageStep = 0;
+            Settings.percentage = 0;
+            for(int i = 0; i < userControls.macrosToRun.Count; i++)
             {
-                setRobotPosition(userControls.macroToRun.ElementAt<int[]>(i));   
-            } 
-            userControls.stillNotDone = false;
+                percentageStep += userControls.macrosToRun.ElementAt(i).Count;
+            }
+            percentageStep = 100 / percentageStep;
+            for(int i = 0; i < userControls.macrosToRun.Count; i++)
+            {
+                macro = userControls.macrosToRun.ElementAt(i);
+                for(int macroIndex = 0; macroIndex < macro.Count; macroIndex++)
+                {
+                    if (macro.ElementAt(macroIndex)[0] < 300)
+                    {
+                        userControls.modEquiped = macro.ElementAt(macroIndex)[0];
+                        changeMod();
+                    }
+                    else if(macro.ElementAt(macroIndex)[2] < 300)
+                    {
+                        runMacro(userControls.macroLib.macroStorage.ElementAt(macro.ElementAt(macroIndex)[2]), percentageStep);
+                    }
+                    else
+                    {
+                        setRobotPosition(macro.ElementAt(macroIndex));
+                        Settings.percentage += percentageStep;
+                    }
+                }
+            }
+            Settings.percentage = 100;
+            userControls.runMacro = false;
         }
 
+        /*
+         * Overload of runMacro. Called when a macro is called by the first
+         * runMacro functionn when a macro is called from within another macro.
+         * Function can be used recusively when the macro called from within a macro
+         * contains yet another macro. 
+         */
+        private void runMacro(List<int[]> macro, float percentageStep)
+        {
+            percentageStep = percentageStep / macro.Count;
+            for(int i = 0; i < macro.Count; i++)
+            {
+                if (macro.ElementAt(i)[0] < 300)
+                {
+                    userControls.modEquiped = macro.ElementAt(i)[0];
+                    this.modEquiped = macro.ElementAt(i)[0];
+                    changeMod();
+                }
+                else if (macro.ElementAt(i)[2] < 300)
+                {
+                    runMacro(userControls.macroLib.macroStorage.ElementAt(macro.ElementAt(i)[2]), percentageStep);
+                }
+                else
+                {
+                    setRobotPosition(macro.ElementAt(i));
+                }
+                Settings.percentage += percentageStep;
+            }
+        }
+        
         /*
          * Function that writes all the values in ServoPositions to the servo's
          * in order to move them.

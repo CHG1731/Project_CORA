@@ -39,7 +39,6 @@
             this.connectRobotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorSchemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calmMetallicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,7 +113,6 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startToolStripMenuItem1,
             this.connectionToolStripMenuItem,
-            this.quitToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -166,13 +164,6 @@
             this.connectToolStripMenuItem.Text = "Connect";
             this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
             // 
-            // quitToolStripMenuItem
-            // 
-            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
-            this.quitToolStripMenuItem.Text = "Quit";
-            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
-            // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -190,7 +181,7 @@
             this.superFancyToolStripMenuItem,
             this.kinkyToolStripMenuItem});
             this.colorSchemeToolStripMenuItem.Name = "colorSchemeToolStripMenuItem";
-            this.colorSchemeToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
+            this.colorSchemeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.colorSchemeToolStripMenuItem.Text = "Color Scheme";
             // 
             // calmMetallicToolStripMenuItem
@@ -370,7 +361,7 @@
             // runQueueButton
             // 
             this.runQueueButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.runQueueButton.Location = new System.Drawing.Point(575, 614);
+            this.runQueueButton.Location = new System.Drawing.Point(575, 627);
             this.runQueueButton.Name = "runQueueButton";
             this.runQueueButton.Size = new System.Drawing.Size(487, 23);
             this.runQueueButton.TabIndex = 11;
@@ -395,7 +386,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.macroDescription.Location = new System.Drawing.Point(575, 31);
             this.macroDescription.Name = "macroDescription";
-            this.macroDescription.Size = new System.Drawing.Size(521, 560);
+            this.macroDescription.Size = new System.Drawing.Size(521, 580);
             this.macroDescription.TabIndex = 9;
             this.macroDescription.Text = "";
             // 
@@ -406,7 +397,7 @@
             this.createMacroButton.Name = "createMacroButton";
             this.createMacroButton.Size = new System.Drawing.Size(227, 23);
             this.createMacroButton.TabIndex = 8;
-            this.createMacroButton.Text = "Creat Macro";
+            this.createMacroButton.Text = "Create Macro";
             this.createMacroButton.UseVisualStyleBackColor = true;
             this.createMacroButton.Click += new System.EventHandler(this.createMacroButton_Click);
             // 
@@ -660,7 +651,6 @@
         private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectRobotToolStripMenuItem;
         private System.Windows.Forms.Label statusLabel;
-        private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.ComponentModel.BackgroundWorker PollJoyStick;
         private System.Windows.Forms.Timer timer1;
