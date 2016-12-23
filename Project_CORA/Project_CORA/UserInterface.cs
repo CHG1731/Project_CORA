@@ -39,7 +39,7 @@ namespace Project_CORA
         {
             deserializeMacros();
             this.FormClosing += UserInterface_FormClosing;
-            Settings.speedSetting = 10;
+            Settings.speedSetting = 20;
             Settings.colorPositionPanes = Color.LightGray;
             blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
@@ -257,7 +257,7 @@ namespace Project_CORA
         {
             if (JoyStickState.connected)
             {
-                this.axisPositionBar.Value = ServoPositions.frameServo * (100/1000);
+                this.axisPositionBar.Value = ServoPositions.frameServo * (100/6000);
             }
         }
         #endregion

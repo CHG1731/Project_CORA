@@ -51,7 +51,7 @@ namespace Project_CORA
             blackPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             bluePen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
             redPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
-            timer1.Start();
+            timer2.Start();
         }
 
         private void updateRobotPositon(int baseValue, int midValue, int endValue)
@@ -259,7 +259,7 @@ namespace Project_CORA
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer2_Tick(object sender, EventArgs e)
         {
             updateRobotPositon(baseServoValueBar.Value, midServoValueBar.Value, endServoValueBar.Value);
             updateRotationPosition(rotationServoValueBar.Value);

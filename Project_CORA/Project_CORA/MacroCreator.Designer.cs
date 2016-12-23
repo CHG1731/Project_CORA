@@ -60,7 +60,7 @@
             this.robotPositionPanel = new System.Windows.Forms.Panel();
             this.baseRotationPanel = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.baseServoValueBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.midServoValueBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endServoValueBar)).BeginInit();
@@ -374,7 +374,7 @@
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // MacroCreator
             // 
@@ -458,6 +458,6 @@
         private System.Windows.Forms.Panel robotPositionPanel;
         private System.Windows.Forms.Panel baseRotationPanel;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
     }
 }

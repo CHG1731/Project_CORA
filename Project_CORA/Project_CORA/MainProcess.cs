@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO.Ports;
 
 namespace Project_CORA
 {
@@ -14,18 +15,18 @@ namespace Project_CORA
         private int modEquiped = 0;
         Dynamixel dynamixel;
         SerialPort2Dynamixel serialPort;
-
+        SerialPort arduinoPort = new SerialPort("COM9");
         private bool emergencyStopInEffect = false;
         private Boolean emergencyReset = false;
 
         private int baseCoupleVal = 650, endCoupleVal = 712, moduleCoupleVal = 850;
         //Declaration of Servoor Positionues.
         //TODO properly set contraints.
-        public int baseServoMin = 300, baseServoMax = 850, baseServo = 11, baseServoDefault = 850;
+        public int baseServoMin = 300, baseServoMax = 850, baseServo = 15, baseServoDefault = 850;
         private int midServoMin = 0, midServoMax = 810, midServo = 9, midServoDefault = 810;
         private int endServoMin = 512, endServoMax = 1023, endServo = 4, endServoDefault = 512;
         private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 20;
-        private int frameServoMin = 0, frameServoMax = 0 /*TODO Add actual value*/, frameServoDefault = 0; 
+        private int frameServoMin = 0, frameServoMax = 6000, frameServoDefault = 0; 
         private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
         private int coupleServo = 7, coupleServoDefault = 512;
         private int frameModInterval = 10;
@@ -38,6 +39,8 @@ namespace Project_CORA
             ServoPositions.rotServo = rotServoDefault;
             ServoPositions.moduleServo = moduleServoDefault;
             ServoPositions.coupleServo = coupleServoDefault;
+            arduinoPort.BaudRate = 115200;
+            //arduinoPort.Open();
             this.userControls = u;
             runMainProcess();
         }
@@ -49,7 +52,7 @@ namespace Project_CORA
         {
             serialPort = new SerialPort2Dynamixel();
             dynamixel = new Dynamixel();
-            if (serialPort.open("COM7") == false)
+            if (serialPort.open("COM6") == false)
             {
                 dynamixel.sendTossModeCommand(serialPort);
             }
@@ -79,7 +82,7 @@ namespace Project_CORA
                 calculateServoPositions();
                 //Send Servoor Positionues to servo's
                 sendServoPositions();
-                Thread.Sleep(1);
+                //Thread.Sleep(1);
             }
         }
 
@@ -102,10 +105,10 @@ namespace Project_CORA
                 sendServoPositions();
                 Thread.Sleep(1);
             }
-            while (!(ServoPositions.rotServo == destinations[4] /*&& ServoPositions.frameServo == destinations[5]*/))
+            //arduinoPort.WriteLine(String.Concat("set", destinations[5], "#"));
+            while (!(ServoPositions.rotServo == destinations[4]))
             {
                 ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
-                //ServoPositions.frameServo = checkServoPosition(ServoPositions.frameServo, destinations[5]); //Might not work for frameservo.
                 sendServoPositions();
                 Thread.Sleep(1);
             }
@@ -205,6 +208,7 @@ namespace Project_CORA
             ServoPositions.rotServo -= (JoyStickState.Zrotation / speedSetting);
             ServoPositions.moduleServo += (JoyStickState.Yaxis / speedSetting);
             ServoPositions.coupleServo += (JoyStickState.Xaxis / speedSetting);
+            ServoPositions.frameServo += (int)(JoyStickState.slider * 0.30);
             switch (JoyStickState.pov)
             {
                 case 1:
@@ -222,6 +226,8 @@ namespace Project_CORA
             else if(ServoPositions.endServo < endServoMin) { ServoPositions.endServo = endServoMin; }
             if(ServoPositions.rotServo > rotServoMax) { ServoPositions.rotServo = rotServoMax; }
             else if(ServoPositions.rotServo < rotServoMin) { ServoPositions.rotServo = rotServoMin; }
+            if (ServoPositions.frameServo > frameServoMax) { ServoPositions.frameServo = frameServoMax; }
+            else if (ServoPositions.frameServo < frameServoMin) { ServoPositions.frameServo = frameServoMin; }
         }
         
         /*
@@ -298,15 +304,16 @@ namespace Project_CORA
          */ 
         private void sendServoPositions()
         {
-            if (!emergencyReset)
-            {
+            //if (!emergencyReset) //possible cause of rebuild problem?
+            //{
                 dynamixel.setPosition(serialPort, baseServo, ServoPositions.baseServo);
                 dynamixel.setPosition(serialPort, midServo, ServoPositions.midServo);
                 dynamixel.setPosition(serialPort, endServo, ServoPositions.endServo);
                 dynamixel.setPosition(serialPort, rotServo, ServoPositions.rotServo);
                 dynamixel.setPosition(serialPort, moduleServo, ServoPositions.moduleServo);
                 dynamixel.setPosition(serialPort, coupleServo, ServoPositions.coupleServo);
-            }
+                //arduinoPort.WriteLine(String.Concat("set", ServoPositions.frameServo, "#"));
+            //}
         }
 
         private void checkForEmergencyStop()
