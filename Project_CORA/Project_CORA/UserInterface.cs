@@ -25,6 +25,7 @@ namespace Project_CORA
         public int modSelected = 0;
         public int modEquiped = 0;
 
+        WebCam webcam;
         Graphics positionPanelGraphics;
         Graphics rotationValueGraphics;
         Pen blackPen = new Pen(Color.Black, 7);
@@ -95,6 +96,9 @@ namespace Project_CORA
         {
             fetchCom(toolStripComboBox1);
             PollJoyStick.RunWorkerAsync();
+            webcam = new WebCam();
+            webcam.InitializeWebCam(ref imgVideo);
+            webcam.Start();
         }
 
         private void fetchCom(ToolStripComboBox x)

@@ -84,12 +84,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.moduleTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.imgVideo = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.speedSettingSlider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -181,7 +184,7 @@
             this.superFancyToolStripMenuItem,
             this.kinkyToolStripMenuItem});
             this.colorSchemeToolStripMenuItem.Name = "colorSchemeToolStripMenuItem";
-            this.colorSchemeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.colorSchemeToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
             this.colorSchemeToolStripMenuItem.Text = "Color Scheme";
             // 
             // calmMetallicToolStripMenuItem
@@ -514,7 +517,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.manualDisplay.Location = new System.Drawing.Point(254, 6);
             this.manualDisplay.Name = "manualDisplay";
-            this.manualDisplay.Size = new System.Drawing.Size(822, 702);
+            this.manualDisplay.Size = new System.Drawing.Size(856, 741);
             this.manualDisplay.TabIndex = 1;
             this.manualDisplay.Text = "";
             // 
@@ -531,6 +534,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.DimGray;
+            this.tabPage1.Controls.Add(this.imgVideo);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -599,6 +603,18 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "Current Module";
             // 
+            // imgVideo
+            // 
+            this.imgVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.imgVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.imgVideo.Location = new System.Drawing.Point(0, 0);
+            this.imgVideo.Name = "imgVideo";
+            this.imgVideo.Size = new System.Drawing.Size(1116, 753);
+            this.imgVideo.TabIndex = 0;
+            this.imgVideo.TabStop = false;
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -635,8 +651,10 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.speedSettingSlider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -697,6 +715,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox moduleTextBox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox imgVideo;
     }
 }
 

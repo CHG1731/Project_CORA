@@ -16,20 +16,21 @@ namespace Project_CORA
         Dynamixel dynamixel;
         SerialPort2Dynamixel serialPort;
         SerialPort arduinoPort = new SerialPort("COM9");
+
         private bool emergencyStopInEffect = false;
         private Boolean emergencyReset = false;
 
         private int baseCoupleVal = 650, endCoupleVal = 712, moduleCoupleVal = 850;
         //Declaration of Servoor Positionues.
         //TODO properly set contraints.
-        public int baseServoMin = 300, baseServoMax = 850, baseServo = 15, baseServoDefault = 850;
-        private int midServoMin = 0, midServoMax = 810, midServo = 9, midServoDefault = 810;
+        public int baseServoMin = 300, baseServoMax = 850, baseServo = 15, baseServoDefault = 840;
+        private int midServoMin = 0, midServoMax = 850, midServo = 9, midServoDefault = 810;
         private int endServoMin = 512, endServoMax = 1023, endServo = 4, endServoDefault = 512;
         private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 20;
         private int frameServoMin = 0, frameServoMax = 6000, frameServoDefault = 0; 
         private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
         private int coupleServo = 7, coupleServoDefault = 512;
-        private int frameModInterval = 10;
+        private int frameModInterval = 10, yValue = 0, yValueStart = 0, yValueMin = -300, yValueMax = 850;
 
         public MainProcess(UserInterface u)
         {
@@ -82,7 +83,7 @@ namespace Project_CORA
                 calculateServoPositions();
                 //Send Servoor Positionues to servo's
                 sendServoPositions();
-                //Thread.Sleep(1);
+                Thread.Sleep(1);
             }
         }
 
@@ -202,7 +203,15 @@ namespace Project_CORA
         private void calculateServoPositions()
         {
             int speedSetting = Settings.speedSetting;
-            ServoPositions.baseServo -= (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis / speedSetting);
+            yValue += (JoyStickState.Zaxis / speedSetting);
+            if(yValue < yValueMin) { yValue = yValueMin; }
+            else if(yValue > yValueMax) { yValue = yValueMax; }
+            if(yValue < yValueStart)
+            {
+                ServoPositions.baseServo -= ((JoyStickState.Yaxis / speedSetting) / 2);
+                ServoPositions.baseServo += (JoyStickState.Zaxis / speedSetting);
+            }
+            else { ServoPositions.baseServo -= (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis / speedSetting); }
             ServoPositions.midServo -= (JoyStickState.Yaxis / speedSetting);
             ServoPositions.endServo += (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis /speedSetting);
             ServoPositions.rotServo -= (JoyStickState.Zrotation / speedSetting);
@@ -212,10 +221,10 @@ namespace Project_CORA
             switch (JoyStickState.pov)
             {
                 case 1:
-                    ServoPositions.moduleServo += speedSetting;
+                    ServoPositions.moduleServo += (100 / speedSetting);
                     break;
                 case 5:
-                    ServoPositions.moduleServo -= speedSetting;
+                    ServoPositions.moduleServo -= (100 / speedSetting);
                     break;
             }
             if(ServoPositions.baseServo > baseServoMax) { ServoPositions.baseServo = baseServoMax; }
