@@ -19,7 +19,7 @@ namespace Module_Configuration_Tool
         public ModuleConfigurator()
         {
             InitializeComponent();
-            this.FormClosing += UserInterface_FormClosing;
+            this.FormClosing += ModuleConfigurator_FormClosing;
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(ModuleLib));
@@ -32,7 +32,7 @@ namespace Module_Configuration_Tool
             updateModuleList();
         }
 
-        private void UserInterface_FormClosing(object sender, FormClosingEventArgs e)
+        private void ModuleConfigurator_FormClosing(object sender, FormClosingEventArgs e)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ModuleLib));
             System.IO.StreamWriter writer = new System.IO.StreamWriter("ModuleLib.xml");

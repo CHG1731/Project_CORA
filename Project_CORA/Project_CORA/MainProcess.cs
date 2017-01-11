@@ -20,15 +20,16 @@ namespace Project_CORA
         private bool emergencyStopInEffect = false;
         private Boolean emergencyReset = false;
 
-        private int baseCoupleVal = 650, endCoupleVal = 712, moduleCoupleVal = 850;
-        //Declaration of Servoor Positionues.
-        //TODO properly set contraints.
+        private int baseCoupleVal1 = 678, endCoupleVal1 = 580, moduleCoupleVal1 = 484, midCoupleVal1 = 700;
+        private int baseCoupleVal2 = 621, endCoupleVal2 = 614, moduleCoupleVal2 = 554, midCoupleVal2 = 650;
+        private int baseCoupleVal3 = 709, endCoupleVal3 = 781, moduleCoupleVal3 = 700, midCoupleVal3 = 787;
+        //Declaration of Servo Positionues.
         public int baseServoMin = 300, baseServoMax = 850, baseServo = 15, baseServoDefault = 840;
         private int midServoMin = 0, midServoMax = 850, midServo = 9, midServoDefault = 810;
         private int endServoMin = 512, endServoMax = 1023, endServo = 4, endServoDefault = 512;
-        private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 20;
+        private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 821;
         private int frameServoMin = 0, frameServoMax = 6000, frameServoDefault = 0; 
-        private int moduleServoMin = 0, moduleServoMax = 1023, moduleServo = 18, moduleServoDefault = 512;
+        private int moduleServo = 18, moduleServoDefault = 512;
         private int coupleServo = 7, coupleServoDefault = 512;
         private int frameModInterval = 10, yValue = 0, yValueStart = 0, yValueMin = -300, yValueMax = 850;
 
@@ -53,7 +54,7 @@ namespace Project_CORA
         {
             serialPort = new SerialPort2Dynamixel();
             dynamixel = new Dynamixel();
-            if (serialPort.open("COM6") == false)
+            if (serialPort.open("COM4") == false)
             {
                 dynamixel.sendTossModeCommand(serialPort);
             }
@@ -146,12 +147,6 @@ namespace Project_CORA
          */ 
         private void changeMod()
         {
-            if (this.modEquiped != 0)
-            {
-                setRobotPosition(new int[7] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault,
-                    rotServoSwitchPos, frameModInterval * this.modEquiped, 0});
-                coupleMod(true);
-            }
             this.modEquiped = userControls.modEquiped;
             setRobotPosition(new int[7] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault,
                 rotServoSwitchPos, frameModInterval * this.modEquiped , 1023});
@@ -165,36 +160,62 @@ namespace Project_CORA
          */ 
         private void coupleMod(bool eject)
         {
-            while(!(ServoPositions.baseServo == baseCoupleVal && ServoPositions.endServo == endCoupleVal && ServoPositions.moduleServo
-                 == moduleCoupleVal))
+            int oldSpeedSetting = Settings.speedSetting;
+            //Settings.speedSetting = 10;
+            moveToCouplePosOne();
+            moveToCouplePosTwo();
+            moveToCouplePosThree();
+            while (!(ServoPositions.rotServo == rotServoDefault))
             {
-                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, baseCoupleVal);
-                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, endCoupleVal);
-                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, moduleCoupleVal);
+                ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, rotServoDefault);
                 sendServoPositions();
                 Thread.Sleep(1);
             }
-            if (!eject)
-            {
-                ServoPositions.coupleServo = 1023;
-                sendServoPositions();
-            }
-            else
-            {
-                ServoPositions.coupleServo = 0;
-                sendServoPositions();
-            }
-            while (!(ServoPositions.baseServo == baseServoDefault && ServoPositions.endServo == endServoDefault))
-            {
-                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, baseServoDefault);
-                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, endServoDefault);
-                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, moduleServoDefault);
-                sendServoPositions();
-                Thread.Sleep(1);
-            }
-
+            setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
+                        moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
         }
 
+        private void moveToCouplePosOne()
+        {
+            while (!(ServoPositions.endServo == endCoupleVal1 && ServoPositions.moduleServo
+                 == moduleCoupleVal1 && ServoPositions.midServo == midCoupleVal1 && ServoPositions.baseServo == baseCoupleVal1))
+            {
+                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, endCoupleVal1);
+                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, moduleCoupleVal1);
+                ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, midCoupleVal1);
+                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, baseCoupleVal1);
+                sendServoPositions();
+                Thread.Sleep(1);
+            }
+        }
+
+        private void moveToCouplePosTwo()
+        {
+            while (!(ServoPositions.baseServo == baseCoupleVal2 && ServoPositions.endServo == endCoupleVal2 && ServoPositions.moduleServo
+                 == moduleCoupleVal2 && ServoPositions.midServo == midCoupleVal2))
+            {
+                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, baseCoupleVal2);
+                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, endCoupleVal2);
+                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, moduleCoupleVal2);
+                ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, midCoupleVal2);
+                sendServoPositions();
+                Thread.Sleep(1);
+            }
+        }
+
+        private void moveToCouplePosThree()
+        {
+            while (!(ServoPositions.baseServo == baseCoupleVal3 && ServoPositions.endServo == endCoupleVal3 && ServoPositions.moduleServo
+                 == moduleCoupleVal3 && ServoPositions.midServo == midCoupleVal3))
+            {
+                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, baseCoupleVal3);
+                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, endCoupleVal3);
+                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, moduleCoupleVal3);
+                ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, midCoupleVal3);
+                sendServoPositions();
+                Thread.Sleep(1);
+            }
+        }
         /*
          * Function calculates the Positions of all the joints
          * based on input from the controller and stores
