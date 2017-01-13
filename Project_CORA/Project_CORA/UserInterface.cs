@@ -15,11 +15,9 @@ namespace Project_CORA
 {
     public partial class UserInterface : Form
     {
-        public bool emergencyStopActive = false;
         public bool requestedReset = false;
         public bool RobotConnected = false;
         public bool runMacro;
-        public bool stillNotDone = false;
         public List<List<int[]>> macrosToRun = new List<List<int[]>>();
 
         public int modSelected = 0;

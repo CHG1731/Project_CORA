@@ -20,18 +20,20 @@ namespace Project_CORA
         private bool emergencyStopInEffect = false;
         private Boolean emergencyReset = false;
 
-        private int baseCoupleVal1 = 678, endCoupleVal1 = 580, moduleCoupleVal1 = 484, midCoupleVal1 = 700;
-        private int baseCoupleVal2 = 621, endCoupleVal2 = 614, moduleCoupleVal2 = 554, midCoupleVal2 = 650;
-        private int baseCoupleVal3 = 709, endCoupleVal3 = 781, moduleCoupleVal3 = 700, midCoupleVal3 = 787;
+        private int baseCoupleVal1 = 690, endCoupleVal1 = 600, moduleCoupleVal1 = 512, midCoupleVal1 = 720;
+        private int baseCoupleVal2 = 590, endCoupleVal2 = 630, moduleCoupleVal2 = 562, midCoupleVal2 = 600;
+        private int baseCoupleVal3 = 660, endCoupleVal3 = 620, moduleCoupleVal3 = 600, midCoupleVal3 = 600;
+        private int baseCoupleVal4 = 850, endCoupleVal4 = 630, moduleCoupleVal4 = 715, midCoupleVal4 = 700;
+        private int baseCoupleVal5 = 730, endCoupleVal5 = 630, moduleCoupleVal5 = 720, midCoupleVal5 = 600;
+        private int baseCoupleVal6 = 730, endCoupleVal6 = 630, moduleCoupleVal6 = 840, midCoupleVal6 = 500;
         //Declaration of Servo Positionues.
         public int baseServoMin = 300, baseServoMax = 850, baseServo = 15, baseServoDefault = 840;
-        private int midServoMin = 0, midServoMax = 850, midServo = 9, midServoDefault = 810;
+        private int midServoMin = 0, midServoMax = 850, midServo = 9, midServoDefault = 800;
         private int endServoMin = 512, endServoMax = 1023, endServo = 4, endServoDefault = 512;
-        private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 821;
+        private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 826;
         private int frameServoMin = 0, frameServoMax = 6000, frameServoDefault = 0; 
         private int moduleServo = 18, moduleServoDefault = 512;
         private int coupleServo = 7, coupleServoDefault = 512;
-        private int frameModInterval = 10, yValue = 0, yValueStart = 0, yValueMin = -300, yValueMax = 850;
 
         public MainProcess(UserInterface u)
         {
@@ -65,10 +67,9 @@ namespace Project_CORA
                 //check if robot needs to reset
                 if (userControls.requestedReset || checkResetButton())
                 {
-                    emergencyReset = false;
+                    userControls.requestedReset = false;
                     setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
                         moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-                    userControls.requestedReset = false;
                 }
                 //Check if a new module is requested
                 //switch modules if so
@@ -147,75 +148,81 @@ namespace Project_CORA
          */ 
         private void changeMod()
         {
+            if(this.modEquiped != 0 && this.modEquiped == 1)
+            {
+                coupleModOne(true);
+            }
+            else if(this.modEquiped != 0 && this.modEquiped == 2)
+            {
+                coupleModTwo(true);
+            }
             this.modEquiped = userControls.modEquiped;
+            if (this.modEquiped == 1) { coupleModOne(false); }
+            else if(this.modEquiped == 2) { coupleModTwo(false); }
             setRobotPosition(new int[7] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault,
-                rotServoSwitchPos, frameModInterval * this.modEquiped , 1023});
-            coupleMod(false);
-            setRobotPosition(new int[7] { baseServoDefault, midServoDefault, endServoDefault, moduleServoDefault,
-                rotServoDefault, frameModInterval * this.modEquiped , coupleServoDefault});
+                rotServoDefault, 0 , coupleServoDefault});
         }
 
         /*
          * Helper function used by changeMod()
          */ 
-        private void coupleMod(bool eject)
+        private void coupleModOne(bool eject)
         {
             int oldSpeedSetting = Settings.speedSetting;
             //Settings.speedSetting = 10;
-            moveToCouplePosOne();
-            moveToCouplePosTwo();
-            moveToCouplePosThree();
-            while (!(ServoPositions.rotServo == rotServoDefault))
+            if (eject)
             {
-                ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, rotServoDefault);
-                sendServoPositions();
-                Thread.Sleep(1);
+                setRobotPosition(new int[7]  { baseCoupleVal3, midCoupleVal3, endCoupleVal3,
+                        moduleCoupleVal3, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
+                        moduleCoupleVal2, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
+                        moduleCoupleVal1, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
+                        moduleServoDefault, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
             }
-            setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
+            else
+            {
+                setRobotPosition(new int[7]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
+                        moduleCoupleVal1, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
+                        moduleCoupleVal2, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseCoupleVal3, midCoupleVal3, endCoupleVal3,
+                        moduleCoupleVal3, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
                         moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
-        }
-
-        private void moveToCouplePosOne()
-        {
-            while (!(ServoPositions.endServo == endCoupleVal1 && ServoPositions.moduleServo
-                 == moduleCoupleVal1 && ServoPositions.midServo == midCoupleVal1 && ServoPositions.baseServo == baseCoupleVal1))
-            {
-                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, endCoupleVal1);
-                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, moduleCoupleVal1);
-                ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, midCoupleVal1);
-                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, baseCoupleVal1);
-                sendServoPositions();
-                Thread.Sleep(1);
             }
         }
 
-        private void moveToCouplePosTwo()
+        private void coupleModTwo(bool eject)
         {
-            while (!(ServoPositions.baseServo == baseCoupleVal2 && ServoPositions.endServo == endCoupleVal2 && ServoPositions.moduleServo
-                 == moduleCoupleVal2 && ServoPositions.midServo == midCoupleVal2))
+            int oldSpeedSetting = Settings.speedSetting;
+            //Settings.speedSetting = 10;
+            if (eject)
             {
-                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, baseCoupleVal2);
-                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, endCoupleVal2);
-                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, moduleCoupleVal2);
-                ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, midCoupleVal2);
-                sendServoPositions();
-                Thread.Sleep(1);
+                setRobotPosition(new int[7]  { baseCoupleVal6, midCoupleVal6, endCoupleVal6,
+                        moduleCoupleVal6, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseCoupleVal5, midCoupleVal5, endCoupleVal5,
+                        moduleCoupleVal5, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseCoupleVal4, midCoupleVal4, endCoupleVal4,
+                        moduleCoupleVal4, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
+                        moduleServoDefault, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+            }
+            else
+            {
+                setRobotPosition(new int[7]  { baseCoupleVal4, midCoupleVal4, endCoupleVal4,
+                        moduleCoupleVal4, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseCoupleVal5, midCoupleVal5, endCoupleVal5,
+                        moduleCoupleVal5, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseCoupleVal6, midCoupleVal6, endCoupleVal6,
+                        moduleCoupleVal6, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
+                        moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
             }
         }
 
-        private void moveToCouplePosThree()
-        {
-            while (!(ServoPositions.baseServo == baseCoupleVal3 && ServoPositions.endServo == endCoupleVal3 && ServoPositions.moduleServo
-                 == moduleCoupleVal3 && ServoPositions.midServo == midCoupleVal3))
-            {
-                ServoPositions.baseServo = checkServoPosition(ServoPositions.baseServo, baseCoupleVal3);
-                ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, endCoupleVal3);
-                ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, moduleCoupleVal3);
-                ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, midCoupleVal3);
-                sendServoPositions();
-                Thread.Sleep(1);
-            }
-        }
+
         /*
          * Function calculates the Positions of all the joints
          * based on input from the controller and stores
@@ -224,10 +231,12 @@ namespace Project_CORA
         private void calculateServoPositions()
         {
             int speedSetting = Settings.speedSetting;
-            yValue += (JoyStickState.Zaxis / speedSetting);
-            if(yValue < yValueMin) { yValue = yValueMin; }
-            else if(yValue > yValueMax) { yValue = yValueMax; }
-            if(yValue < yValueStart)
+            Boolean controlledMovement = false;
+            if (JoyStickState.buttons != null)
+            {
+                controlledMovement = JoyStickState.buttons[2];
+            }
+            if (controlledMovement)
             {
                 ServoPositions.baseServo -= ((JoyStickState.Yaxis / speedSetting) / 2);
                 ServoPositions.baseServo += (JoyStickState.Zaxis / speedSetting);
@@ -334,8 +343,8 @@ namespace Project_CORA
          */ 
         private void sendServoPositions()
         {
-            //if (!emergencyReset) //possible cause of rebuild problem?
-            //{
+            if (userControls.requestedReset == false) //possible cause of rebuild problem?
+            {
                 dynamixel.setPosition(serialPort, baseServo, ServoPositions.baseServo);
                 dynamixel.setPosition(serialPort, midServo, ServoPositions.midServo);
                 dynamixel.setPosition(serialPort, endServo, ServoPositions.endServo);
@@ -343,7 +352,7 @@ namespace Project_CORA
                 dynamixel.setPosition(serialPort, moduleServo, ServoPositions.moduleServo);
                 dynamixel.setPosition(serialPort, coupleServo, ServoPositions.coupleServo);
                 //arduinoPort.WriteLine(String.Concat("set", ServoPositions.frameServo, "#"));
-            //}
+            }
         }
 
         private void checkForEmergencyStop()
