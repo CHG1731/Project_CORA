@@ -83,8 +83,8 @@ namespace Project_CORA
             //the instruction, rawRead => 2
             buffer[pos++] = 2;
 
-            // pos registers 36 and 37
-            buffer[pos++] = 0x24;
+            // pos registers 32 and 33
+            buffer[pos++] = 0x20;
 
             //bytes to rawRead
             buffer[pos++] = 2;
@@ -149,7 +149,7 @@ namespace Project_CORA
             buffer[pos++] = 3;
 
             // goal registers 38 and 39
-            buffer[pos++] = 0x26;// 38;
+            buffer[pos++] = 0x20;// 38;
 
             //bytes to write
             byte hexH = 0;
