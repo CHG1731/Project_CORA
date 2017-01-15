@@ -132,6 +132,43 @@ namespace Project_CORA
             return pos;
         }
 
+        private static int getSetSpeedCommand(byte[] buffer, byte id, short goal)
+        {
+            int pos = 0;
+            byte numberOfParameters = 0;
+            //OXFF 0XFF ID LENGTH INSTRUCTION PARAMETER1 …PARAMETER N CHECK SUM
+
+            buffer[pos++] = 0xff;
+            buffer[pos++] = 0xff;
+            buffer[pos++] = id;
+
+            // bodyLength
+            buffer[pos++] = 0; //place holder
+
+            //the instruction, query => 3
+            buffer[pos++] = 3;
+
+            // goal registers 38 and 39
+            buffer[pos++] = 0x26;// 38;
+
+            //bytes to write
+            byte hexH = 0;
+            byte hexL = 0;
+            toHexHLConversion(goal, out hexH, out hexL);
+            buffer[pos++] = hexL;
+            numberOfParameters++;
+            buffer[pos++] = hexH;
+            numberOfParameters++;
+
+            // bodyLength
+            buffer[3] = (byte)(numberOfParameters + 3);
+
+            byte checksum = checkSumatory(buffer, pos);
+            buffer[pos++] = checksum;
+
+            return pos;
+        }
+
         public short getPosition(SerialPort2Dynamixel sp2d, int id)
         {
             //byte[] localbuffer = new byte[MaxBufferSize];
@@ -165,6 +202,20 @@ namespace Project_CORA
 
             short position = (short)goal;
             int size = getSetPositionCommand(buffer, (byte)id, (short)goal);
+            byte[] res = sp2d.query(buffer, size, false);
+
+            //ushort Positionue = 1;
+            if (res != null && res.Length > 4 && res[4] == 0)
+                couldSet = true;
+
+            return couldSet;
+        }
+        public bool setSpeed(SerialPort2Dynamixel sp2d, int id, int goal)
+        {
+            bool couldSet = false;
+
+            short position = (short)goal;
+            int size = getSetSpeedCommand(buffer, (byte)id, (short)goal);
             byte[] res = sp2d.query(buffer, size, false);
 
             //ushort Positionue = 1;
