@@ -389,6 +389,7 @@
             this.deleteMacroButton.TabIndex = 10;
             this.deleteMacroButton.Text = "Delete Macro";
             this.deleteMacroButton.UseVisualStyleBackColor = true;
+            this.deleteMacroButton.Click += new System.EventHandler(this.deleteMacroButton_Click);
             // 
             // macroDescription
             // 

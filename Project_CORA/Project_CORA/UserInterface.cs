@@ -183,9 +183,13 @@ namespace Project_CORA
             updateRotationPosition(ServoPositions.rotServo);
             this.macroProgressBar.Value = (int)Settings.percentage;
             this.framePositionBar.Value = ServoPositions.frameServo;
-            if(macroLib.macroStorage.Count > this.macroList.Items.Count)
+            if(macroLib.macroStorage.Count != this.macroList.Items.Count)
             {
-                macroList.Items.Add(macroLib.macroNames[macroLib.macroStorage.Count - 1]);
+                macroList.Items.Clear();
+                for(int i = 0; i < macroLib.macroStorage.Count; i++)
+                {
+                    macroList.Items.Add(macroLib.macroNames[i]);
+                }
             }
         }
 
@@ -363,6 +367,15 @@ namespace Project_CORA
         {
             MacroCreator macroCreator = new MacroCreator(macroLib, modList, macroList);
             macroCreator.Show();
+        }
+
+        private void deleteMacroButton_Click(object sender, EventArgs e)
+        {
+            macroLib.macroStorage.RemoveAt(macroList.SelectedIndex);
+            for(int i = macroList.SelectedIndex; i < macroLib.macroNames.Length - 1; i++)
+            {
+                macroLib.macroNames[i] = macroLib.macroNames[i + 1];
+            }
         }
     }
 }
