@@ -182,7 +182,7 @@ namespace Project_CORA
             updateRobotPositon(ServoPositions.baseServo, ServoPositions.midServo, ServoPositions.endServo);
             updateRotationPosition(ServoPositions.rotServo);
             this.macroProgressBar.Value = (int)Settings.percentage;
-            updateSliderValue();
+            this.framePositionBar.Value = ServoPositions.frameServo;
             if(macroLib.macroStorage.Count > this.macroList.Items.Count)
             {
                 macroList.Items.Add(macroLib.macroNames[macroLib.macroStorage.Count - 1]);
@@ -255,13 +255,6 @@ namespace Project_CORA
             rotationValueGraphics.FillEllipse(redBrush, pointRectangle);
         }
 
-        private void updateSliderValue()
-        {
-            if (JoyStickState.connected)
-            {
-                this.axisPositionBar.Value = ServoPositions.frameServo * (100/6000);
-            }
-        }
         #endregion
 
         #region code for macro management

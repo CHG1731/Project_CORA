@@ -34,7 +34,7 @@
             this.midServoValueBar = new System.Windows.Forms.TrackBar();
             this.endServoValueBar = new System.Windows.Forms.TrackBar();
             this.moduleServoValueBar = new System.Windows.Forms.TrackBar();
-            this.trackBar5 = new System.Windows.Forms.TrackBar();
+            this.frameServoBar = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -65,7 +65,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.midServoValueBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endServoValueBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.moduleServoValueBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frameServoBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rotationServoValueBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,12 +125,13 @@
             this.moduleServoValueBar.Value = 512;
             this.moduleServoValueBar.Scroll += new System.EventHandler(this.moduleServoBar_Scroll);
             // 
-            // trackBar5
+            // frameServoBar
             // 
-            this.trackBar5.Location = new System.Drawing.Point(27, 501);
-            this.trackBar5.Name = "trackBar5";
-            this.trackBar5.Size = new System.Drawing.Size(1387, 56);
-            this.trackBar5.TabIndex = 4;
+            this.frameServoBar.Location = new System.Drawing.Point(27, 501);
+            this.frameServoBar.Maximum = 6000;
+            this.frameServoBar.Name = "frameServoBar";
+            this.frameServoBar.Size = new System.Drawing.Size(1387, 56);
+            this.frameServoBar.TabIndex = 4;
             // 
             // label1
             // 
@@ -372,7 +373,7 @@
             this.label9.TabIndex = 31;
             this.label9.Text = "Position Preview";
             // 
-            // timer1
+            // timer2
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
@@ -407,7 +408,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.trackBar5);
+            this.Controls.Add(this.frameServoBar);
             this.Controls.Add(this.moduleServoValueBar);
             this.Controls.Add(this.endServoValueBar);
             this.Controls.Add(this.midServoValueBar);
@@ -419,7 +420,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.midServoValueBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.endServoValueBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.moduleServoValueBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frameServoBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rotationServoValueBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -432,7 +433,7 @@
         private System.Windows.Forms.TrackBar midServoValueBar;
         private System.Windows.Forms.TrackBar endServoValueBar;
         private System.Windows.Forms.TrackBar moduleServoValueBar;
-        private System.Windows.Forms.TrackBar trackBar5;
+        private System.Windows.Forms.TrackBar frameServoBar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

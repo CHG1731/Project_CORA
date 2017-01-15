@@ -18,14 +18,12 @@ namespace Project_CORA
         SerialPort arduinoPort = new SerialPort();
 
         private bool emergencyStopInEffect = false;
-        private Boolean emergencyReset = false;
 
+        //Declaration of the positions required for module switching.
         private int baseCoupleVal1 = 690, endCoupleVal1 = 600, moduleCoupleVal1 = 512, midCoupleVal1 = 720;
-        private int baseCoupleVal2 = 590, endCoupleVal2 = 630, moduleCoupleVal2 = 562, midCoupleVal2 = 600;
-        private int baseCoupleVal3 = 750, endCoupleVal3 = 600, moduleCoupleVal3 = 512, midCoupleVal3 = 720;
-        private int baseCoupleVal4 = 850, endCoupleVal4 = 630, moduleCoupleVal4 = 715, midCoupleVal4 = 700;
-        private int baseCoupleVal5 = 730, endCoupleVal5 = 630, moduleCoupleVal5 = 720, midCoupleVal5 = 600;
-        private int baseCoupleVal6 = 730, endCoupleVal6 = 630, moduleCoupleVal6 = 840, midCoupleVal6 = 500;
+        private int baseCoupleVal2 = 750, endCoupleVal2 = 600, moduleCoupleVal2 = 512, midCoupleVal2 = 720;
+        private int baseCoupleVal3 = 850, endCoupleVal3 = 630, moduleCoupleVal3 = 715, midCoupleVal3 = 700;
+        private int baseCoupleVal4 = 850, endCoupleVal4 = 630, moduleCoupleVal4 = 715, midCoupleVal4 = 640;
         //Declaration of Servo Positionues.
         public int baseServoMin = 300, baseServoMax = 850, baseServo = 15, baseServoDefault = 840;
         private int midServoMin = 0, midServoMax = 850, midServo = 9, midServoDefault = 800;
@@ -42,6 +40,13 @@ namespace Project_CORA
             ServoPositions.endServo = endServoDefault;
             ServoPositions.rotServo = rotServoDefault;
             ServoPositions.moduleServo = moduleServoDefault;
+            ServoPositions.frameServo = frameServoDefault;
+            serialPort = new SerialPort2Dynamixel();
+            dynamixel = new Dynamixel();
+            if (serialPort.open("COM4") == false)
+            {
+                dynamixel.sendTossModeCommand(serialPort);
+            }
             arduinoPort.BaudRate = 9600;
             arduinoPort.PortName = "COM9";
             arduinoPort.Open();
@@ -54,12 +59,6 @@ namespace Project_CORA
          */
         private void runMainProcess()
         {
-            serialPort = new SerialPort2Dynamixel();
-            dynamixel = new Dynamixel();
-            if (serialPort.open("COM4") == false)
-            {
-                dynamixel.sendTossModeCommand(serialPort);
-            }
             while (true)
             {
                 //Check if emergency stop is in effect
@@ -68,8 +67,9 @@ namespace Project_CORA
                 if (userControls.requestedReset || checkResetButton())
                 {
                     userControls.requestedReset = false;
-                    setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
-                        moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                    arduinoPort.WriteLine("reset#");
+                    setRobotPosition(new int[5]  { baseServoDefault, midServoDefault, endServoDefault,
+                        moduleServoDefault, rotServoDefault });
                 }
                 //Check if a new module is requested
                 //switch modules if so
@@ -104,11 +104,10 @@ namespace Project_CORA
                 ServoPositions.midServo = checkServoPosition(ServoPositions.midServo, destinations[1]);
                 ServoPositions.endServo = checkServoPosition(ServoPositions.endServo, destinations[2]);
                 ServoPositions.moduleServo = checkServoPosition(ServoPositions.moduleServo, destinations[3]);
-                //ServoPositions.coupleServo = checkServoPosition(ServoPositions.coupleServo, destinations[6]);
                 sendServoPositions();
                 Thread.Sleep(1);
             }
-            //arduinoPort.WriteLine(String.Concat("set", destinations[5], "#"));
+            if (destinations.Length == 6) { arduinoPort.WriteLine(String.Concat("set", destinations[5], "#")); }
             while (!(ServoPositions.rotServo == destinations[4]))
             {
                 ServoPositions.rotServo = checkServoPosition(ServoPositions.rotServo, destinations[4]);
@@ -148,13 +147,15 @@ namespace Project_CORA
          */ 
         private void changeMod()
         {
-            if(this.modEquiped != 0 && this.modEquiped == 1)
+            arduinoPort.WriteLine("reset#");
+            setRobotPosition(new int[5]  { baseServoDefault, midServoDefault, endServoDefault,
+                        moduleServoDefault, rotServoSwitchPos });
+            if (this.modEquiped != 0 && this.modEquiped == 1)
             {
                 coupleModOne(true);
             }
             else if(this.modEquiped != 0 && this.modEquiped == 2)
             {
-                arduinoPort.WriteLine("reset#");
                 coupleModTwo(true);
             }
             this.modEquiped = userControls.modEquiped;
@@ -175,34 +176,30 @@ namespace Project_CORA
             {
                 arduinoPort.WriteLine("set2070#");
                 Thread.Sleep(4000);
-                setRobotPosition(new int[7]  { baseCoupleVal3, midCoupleVal3, endCoupleVal3,
-                        moduleCoupleVal3, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
-                        moduleCoupleVal1, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                //setRobotPosition(new int[7]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
-                // moduleCoupleVal1, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                dynamixel.setSpeed(serialPort, 7, 1023 + 1023);
-                Thread.Sleep(9500);
+                setRobotPosition(new int[5]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
+                        moduleCoupleVal2, rotServoSwitchPos });
+                setRobotPosition(new int[5]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
+                        moduleCoupleVal1, rotServoSwitchPos });
+                dynamixel.setSpeed(serialPort, coupleServo, 1023 + 1023);
+                Thread.Sleep(7500);
                 arduinoPort.WriteLine("reset#");
                 Thread.Sleep(2000);
-                dynamixel.setSpeed(serialPort, 7, 0);
-                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
-                        moduleServoDefault, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                dynamixel.setSpeed(serialPort, coupleServo, 0);
+                setRobotPosition(new int[5]  { baseServoDefault, midServoDefault, endServoDefault,
+                        moduleServoDefault, rotServoSwitchPos });
             }
             else
             {
-                setRobotPosition(new int[7]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
-                        moduleCoupleVal1, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                dynamixel.setSpeed(serialPort, 7, 1023);
+                setRobotPosition(new int[5]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
+                        moduleCoupleVal1, rotServoSwitchPos });
+                dynamixel.setSpeed(serialPort, coupleServo, 1023);
                 arduinoPort.WriteLine("set2300#");
                 Thread.Sleep(9000);
-                // setRobotPosition(new int[7]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
-                //       moduleCoupleVal2, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                dynamixel.setSpeed(serialPort, 7, 0);
-                setRobotPosition(new int[7]  { baseCoupleVal3, midCoupleVal3, endCoupleVal3,
-                        moduleCoupleVal3, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
-                        moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                dynamixel.setSpeed(serialPort, coupleServo, 0);
+                setRobotPosition(new int[5]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
+                        moduleCoupleVal2, rotServoDefault });
+                setRobotPosition(new int[5]  { baseServoDefault, midServoDefault, endServoDefault,
+                        moduleServoDefault, rotServoDefault });
                 arduinoPort.WriteLine("reset#");
             }
         }
@@ -213,25 +210,33 @@ namespace Project_CORA
             //Settings.speedSetting = 10;
             if (eject)
             {
-                setRobotPosition(new int[7]  { baseCoupleVal6, midCoupleVal6, endCoupleVal6,
-                        moduleCoupleVal6, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseCoupleVal5, midCoupleVal5, endCoupleVal5,
-                        moduleCoupleVal5, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseCoupleVal4, midCoupleVal4, endCoupleVal4,
-                        moduleCoupleVal4, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
-                        moduleServoDefault, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                arduinoPort.WriteLine("set2070#");
+                Thread.Sleep(4000);
+                setRobotPosition(new int[5]  { baseCoupleVal4, midCoupleVal4, endCoupleVal4,
+                        moduleCoupleVal4, rotServoSwitchPos });
+                setRobotPosition(new int[5]  { baseCoupleVal3, midCoupleVal3, endCoupleVal3,
+                        moduleCoupleVal3, rotServoSwitchPos });
+                dynamixel.setSpeed(serialPort, coupleServo, 1023 + 1023);
+                Thread.Sleep(7500);
+                arduinoPort.WriteLine("reset#");
+                Thread.Sleep(2000);
+                dynamixel.setSpeed(serialPort, coupleServo, 0);
+                setRobotPosition(new int[5]  { baseServoDefault, midServoDefault, endServoDefault,
+                        moduleServoDefault, rotServoSwitchPos });
             }
             else
             {
-                setRobotPosition(new int[7]  { baseCoupleVal4, midCoupleVal4, endCoupleVal4,
-                        moduleCoupleVal4, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseCoupleVal5, midCoupleVal5, endCoupleVal5,
-                        moduleCoupleVal5, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseCoupleVal6, midCoupleVal6, endCoupleVal6,
-                        moduleCoupleVal6, rotServoDefault, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
-                        moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[5]  { baseCoupleVal3, midCoupleVal3, endCoupleVal3,
+                        moduleCoupleVal3, rotServoSwitchPos });
+                dynamixel.setSpeed(serialPort, coupleServo, 1023);
+                arduinoPort.WriteLine("set2300#");
+                Thread.Sleep(9000);
+                dynamixel.setSpeed(serialPort, coupleServo, 0);
+                setRobotPosition(new int[5]  { baseCoupleVal4, midCoupleVal4, endCoupleVal4,
+                        moduleCoupleVal4, rotServoDefault });
+                setRobotPosition(new int[5]  { baseServoDefault, midServoDefault, endServoDefault,
+                        moduleServoDefault, rotServoDefault });
+                arduinoPort.WriteLine("reset#");
             }
         }
 
@@ -362,8 +367,7 @@ namespace Project_CORA
                 dynamixel.setPosition(serialPort, endServo, ServoPositions.endServo);
                 dynamixel.setPosition(serialPort, rotServo, ServoPositions.rotServo);
                 dynamixel.setPosition(serialPort, moduleServo, ServoPositions.moduleServo);
-                //dynamixel.setPosition(serialPort, coupleServo, ServoPositions.coupleServo);
-                //arduinoPort.WriteLine(String.Concat("set", ServoPositions.frameServo, "#"));
+                arduinoPort.WriteLine(String.Concat("set", ServoPositions.frameServo, "#"));
             }
         }
 

@@ -205,7 +205,7 @@ namespace Project_CORA
         private void addToMacroButton_Click(object sender, EventArgs e)
         {
             int[] newCommand = new int[] {baseServoValueBar.Value, midServoValueBar.Value, endServoValueBar.Value, moduleServoValueBar.Value,
-                rotationServoValueBar.Value, 0,0};
+                rotationServoValueBar.Value, frameServoBar.Value};
             newMacro.Add(newCommand);
             previewBox.Text += counter++ + "\t\t";
             for(int i = 0; i<newCommand.Length - 1; i++)
@@ -236,7 +236,7 @@ namespace Project_CORA
 
         private void modList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            newMacro.Add(new int[] { modList.SelectedIndex,2000,2000,2000,2000,2000,2000,});
+            newMacro.Add(new int[] { modList.SelectedIndex,2000,2000,2000,2000,2000});
             previewBox.Text += counter++ + "\t\tSwitch to module: " + (string)modList.SelectedItem + "\n";
             this.modList.Visible = false;
             this.Refresh();
@@ -244,7 +244,7 @@ namespace Project_CORA
 
         private void macroList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            newMacro.Add(new int[] { 2000, 2000, macroList.SelectedIndex, 2000, 2000, 2000, 2000, });
+            newMacro.Add(new int[] { 2000, 2000, macroList.SelectedIndex, 2000, 2000, 2000 });
             previewBox.Text += counter++ + "\t\tRun macro: " + (string)macroList.SelectedItem + "\n";
             this.macroList.Visible = false;
             this.Refresh();
