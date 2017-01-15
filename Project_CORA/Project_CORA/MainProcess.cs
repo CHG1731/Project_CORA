@@ -21,10 +21,10 @@ namespace Project_CORA
         private Boolean emergencyReset = false;
 
         private int baseCoupleVal1 = 690, endCoupleVal1 = 600, moduleCoupleVal1 = 512, midCoupleVal1 = 720;
-        //private int baseCoupleVal2 = 590, endCoupleVal2 = 630, moduleCoupleVal2 = 562, midCoupleVal2 = 600;
+        private int baseCoupleVal2 = 590, endCoupleVal2 = 630, moduleCoupleVal2 = 562, midCoupleVal2 = 600;
         private int baseCoupleVal3 = 660, endCoupleVal3 = 620, moduleCoupleVal3 = 600, midCoupleVal3 = 600;
         private int baseCoupleVal4 = 850, endCoupleVal4 = 630, moduleCoupleVal4 = 715, midCoupleVal4 = 700;
-        //private int baseCoupleVal5 = 730, endCoupleVal5 = 630, moduleCoupleVal5 = 720, midCoupleVal5 = 600;
+        private int baseCoupleVal5 = 730, endCoupleVal5 = 630, moduleCoupleVal5 = 720, midCoupleVal5 = 600;
         private int baseCoupleVal6 = 730, endCoupleVal6 = 630, moduleCoupleVal6 = 840, midCoupleVal6 = 500;
         //Declaration of Servo Positionues.
         public int baseServoMin = 300, baseServoMax = 850, baseServo = 15, baseServoDefault = 840;
@@ -44,7 +44,7 @@ namespace Project_CORA
             ServoPositions.moduleServo = moduleServoDefault;
             ServoPositions.coupleServo = coupleServoDefault;
             arduinoPort.BaudRate = 6900;
-            arduinoPort.PortName = "com9";
+            arduinoPort.PortName = "COM9";
             arduinoPort.Open();
             this.userControls = u;
             runMainProcess();
@@ -175,12 +175,17 @@ namespace Project_CORA
             //Settings.speedSetting = 10;
             if (eject)
             {
+                arduinoPort.WriteLine("set1400#");
                 setRobotPosition(new int[7]  { baseCoupleVal3, midCoupleVal3, endCoupleVal3,
                         moduleCoupleVal3, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-               // setRobotPosition(new int[7]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
-                       // moduleCoupleVal2, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-                setRobotPosition(new int[7]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
-                        moduleCoupleVal1, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                setRobotPosition(new int[7]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
+                        moduleCoupleVal2, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                //setRobotPosition(new int[7]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
+                // moduleCoupleVal1, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                dynamixel.setSpeed(serialPort, 7, 1023 + 1023);
+                arduinoPort.WriteLine("reset#");
+                Thread.Sleep(3000);
+                dynamixel.setSpeed(serialPort, 7, 0);
                 setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
                         moduleServoDefault, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
             }
@@ -188,12 +193,17 @@ namespace Project_CORA
             {
                 setRobotPosition(new int[7]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
                         moduleCoupleVal1, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
-               // setRobotPosition(new int[7]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
-                 //       moduleCoupleVal2, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                dynamixel.setSpeed(serialPort, 7, 1023);
+                arduinoPort.WriteLine("set1400#");
+                Thread.Sleep(3000);
+                // setRobotPosition(new int[7]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
+                //       moduleCoupleVal2, rotServoSwitchPos, frameServoDefault, coupleServoDefault });
+                dynamixel.setSpeed(serialPort, 7, 0);
                 setRobotPosition(new int[7]  { baseCoupleVal3, midCoupleVal3, endCoupleVal3,
                         moduleCoupleVal3, rotServoDefault, frameServoDefault, coupleServoDefault });
                 setRobotPosition(new int[7]  { baseServoDefault, midServoDefault, endServoDefault,
                         moduleServoDefault, rotServoDefault, frameServoDefault, coupleServoDefault });
+                arduinoPort.WriteLine("reset#");
             }
         }
 
