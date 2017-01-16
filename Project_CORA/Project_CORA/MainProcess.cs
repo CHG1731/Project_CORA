@@ -37,17 +37,45 @@ namespace Project_CORA
 
         public MainProcess(UserInterface u)
         {
+            test();
             ServoPositions.baseServo = baseServoDefault;
             ServoPositions.midServo = midServoDefault;
             ServoPositions.endServo = endServoDefault;
             ServoPositions.rotServo = rotServoDefault;
             ServoPositions.moduleServo = moduleServoDefault;
             ServoPositions.coupleServo = coupleServoDefault;
-            arduinoPort.BaudRate = 6900;
-            arduinoPort.PortName = "COM9";
-            arduinoPort.Open();
             this.userControls = u;
             runMainProcess();
+        }
+
+        public void test()
+        {
+            serialPort = new SerialPort2Dynamixel();
+            dynamixel = new Dynamixel();
+            if (serialPort.open("COM4") == false)
+            {
+                dynamixel.sendTossModeCommand(serialPort);
+                Thread.Sleep(2000);
+                dynamixel.setSpeed(serialPort, 7, 1023);
+                Thread.Sleep(2000);
+                dynamixel.setSpeed(serialPort, 7, 1023 + 1023);
+                Thread.Sleep(4000);
+                dynamixel.setSpeed(serialPort, 7, 0);
+            }
+            /*
+            SerialPort SP = new SerialPort();
+            SP.BaudRate = 9600;
+            SP.PortName = "COM10";
+            SP.Open();
+            if(SP.IsOpen)
+            {
+                Thread.Sleep(2000);
+                SP.WriteLine("set1200#");
+                Thread.Sleep(2000);
+                SP.WriteLine("reset#");
+                Thread.Sleep(20000);
+            }
+            */
         }
 
         /*
@@ -55,9 +83,10 @@ namespace Project_CORA
          */
         private void runMainProcess()
         {
+            Thread.Sleep(400000000);
             serialPort = new SerialPort2Dynamixel();
             dynamixel = new Dynamixel();
-            if (serialPort.open("COM4") == false)
+            if (serialPort.open("COM7") == false)
             {
                 dynamixel.sendTossModeCommand(serialPort);
             }

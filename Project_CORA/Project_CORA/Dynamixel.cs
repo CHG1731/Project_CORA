@@ -149,7 +149,7 @@ namespace Project_CORA
             buffer[pos++] = 3;
 
             // goal registers 38 and 39
-            buffer[pos++] = 0x26;// 38;
+            buffer[pos++] = 0x20;// 38;
 
             //bytes to write
             byte hexH = 0;
