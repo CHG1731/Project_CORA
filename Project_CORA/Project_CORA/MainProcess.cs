@@ -147,7 +147,7 @@ namespace Project_CORA
          */ 
         private void changeMod()
         {
-            arduinoPort.WriteLine("reset#");
+            //arduinoPort.WriteLine("reset#");
             setRobotPosition(new int[5]  { baseServoDefault, midServoDefault, endServoDefault,
                         moduleServoDefault, rotServoSwitchPos });
             if (this.modEquiped != 0 && this.modEquiped == 1)
