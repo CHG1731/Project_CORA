@@ -635,6 +635,7 @@
             // 
             // framePositionBar
             // 
+            this.framePositionBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.framePositionBar.Location = new System.Drawing.Point(1144, 594);
             this.framePositionBar.Maximum = 6000;
             this.framePositionBar.Name = "framePositionBar";

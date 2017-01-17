@@ -15,5 +15,7 @@ namespace Project_CORA
         public static int moduleServo { get; set; }
         public static int rotServo { get; set; }
         public static int frameServo { get; set; }
+        public static int clawServoOne { get; set; }
+        public static int clawServoTwo { get; set; }
     }
 }

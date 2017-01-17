@@ -20,18 +20,20 @@ namespace Project_CORA
         private bool emergencyStopInEffect = false;
 
         //Declaration of the positions required for module switching.
-        private int baseCoupleVal1 = 690, endCoupleVal1 = 600, moduleCoupleVal1 = 512, midCoupleVal1 = 720;
-        private int baseCoupleVal2 = 750, endCoupleVal2 = 600, moduleCoupleVal2 = 512, midCoupleVal2 = 720;
+        private int baseCoupleVal1 = 690, endCoupleVal1 = 600, moduleCoupleVal1 = 490, midCoupleVal1 = 720;
+        private int baseCoupleVal2 = 800, endCoupleVal2 = 600, moduleCoupleVal2 = 490, midCoupleVal2 = 680;
         private int baseCoupleVal3 = 850, endCoupleVal3 = 630, moduleCoupleVal3 = 715, midCoupleVal3 = 700;
-        private int baseCoupleVal4 = 850, endCoupleVal4 = 630, moduleCoupleVal4 = 715, midCoupleVal4 = 640;
+        private int baseCoupleVal4 = 850, endCoupleVal4 = 630, moduleCoupleVal4 = 675, midCoupleVal4 = 600;
         //Declaration of Servo Positionues.
         public int baseServoMin = 300, baseServoMax = 850, baseServo = 15, baseServoDefault = 840;
         private int midServoMin = 0, midServoMax = 850, midServo = 9, midServoDefault = 800;
         private int endServoMin = 512, endServoMax = 1023, endServo = 4, endServoDefault = 512;
         private int rotServoMin = 0, rotServoMax = 1023, rotServo = 17, rotServoDefault = 512, rotServoSwitchPos = 826;
-        private int frameServoMin = 0, frameServoMax = 6000, frameServoDefault = 0; 
+        private int frameServoMin = 0, frameServoMax = 6000, frameServoDefault = 0, oldFramePosition = 0; 
         private int moduleServo = 18, moduleServoDefault = 512;
         private int coupleServo = 7, coupleServoDefault = 512;
+        private int clawServoOne = 11, clawSeroTwo = 5;
+        private int millis = 0;
 
         public MainProcess(UserInterface u)
         {
@@ -41,6 +43,8 @@ namespace Project_CORA
             ServoPositions.rotServo = rotServoDefault;
             ServoPositions.moduleServo = moduleServoDefault;
             ServoPositions.frameServo = frameServoDefault;
+            ServoPositions.clawServoOne = 512;
+            ServoPositions.clawServoTwo = 512;
             serialPort = new SerialPort2Dynamixel();
             dynamixel = new Dynamixel();
             if (serialPort.open("COM4") == false)
@@ -86,6 +90,7 @@ namespace Project_CORA
                 //Send Servoor Positionues to servo's
                 sendServoPositions();
                 Thread.Sleep(1);
+                millis++;
             }
         }
 
@@ -148,8 +153,12 @@ namespace Project_CORA
         private void changeMod()
         {
             //arduinoPort.WriteLine("reset#");
-            setRobotPosition(new int[5]  { baseServoDefault, midServoDefault, endServoDefault,
-                        moduleServoDefault, rotServoSwitchPos });
+            ServoPositions.clawServoOne = ServoPositions.clawServoTwo = 512;
+            if(ServoPositions.frameServo > 1000)
+            {
+                arduinoPort.WriteLine("reset");
+                Thread.Sleep(ServoPositions.frameServo);
+            }
             if (this.modEquiped != 0 && this.modEquiped == 1)
             {
                 coupleModOne(true);
@@ -174,9 +183,9 @@ namespace Project_CORA
             //Settings.speedSetting = 10;
             if (eject)
             {
-                arduinoPort.WriteLine("set2070#");
+                arduinoPort.WriteLine("set2600#");
                 Thread.Sleep(4000);
-                setRobotPosition(new int[5]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
+                setRobotPosition(new int[5]  { baseCoupleVal2, (midCoupleVal2 - 40), endCoupleVal2,
                         moduleCoupleVal2, rotServoSwitchPos });
                 setRobotPosition(new int[5]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
                         moduleCoupleVal1, rotServoSwitchPos });
@@ -193,9 +202,11 @@ namespace Project_CORA
                 setRobotPosition(new int[5]  { baseCoupleVal1, midCoupleVal1, endCoupleVal1,
                         moduleCoupleVal1, rotServoSwitchPos });
                 dynamixel.setSpeed(serialPort, coupleServo, 1023);
-                arduinoPort.WriteLine("set2300#");
+                arduinoPort.WriteLine("set2500#");
                 Thread.Sleep(9000);
                 dynamixel.setSpeed(serialPort, coupleServo, 0);
+                arduinoPort.WriteLine("set2350#");
+                Thread.Sleep(3000);
                 setRobotPosition(new int[5]  { baseCoupleVal2, midCoupleVal2, endCoupleVal2,
                         moduleCoupleVal2, rotServoDefault });
                 setRobotPosition(new int[5]  { baseServoDefault, midServoDefault, endServoDefault,
@@ -210,7 +221,7 @@ namespace Project_CORA
             //Settings.speedSetting = 10;
             if (eject)
             {
-                arduinoPort.WriteLine("set2070#");
+                arduinoPort.WriteLine("set2170#");
                 Thread.Sleep(4000);
                 setRobotPosition(new int[5]  { baseCoupleVal4, midCoupleVal4, endCoupleVal4,
                         moduleCoupleVal4, rotServoSwitchPos });
@@ -229,7 +240,7 @@ namespace Project_CORA
                 setRobotPosition(new int[5]  { baseCoupleVal3, midCoupleVal3, endCoupleVal3,
                         moduleCoupleVal3, rotServoSwitchPos });
                 dynamixel.setSpeed(serialPort, coupleServo, 1023);
-                arduinoPort.WriteLine("set2300#");
+                arduinoPort.WriteLine("set2200#");
                 Thread.Sleep(9000);
                 dynamixel.setSpeed(serialPort, coupleServo, 0);
                 setRobotPosition(new int[5]  { baseCoupleVal4, midCoupleVal4, endCoupleVal4,
@@ -252,19 +263,22 @@ namespace Project_CORA
             Boolean controlledMovement = false;
             if (JoyStickState.buttons != null)
             {
-                controlledMovement = JoyStickState.buttons[2];
+                if (JoyStickState.buttons[0] && ServoPositions.clawServoOne < 630 && ServoPositions.clawServoTwo > 410) {
+                    ServoPositions.clawServoOne += 10;
+                    ServoPositions.clawServoTwo -= 10;
+                }
+                else if (JoyStickState.buttons[3] && ServoPositions.clawServoOne > 300)
+                {
+                    ServoPositions.clawServoOne -= 10;
+                    ServoPositions.clawServoTwo += 10;
+                }
             }
-            if (controlledMovement)
-            {
-                ServoPositions.baseServo -= ((JoyStickState.Yaxis / speedSetting) / 2);
-                ServoPositions.baseServo += (JoyStickState.Zaxis / speedSetting);
-            }
-            else { ServoPositions.baseServo -= (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis / speedSetting); }
+            ServoPositions.baseServo -= (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis / speedSetting);
             ServoPositions.midServo -= (JoyStickState.Yaxis / speedSetting);
-            ServoPositions.endServo += (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis /speedSetting);
+            ServoPositions.endServo += (JoyStickState.Yaxis / speedSetting) - (JoyStickState.Zaxis / speedSetting);
             ServoPositions.rotServo -= (JoyStickState.Zrotation / speedSetting);
             ServoPositions.moduleServo += (JoyStickState.Yaxis / speedSetting);
-            ServoPositions.frameServo += (int)(JoyStickState.slider * 0.30);
+            ServoPositions.frameServo += (int)(JoyStickState.slider * 0.60);
             switch (JoyStickState.pov)
             {
                 case 1:
@@ -367,7 +381,11 @@ namespace Project_CORA
                 dynamixel.setPosition(serialPort, endServo, ServoPositions.endServo);
                 dynamixel.setPosition(serialPort, rotServo, ServoPositions.rotServo);
                 dynamixel.setPosition(serialPort, moduleServo, ServoPositions.moduleServo);
-                arduinoPort.WriteLine(String.Concat("set", ServoPositions.frameServo, "#"));
+                dynamixel.setPosition(serialPort, clawServoOne, ServoPositions.clawServoOne);
+                dynamixel.setPosition(serialPort, clawSeroTwo, ServoPositions.clawServoTwo);
+                if (JoyStickState.buttons != null) {
+                    if (JoyStickState.buttons[7]) { arduinoPort.WriteLine(String.Concat("set", ServoPositions.frameServo, "#")); }
+                }
             }
         }
 
